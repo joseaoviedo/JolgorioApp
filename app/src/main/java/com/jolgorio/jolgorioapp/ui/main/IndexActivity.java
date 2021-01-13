@@ -1,34 +1,44 @@
 package com.jolgorio.jolgorioapp.ui.main;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.tools.Security;
+import com.jolgorio.jolgorioapp.ui.login.LoginActivity;
 
 public class IndexActivity extends AppCompatActivity {
-    private Button signInBtn;
-    private Button signUpBtn;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState){
-        System.out.println("Iniciado");
+        System.out.println("==================================================");
+        System.out.println(Security.getHash("Jolgorio"));
+        System.out.println(Security.getHash("Jolgoria"));
+        System.out.println(Security.getHash("Jolgorio"));
+        System.out.println(Security.getHash("Jolgoria"));
+        System.out.println("==================================================");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        signInBtn = findViewById(R.id.indexLogin);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
+        final Button loginBtn = findViewById(R.id.indexLogin);
+        final Button registerBtn = findViewById(R.id.indexRegister);
+
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IndexActivity.this, SignInActivity.class));
+                startActivity(new Intent(IndexActivity.this, LoginActivity.class));
             }
         });
 
-        signUpBtn = findViewById(R.id.indexRegister);
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //openSignUp();
