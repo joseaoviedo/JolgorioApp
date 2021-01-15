@@ -6,6 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/loginLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/loginPassword"
+        app:layout_constraintStart_toStartOf="@+id/loginPassword"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="326dp"
@@ -35,7 +51,7 @@
         app:layout_constraintVertical_bias="0.031" />
 
     <EditText
-        android:id="@+id/signInUsername"
+        android:id="@+id/loginUsername"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -60,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.204"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInUsername"
+        app:layout_constraintTop_toBottomOf="@+id/loginUsername"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -73,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInPassword"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -93,7 +109,7 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <EditText
-        android:id="@+id/signInPassword"
+        android:id="@+id/loginPassword"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -106,7 +122,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/signInCancel"
+        android:id="@+id/loginCancel"
         android:layout_width="145dp"
         android:layout_height="85dp"
         android:layout_marginStart="36dp"
@@ -126,7 +142,7 @@
         app:layout_constraintVertical_bias="0.158" />
 
     <Button
-        android:id="@+id/signInContinue"
+        android:id="@+id/loginContinue"
         android:layout_width="145dp"
         android:layout_height="85dp"
         android:fontFamily="@font/poppins_medium"
@@ -141,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toEndOf="@+id/signInCancel"
+        app:layout_constraintStart_toEndOf="@+id/loginCancel"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:layout_constraintVertical_bias="0.158" />
 
