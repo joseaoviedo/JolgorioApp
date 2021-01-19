@@ -20,7 +20,7 @@ public class ActivityDummy {
         JolgorioActivity act9 = new JolgorioActivity(9, 3, "Leyendas costarriceses", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", false);
         JolgorioActivity act10 = new JolgorioActivity(10, 3, "Música de los 60s", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", true);
         JolgorioActivity act11 = new JolgorioActivity(11, 3, "Cuentos populares", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", false);
-        JolgorioActivity act12 = new JolgorioActivity(9, 3, "Artistas costarricenses", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", true);
+        JolgorioActivity act12 = new JolgorioActivity(12, 3, "Artistas costarricenses", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", true);
 
         dummy.add(act1);
         dummy.add(act2);
