@@ -22,17 +22,13 @@ public class SQLConnection {
 
     private SQLConnection(){
         String connectionUrl =
-                "jdbc:sqlserver://" + Configuration.getSqlServerURL() + ";"
-                        + "database=" + Configuration.getSqlDatabase() + ";"
-                        + "user=" + Configuration.getSqlUsername() + ";"
-                        + "password="+  Configuration.getSqlPassword() + ";"
-                        + "encrypt=true;"
-                        + "trustServerCertificate=false;";
+                "jdbc:mysql://" + Configuration.getSqlServerURL() + "/" + Configuration.getSqlDatabase() + "?cloudSqlInstance=phonic-vortex-258523:us-central1:jolgoriotest&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=" + Configuration.getSqlUsername() + "&password=" + Configuration.getSqlPassword();
         try{
-            connection = DriverManager.getConnection(connectionUrl);
-            return;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(connectionUrl, Configuration.getSqlUsername(), Configuration.getSqlPassword());
+            System.out.println("==========Conectado===============");
         }catch(Exception e){
-            return;
+            e.printStackTrace();
         }
     }
 
