@@ -29,17 +29,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actividades pendientes"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
         android:textSize="20sp"
         android:textColor="#3d3d3d"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="80dp"/>
 
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="125dp"
+        android:layout_centerHorizontal="true">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/artistica_icon"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/deportiva_icon"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/cultural_icon"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="368dp"
-        android:layout_height="701dp"
+        android:layout_width="370dp"
+        android:layout_height="700dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="200dp"
         android:layout_marginRight="20dp"
