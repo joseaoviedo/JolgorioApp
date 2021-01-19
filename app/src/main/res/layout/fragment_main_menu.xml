@@ -7,7 +7,8 @@
     android:background="#1F7C81"
     tools:context=".ui.main.MainMenuFragment"
     app:defaultNavHost="true"
-    app:navGraph="@navigation/nav_graph">
+    app:navGraph="@navigation/nav_graph"
+    android:id="@+id/container">
 
     <TextView
         android:id="@+id/PM_title0"
