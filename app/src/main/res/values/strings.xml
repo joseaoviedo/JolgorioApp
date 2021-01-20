@@ -21,4 +21,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="videollamada">Videollamada</string>
+    <string name="title_activity_contacts">activity_contacts</string>
+    <string name="tab_contacts">Contactos</string>
+    <string name="tab_favorites">Favoritos</string>
+    <string name="tab_registro">Registro</string>
 </resources>
