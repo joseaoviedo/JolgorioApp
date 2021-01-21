@@ -1,48 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
+
+
     tools:context=".ui.videocall.Activity_contacts">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="138dp"
         android:background="#FFFFFF"
-        android:gravity="center"
         android:theme="@style/Theme.JolgorioApp.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/textView9"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/videollamada"
-            android:textAlignment="center"
-            android:textColor="#3D3D3D"
-            android:textSize="30sp" />
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/atras"
+                android:backgroundTint="#3d3d3d" />
 
-
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="235dp"
+                android:layout_height="53dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/videollamada"
+                android:textAlignment="center"
+                android:textColor="#3D3D3D"
+                android:textSize="30sp" />
+        </LinearLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="71dp"
             android:background="@color/white"
             app:tabIndicatorColor="#979191"
             app:tabTextColor="#3D3D3D"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="411dp"
+            tools:layout_conversion_absoluteHeight="70dp"
+            tools:layout_conversion_absoluteWidth="500dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.viewpager.widget.ViewPager>
+
+</RelativeLayout>
