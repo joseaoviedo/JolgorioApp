@@ -12,6 +12,7 @@
         android:layout_width="339dp"
         android:layout_height="44dp"
         android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
         android:fontFamily="@font/poppins_medium"
         android:gravity="center_horizontal"
         android:text="Menú Principal"
@@ -19,6 +20,7 @@
         android:textAllCaps="false"
         android:textColor="#FFFF"
         android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/PM_button0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +29,7 @@
         android:id="@+id/PM_button0"
         android:layout_width="385dp"
         android:layout_height="119dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="1dp"
         android:drawableLeft="@drawable/activities_icon"
         android:fontFamily="@font/poppins_medium"
         android:gravity="left|center_vertical"
@@ -37,9 +39,10 @@
         android:textSize="28sp"
         app:backgroundTint="#FFFF"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/PM_button1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/PM_title0" />
 
     <Button
         android:id="@+id/PM_button1"
