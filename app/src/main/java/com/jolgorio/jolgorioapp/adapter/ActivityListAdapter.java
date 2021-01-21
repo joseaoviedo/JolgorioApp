@@ -2,6 +2,7 @@ package com.jolgorio.jolgorioapp.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
@@ -25,10 +27,12 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
     private static final String TAG = "ActivityListAdapter";
     private ArrayList<JolgorioActivity> mActivities = new ArrayList<>();
     private Context mContext;
+    private NavController navController;
 
-    public ActivityListAdapter(ArrayList<JolgorioActivity> mActivities, Context mContext) {
+    public ActivityListAdapter(ArrayList<JolgorioActivity> mActivities, Context mContext, NavController navController) {
         this.mActivities = mActivities;
         this.mContext = mContext;
+        this.navController = navController;
     }
 
     @NonNull
@@ -43,9 +47,10 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
         JolgorioActivity act = mActivities.get(position);
+        holder.activityId = act.getId();
         boolean completed = act.getCompleted();
         if(completed){
-            Drawable d = mContext.getDrawable(R.drawable.check);
+            Drawable d = mContext.getDrawable(R.drawable.check_icon);
             holder.categoryImage.setImageDrawable(d);
         }else{
             Drawable d = mContext.getDrawable(R.drawable.mas);
@@ -77,7 +82,9 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
                 if(completed){
                     Toast.makeText(mContext, "La actividad ya ha sido completada", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(mContext, "Abrir actividad", Toast.LENGTH_SHORT).show();
+                    Bundle args = new Bundle();
+                    args.putInt("actId", holder.activityId);
+                    navController.navigate(R.id.action_activityListActivity_to_activityInfoFragment, args);
                 }
 
             }
@@ -93,6 +100,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         CircleImageView categoryImage;
         TextView activityTitle;
         RelativeLayout parentLayout;
+        int activityId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

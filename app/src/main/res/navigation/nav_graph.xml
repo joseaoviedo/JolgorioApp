@@ -8,10 +8,43 @@
         android:id="@+id/mainMenuFragment"
         android:name="com.jolgorio.jolgorioapp.ui.main.MainMenuFragment"
         android:label="fragment_main_menu"
-        tools:layout="@layout/fragment_main_menu" />
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_activityListActivity"
+            app:destination="@id/activityListActivity" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/activitiesFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.activities.ActivitiesFragment"
+        android:id="@+id/activityListActivity"
+        android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityListFragment"
         android:label="fragment_activities"
-        tools:layout="@layout/fragment_activities" />
+        tools:layout="@layout/fragment_activities" >
+        <action
+            android:id="@+id/action_activityListActivity_to_activityInfoFragment"
+            app:destination="@id/activityInfoFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/activityInfoFragment3"
+        android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityInfoFragment"
+        android:label="ActivityInfoFragment"
+        tools:layout="@layout/fragment_activity_info">
+        <action
+            android:id="@+id/action_activityInfoFragment3_to_activityVideoFragment"
+            app:destination="@id/activityVideoFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/activityVideoFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityVideoFragment"
+        android:label="ActivityVideoFragment"
+        tools:layout="@layout/fragment_activity_video"/>
+
+
 </navigation>
