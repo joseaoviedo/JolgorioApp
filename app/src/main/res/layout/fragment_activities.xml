@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.ActivityListActivity">
+    tools:context=".ui.activities.ActivityListFragment">
 
     <TextView
         android:layout_height="wrap_content"
