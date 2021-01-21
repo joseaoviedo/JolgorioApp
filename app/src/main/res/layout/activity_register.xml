@@ -7,48 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
-    <TextView
-        android:id="@+id/SU_title0"
-        android:layout_width="276dp"
-        android:layout_height="80dp"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:text="¡Bienvenido!"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.mejorprogramacion.layouts.Constraint">
 
-    <ImageButton
-        android:id="@+id/EmergencyButton"
-        android:layout_width="47dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:src="@drawable/emergency_icon"
-        android:textSize="29sp"
-        app:backgroundTint="#FFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SU_title0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/SU_title0"
+            android:layout_width="276dp"
+            android:layout_height="80dp"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="¡Bienvenido!"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.024" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        <ImageButton
+            android:id="@+id/EmergencyButton"
+            android:layout_width="47dp"
+            android:layout_height="59dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/emergency_icon"
+            android:textSize="29sp"
+            app:backgroundTint="#FFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/SU_title0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.035"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="104dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/TitleSignUpFullName"
@@ -126,35 +131,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate" />
 
-    <ImageButton
-        android:id="@+id/MaleButton"
-        android:layout_width="48dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/hombre"
-        android:textSize="29sp"
-        app:backgroundTint="@color/black"
-        app:cornerRadius="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toEndOf="@+id/SignUpBirthDate"
-        app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
-        tools:ignore="MissingConstraints" />
+        <ImageButton
+            android:id="@+id/MaleButton"
+            android:layout_width="48dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/hombre"
+            android:textSize="29sp"
+            app:backgroundTint="@color/black"
+            app:cornerRadius="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@+id/SignUpBirthDate"
+            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
+            tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/FemaleButton"
-        android:layout_width="48dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/mujer"
-        android:textSize="29sp"
-        app:backgroundTint="@color/black"
-        app:cornerRadius="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
-        app:layout_constraintStart_toEndOf="@+id/MaleButton"
-        app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
-        tools:ignore="MissingConstraints" />
+        <ImageButton
+            android:id="@+id/FemaleButton"
+            android:layout_width="48dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/mujer"
+            android:textSize="29sp"
+            app:backgroundTint="@color/black"
+            app:cornerRadius="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@+id/MaleButton"
+            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/TitleSignUpPhone"
@@ -176,7 +181,7 @@
             android:inputType="textPersonName"
             app:cornerRadius="70dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPhone" />
 
@@ -195,7 +200,7 @@
 
         <Spinner
             android:id="@+id/signUpPais"
-            android:layout_width="200dp"
+            android:layout_width="393dp"
             android:layout_height="44dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
@@ -222,7 +227,7 @@
 
         <Spinner
             android:id="@+id/signUpProvincia"
-            android:layout_width="200dp"
+            android:layout_width="393dp"
             android:layout_height="44dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
@@ -249,7 +254,7 @@
 
         <Spinner
             android:id="@+id/signUpCanton"
-            android:layout_width="200dp"
+            android:layout_width="393dp"
             android:layout_height="44dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
@@ -276,7 +281,7 @@
 
         <Spinner
             android:id="@+id/signUpDistrito"
-            android:layout_width="200dp"
+            android:layout_width="393dp"
             android:layout_height="44dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
@@ -335,4 +340,37 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TitleSignUpConfirmPW" />
+
+        <Button
+            android:id="@+id/signUpCancel"
+            android:layout_width="181dp"
+            android:layout_height="62dp"
+            android:text="Cancelar"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:gravity="left|center_vertical"
+            app:cornerRadius="9dp"
+            app:backgroundTint="#E28E15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />
+
+        <Button
+            android:id="@+id/signUpEntry"
+            android:layout_width="181dp"
+            android:layout_height="62dp"
+            android:text="Entrar"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:gravity="left|center_vertical"
+            app:cornerRadius="9dp"
+            app:backgroundTint="#227F84"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintStart_toEndOf="signUpCancel"
+            app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
