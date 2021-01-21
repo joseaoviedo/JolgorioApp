@@ -35,6 +35,11 @@
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityInfoFragment"
         android:label="ActivityInfoFragment"
         tools:layout="@layout/fragment_activity_info">
+
+        <argument
+            android:name="activity"
+            app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
+
         <action
             android:id="@+id/action_activityInfoFragment3_to_activityVideoFragment"
             app:destination="@id/activityVideoFragment"
@@ -44,7 +49,11 @@
         android:id="@+id/activityVideoFragment"
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityVideoFragment"
         android:label="ActivityVideoFragment"
-        tools:layout="@layout/fragment_activity_video"/>
+        tools:layout="@layout/fragment_activity_video">
 
+        <argument
+            android:name="activity"
+            app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
+    </fragment>
 
 </navigation>

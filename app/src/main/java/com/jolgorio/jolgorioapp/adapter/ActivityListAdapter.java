@@ -47,7 +47,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");
         JolgorioActivity act = mActivities.get(position);
-        holder.activityId = act.getId();
+        holder.activity = act;
         boolean completed = act.getCompleted();
         if(completed){
             Drawable d = mContext.getDrawable(R.drawable.check_icon);
@@ -68,7 +68,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
                 color = mContext.getDrawable(R.drawable.activity_bg_deportiva);
                 holder.parentLayout.setBackground(color);
                 break;
-            case 3:
+            default:
                 color = mContext.getDrawable(R.drawable.activity_bg_cultural);
                 holder.parentLayout.setBackground(color);
                 break;
@@ -83,7 +83,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
                     Toast.makeText(mContext, "La actividad ya ha sido completada", Toast.LENGTH_SHORT).show();
                 }else{
                     Bundle args = new Bundle();
-                    args.putInt("actId", holder.activityId);
+                    args.putParcelable("activity", holder.activity);
                     navController.navigate(R.id.action_activityListActivity_to_activityInfoFragment, args);
                 }
 
@@ -100,7 +100,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         CircleImageView categoryImage;
         TextView activityTitle;
         RelativeLayout parentLayout;
-        int activityId;
+        JolgorioActivity activity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

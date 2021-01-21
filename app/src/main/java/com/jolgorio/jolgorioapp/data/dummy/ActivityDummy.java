@@ -5,10 +5,29 @@ import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
 import java.util.ArrayList;
 
 public class ActivityDummy {
+    private static ArrayList<JolgorioActivity> dummy = new ArrayList<>();
 
     public static ArrayList<JolgorioActivity> getDummyData(){
-        ArrayList<JolgorioActivity> dummy = new ArrayList<>();
+        if(dummy.isEmpty()){
+            loadData();
+        }
+        return dummy;
+    }
 
+    public JolgorioActivity getByID(int id){
+        if(dummy.isEmpty()){
+            loadData();
+        }
+
+        for(JolgorioActivity j: dummy){
+            if(j.getId() == id){
+                return j;
+            }
+        }
+        return null;
+    }
+
+    private static void loadData(){
         JolgorioActivity act1 = new JolgorioActivity(1, 1, "Pintar botellas", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", true);
         JolgorioActivity act2 = new JolgorioActivity(2, 1, "Pintar óleo", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", false);
         JolgorioActivity act3 = new JolgorioActivity(3, 1, "Pintar acuarela", "DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT", false);
@@ -34,7 +53,5 @@ public class ActivityDummy {
         dummy.add(act10);
         dummy.add(act11);
         dummy.add(act12);
-
-        return dummy;
     }
 }
