@@ -25,4 +25,5 @@
     <string name="tab_contacts">Contactos</string>
     <string name="tab_favorites">Favoritos</string>
     <string name="tab_registro">Registro</string>
+    <string name="contactos">Contactos</string>
 </resources>
