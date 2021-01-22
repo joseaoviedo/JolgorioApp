@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cornerRadius="9dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/alertTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="¿Está seguro de que \n desea salir del \n registro?"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:cornerRadius="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="5sp">
+
+        <Button
+            android:id="@+id/alertNObutton"
+            android:layout_width="120dp"
+            android:layout_height="62dp"
+            android:text="No"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="30dp"
+            app:cornerRadius="9dp"
+            app:backgroundTint="#E28E15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></Button>
+
+        <Button
+            android:id="@+id/alertYESbutton"
+            android:layout_width="120dp"
+            android:layout_height="62dp"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="55dp"
+            android:text="Si"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            app:backgroundTint="#227F84"
+            app:cornerRadius="9dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></Button>
+    </LinearLayout>
+</LinearLayout>
