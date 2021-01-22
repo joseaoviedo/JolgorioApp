@@ -1,6 +1,9 @@
 package com.jolgorio.jolgorioapp.data.model;
 
-public class JolgorioActivity {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class JolgorioActivity implements Parcelable {
     private int id;
     private int type;
     private String title;
@@ -20,6 +23,46 @@ public class JolgorioActivity {
         this.timeDescription = timeDescription;
         this.completed = completed;
     }
+
+    protected JolgorioActivity(Parcel in) {
+        id = in.readInt();
+        type = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        materials = in.readString();
+        videoLink = in.readString();
+        timeDescription = in.readString();
+        completed = in.readByte() != 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(type);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(materials);
+        dest.writeString(videoLink);
+        dest.writeString(timeDescription);
+        dest.writeByte((byte) (completed ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<JolgorioActivity> CREATOR = new Creator<JolgorioActivity>() {
+        @Override
+        public JolgorioActivity createFromParcel(Parcel in) {
+            return new JolgorioActivity(in);
+        }
+
+        @Override
+        public JolgorioActivity[] newArray(int size) {
+            return new JolgorioActivity[size];
+        }
+    };
 
     public int getId() {
         return id;
