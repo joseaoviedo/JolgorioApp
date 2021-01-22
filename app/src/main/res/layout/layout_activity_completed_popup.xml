@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="350dp">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="¡Felicidades!"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="32sp"
+        android:textColor="@color/text_color"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/text_color"
+        android:text="Has completado la actividad"
+        android:gravity="center_horizontal"
+        android:textSize="22sp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_color"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Tomá una foto de tu trabajo"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/activity_completed_exit_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/icon_x">
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/activity_completed_photo_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="255dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/icon_camera" />
+
+
+</RelativeLayout>

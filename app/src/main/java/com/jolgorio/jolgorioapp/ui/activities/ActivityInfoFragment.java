@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +20,17 @@ import android.widget.TextView;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
 
-public class ActivityInfoFragment extends Fragment {
+public class ActivityInfoFragment extends Fragment implements View.OnClickListener{
     JolgorioActivity activity;
+    NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         activity = bundle.getParcelable("activity");
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
     }
 
     @Override
@@ -62,6 +67,7 @@ public class ActivityInfoFragment extends Fragment {
 
         AppCompatButton btn = view.findViewById(R.id.f_activity_enter_btn);
         btn.setBackground(backgroundDrawable);
+        btn.setOnClickListener(this);
 
         TextView description = view.findViewById(R.id.infoDescription);
         description.setText(activity.getDescription());
@@ -76,5 +82,15 @@ public class ActivityInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.f_activity_enter_btn:
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("activity", activity);
+                navController.navigate(R.id.action_activityInfoFragment_to_activityVideoFragment, bundle);
+        }
     }
 }

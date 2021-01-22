@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_activities" >
         <action
             android:id="@+id/action_activityListActivity_to_activityInfoFragment"
-            app:destination="@id/activityInfoFragment3" />
+            app:destination="@id/activityInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -31,7 +31,7 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/activityInfoFragment3"
+        android:id="@+id/activityInfoFragment"
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityInfoFragment"
         android:label="ActivityInfoFragment"
         tools:layout="@layout/fragment_activity_info">
@@ -41,8 +41,9 @@
             app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
 
         <action
-            android:id="@+id/action_activityInfoFragment3_to_activityVideoFragment"
+            android:id="@+id/action_activityInfoFragment_to_activityVideoFragment"
             app:destination="@id/activityVideoFragment"
+            app:popUpTo="@layout/fragment_activities"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
@@ -54,6 +55,9 @@
         <argument
             android:name="activity"
             app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
+        <action
+            android:id="@+id/action_activityVideoFragment_to_activityListActivity"
+            app:destination="@id/activityListActivity" />
     </fragment>
 
 </navigation>
