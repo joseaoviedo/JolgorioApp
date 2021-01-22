@@ -343,11 +343,12 @@
 
         <Button
             android:id="@+id/signUpCancel"
-            android:layout_width="181dp"
+            android:layout_width="190dp"
             android:layout_height="62dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Cancelar"
             android:textAllCaps="false"
-            android:textSize="30sp"
+            android:textSize="29sp"
             android:gravity="left|center_vertical"
             app:cornerRadius="9dp"
             app:backgroundTint="#E28E15"
@@ -360,8 +361,9 @@
 
         <Button
             android:id="@+id/signUpEntry"
-            android:layout_width="181dp"
+            android:layout_width="185dp"
             android:layout_height="62dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Entrar"
             android:textAllCaps="false"
             android:textSize="30sp"
