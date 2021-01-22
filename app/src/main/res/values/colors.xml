@@ -10,16 +10,7 @@
     <color name="artistica">#227F84</color>
     <color name="deportiva">#39B2C3</color>
     <color name="cultural">#E28E15</color>
-<<<<<<< Updated upstream
     <color name="text_color">#3D3D3D</color>
-=======
-<<<<<<< HEAD
-    <color name="background">#EAEAEA</color>
-    <color name="textColor">#3D3D3D</color>
-=======
-    <color name="text_color">#3D3D3D</color>
->>>>>>> 0a861571e1c035e5f9a2ed6bb90b26d604d20c7e
->>>>>>> Stashed changes
-
+    <color name="contact_background">#EAEAEA</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#3d3d3d</color>
 </resources>
