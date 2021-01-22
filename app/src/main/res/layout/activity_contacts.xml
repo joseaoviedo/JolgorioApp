@@ -22,7 +22,7 @@
             <Button
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/atras"
                 android:backgroundTint="#3d3d3d" />
@@ -32,7 +32,7 @@
                 android:layout_width="235dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/videollamada"
                 android:textAlignment="center"
@@ -45,13 +45,16 @@
             android:layout_width="match_parent"
             android:layout_height="71dp"
             android:background="@color/white"
+            app:tabIndicator="@color/background"
             app:tabIndicatorColor="#EAEAEA"
             app:tabIndicatorGravity="bottom"
             app:tabTextColor="#3D3D3D"
             tools:layout_conversion_absoluteHeight="70dp"
             tools:layout_conversion_absoluteWidth="500dp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            app:tabBackground="@drawable/tab_background"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
 
