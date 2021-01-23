@@ -13,7 +13,7 @@
         android:theme="@style/Theme.JolgorioApp">
 
         <activity
-            android:name=".ui.videocall.Activity_contacts"
+            android:name=".ui.register.Activityregister"
             android:label="Jolgorio"
             android:theme="@style/Theme.JolgorioApp.NoActionBar">
             <intent-filter>
