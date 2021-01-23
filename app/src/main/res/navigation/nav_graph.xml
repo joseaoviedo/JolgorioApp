@@ -13,14 +13,14 @@
             android:id="@+id/action_mainMenuFragment_to_activityListActivity"
             app:destination="@id/activityListActivity" />
         <action
-            android:id="@+id/action_mainMenuFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_mainMenuFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
         <action
             android:id="@+id/action_mainMenuFragment_to_videoCallPagerFragment"
             app:destination="@id/videoCallPagerFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/activityListActivity"
@@ -31,11 +31,6 @@
             android:id="@+id/action_activityListActivity_to_activityInfoFragment"
             app:destination="@id/activityInfoFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/activityInfoFragment"
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityInfoFragment"
@@ -75,5 +70,15 @@
         android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallPagerFragment"
         android:label="fragment_videocall_pager"
         tools:layout="@layout/fragment_videocall_pager" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
+
 
 </navigation>
