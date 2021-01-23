@@ -26,4 +26,9 @@
     <string name="tab_favorites">Favoritos</string>
     <string name="tab_registro">Registro</string>
     <string name="contactos">Contactos</string>
+    <string name="mi_perfil">Mi Perfil</string>
+    <string name="Name" />
+    <string name="mis_trabajos">Mis Trabajos</string>
+    <string name="mi_progreso">Mi Progreso</string>
+    <string name="editar_perfil">Editar Perfil</string>
 </resources>
