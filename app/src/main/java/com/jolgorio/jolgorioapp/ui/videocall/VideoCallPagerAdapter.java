@@ -3,6 +3,7 @@ package com.jolgorio.jolgorioapp.ui.videocall;
 import android.provider.CallLog;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -30,6 +31,21 @@ public class VideoCallPagerAdapter extends FragmentPagerAdapter {
                 return callLogFragment;
             default:
                 return null;
+        }
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position){
+            case 0:
+                return "Contactos";
+            case 1:
+                return "Favoritos";
+            case 2:
+                return "Registro";
+            default:
+                return "None";
         }
     }
 
