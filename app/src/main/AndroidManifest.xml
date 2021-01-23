@@ -13,11 +13,7 @@
         android:theme="@style/Theme.JolgorioApp">
 
         <activity
-<<<<<<< HEAD
             android:name=".ui.register.Activityregister"
-=======
-            android:name=".ui.main.MainActivity"
->>>>>>> main
             android:label="Jolgorio"
             android:theme="@style/Theme.JolgorioApp.NoActionBar">
             <intent-filter>

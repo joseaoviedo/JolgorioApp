@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.mejorprogramacion.layouts.Constraint">
+        tools:context="com.mejorprogramacion.layouts.Constraint"
+        tools:ignore="MissingClass">
 
         <TextView
             android:id="@+id/SU_title0"
@@ -31,14 +32,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/EmergencyButton"
-<<<<<<< HEAD
             android:layout_width="47dp"
             android:layout_height="40dp"
-=======
-            android:layout_width="50dp"
-            android:layout_height="50dp"
->>>>>>> main
-            android:layout_marginStart="4dp"
             android:background="@drawable/emergency_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/SU_title0"
@@ -54,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@tools:sample/avatars" />
+            android:src="@drawable/emergency_icon" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addImage"
