@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_miPerfil"
+            app:destination="@id/miPerfil" />
     </fragment>
     <fragment
         android:id="@+id/activityListActivity"
@@ -79,6 +82,22 @@
             android:id="@+id/action_registerFragment_to_mainMenuFragment"
             app:destination="@id/mainMenuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/miPerfil"
+        android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_my_profile"
+        android:label="fragment_my_profile"
+        tools:layout="@layout/fragment_my_profile"
+        >
+        <action
+            android:id="@+id/action_miPerfil_to_misTrabajos"
+            app:destination="@id/misTrabajos" />
+    </fragment>
+    <fragment
+        android:id="@+id/misTrabajos"
+        android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_my_work"
+        android:label="fragment_my_work"
+        tools:layout="@layout/fragment_my_work"
+        />
 
 
 </navigation>

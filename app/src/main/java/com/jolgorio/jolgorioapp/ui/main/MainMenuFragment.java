@@ -35,6 +35,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.PM_button0).setOnClickListener(this);
         view.findViewById(R.id.PM_button1).setOnClickListener(this);
         view.findViewById(R.id.PM_button2).setOnClickListener(this);
+        view.findViewById(R.id.PM_button3).setOnClickListener(this);
         view.findViewById(R.id.PM_button4).setOnClickListener(this);
 
     }
@@ -50,6 +51,9 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.PM_button2:
                 navController.navigate(R.id.action_mainMenuFragment_to_contactsFragment);
+                break;
+            case R.id.PM_button3:
+                navController.navigate(R.id.action_mainMenuFragment_to_miPerfil);
                 break;
             case R.id.PM_button4:
                 navController.navigate(R.id.action_mainMenuFragment_to_registerFragment);
