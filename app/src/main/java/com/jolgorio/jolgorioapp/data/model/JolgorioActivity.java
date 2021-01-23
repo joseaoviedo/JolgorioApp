@@ -35,23 +35,6 @@ public class JolgorioActivity implements Parcelable {
         completed = in.readByte() != 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeInt(type);
-        dest.writeString(title);
-        dest.writeString(description);
-        dest.writeString(materials);
-        dest.writeString(videoLink);
-        dest.writeString(timeDescription);
-        dest.writeByte((byte) (completed ? 1 : 0));
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator<JolgorioActivity> CREATOR = new Creator<JolgorioActivity>() {
         @Override
         public JolgorioActivity createFromParcel(Parcel in) {
@@ -63,6 +46,23 @@ public class JolgorioActivity implements Parcelable {
             return new JolgorioActivity[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(type);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(materials);
+        dest.writeString(videoLink);
+        dest.writeString(timeDescription);
+        dest.writeByte((byte) (completed ? 1 : 0));
+    }
 
     public int getId() {
         return id;
