@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@tools:sample/avatars" />
+            android:src="@drawable/logo" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addImage"

@@ -25,8 +25,9 @@ public class VideoCallPagerFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.videocall_tab_layout);
         ViewPager viewPager = view.findViewById(R.id.videocall_viewpager);
         ArrayList<String> arrayList = new ArrayList<>();
-        VideoCallPagerAdapter adapter = new VideoCallPagerAdapter(getActivity().getSupportFragmentManager());
+        VideoCallPagerAdapter adapter = new VideoCallPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager, true);
         return view;
     }

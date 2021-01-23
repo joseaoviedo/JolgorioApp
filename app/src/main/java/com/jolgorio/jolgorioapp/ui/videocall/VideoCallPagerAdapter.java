@@ -13,7 +13,6 @@ public class VideoCallPagerAdapter extends FragmentPagerAdapter {
 
     public VideoCallPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
-
     }
 
     @NonNull
