@@ -1,4 +1,4 @@
-package com.jolgorio.jolgorioapp.ui.main;
+package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.content.Context;
 
@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.ui.videocall.Fragment_Contacts;
-import com.jolgorio.jolgorioapp.ui.videocall.Fragment_Favorites;
-import com.jolgorio.jolgorioapp.ui.videocall.Fragment_Registro;
+import com.jolgorio.jolgorioapp.ui.videocall.ContactsFragment;
+import com.jolgorio.jolgorioapp.ui.videocall.FavoriteContactsFragment;
+import com.jolgorio.jolgorioapp.ui.videocall.CallLogFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -34,13 +34,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case(0):
-                fragment = new Fragment_Contacts();
+                fragment = new ContactsFragment();
                 break;
             case(1):
-                fragment = new Fragment_Favorites();
+                fragment = new FavoriteContactsFragment();
                 break;
             case(2):
-                fragment = new Fragment_Registro();
+                fragment = new CallLogFragment();
                 break;
         }
 

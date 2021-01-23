@@ -1,4 +1,4 @@
-package com.jolgorio.jolgorioapp.ui;
+package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class ActivityFinishedPopUp extends Fragment {
+import com.jolgorio.jolgorioapp.R;
+
+public class CallLogFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        return view;
+        return inflater.inflate(R.layout.fragemnt_registro,container,false);
     }
 }
