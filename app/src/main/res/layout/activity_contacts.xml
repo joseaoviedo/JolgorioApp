@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="71dp"
             android:background="@color/white"
-            app:tabIndicator="@color/background"
+            app:tabIndicator="@color/contact_background"
             app:tabIndicatorColor="#EAEAEA"
             app:tabIndicatorGravity="bottom"
             app:tabTextColor="#3D3D3D"

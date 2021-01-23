@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.jolgorio.jolgorioapp.R;
 
-public class Fragment_Registro extends Fragment {
+public class FavoriteContactsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragemnt_registro,container,false);
+        return inflater.inflate(R.layout.fragemnt_favorites,container,false);
     }
 }

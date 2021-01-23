@@ -28,5 +28,4 @@
         android:text="This is a title"
         android:fontFamily="@font/poppins_medium"
         android:textSize="24sp"/>
-
 </RelativeLayout>

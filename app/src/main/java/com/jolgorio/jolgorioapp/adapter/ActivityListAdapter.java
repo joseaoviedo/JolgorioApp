@@ -104,7 +104,6 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             categoryImage = itemView.findViewById(R.id.list_activity_image);
             activityTitle = itemView.findViewById(R.id.list_activity_title);
             parentLayout = itemView.findViewById(R.id.list_activity_parent_layout);

@@ -12,7 +12,7 @@ public class UserDAO {
         schema = Configuration.getSqlMainSchema();
     }
 
-    public User getUserById(int id){
+    public JolgorioUser getUserById(int id){
         String query = "SELECT * FROM " + schema + ".Usuario WHERE idUsuario = " + id;
         return null;
     }
