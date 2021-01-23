@@ -27,17 +27,12 @@ public class ContactRepository {
         favContacts = new ArrayList<>();
     }
 
-    public MutableLiveData<List<JolgorioUser>> getFavoriteContacts(){
-        loadData();
-        MutableLiveData<List<JolgorioUser>> data = new MutableLiveData<>();
-        data.setValue(favContacts);
-        return data;
+    public ArrayList<JolgorioUser> getFavContacts() {
+        return favContacts;
     }
 
 
-    public ArrayList<JolgorioUser> getContacts(){
-        if(!dataLoaded){loadData();}
-        loadData();
+    public  ArrayList<JolgorioUser> getContacts(){
         return contacts;
     }
 
@@ -60,10 +55,10 @@ public class ContactRepository {
     public void loadData(){
         dataLoaded = true;
         if(contacts.isEmpty()){
-            ContactsDummy.getContacts();
+            contacts = ContactsDummy.getContacts();
         }
         if(favContacts.isEmpty()){
-            ContactsDummy.getFavContacts();
+            favContacts = ContactsDummy.getFavContacts();
         }
     }
 }

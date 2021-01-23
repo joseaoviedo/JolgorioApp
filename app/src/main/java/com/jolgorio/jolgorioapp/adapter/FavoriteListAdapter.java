@@ -16,43 +16,45 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.data.dummy.ContactsDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ViewHolder> {
-    ArrayList<JolgorioUser> mContacts;
+public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapter.ViewHolder> {
     Context mContext;
     NavController navController;
     ContactRepository contactRepository;
+    ArrayList<JolgorioUser> mFavContacts;
 
-    public ContactListAdapter(Context mContext, NavController navController){
+    public FavoriteListAdapter(Context mContext, NavController navController){
         this.mContext = mContext;
         this.navController = navController;
-        this.contactRepository = ContactRepository.getInstance();
-        this.contactRepository.loadData();
-        this.mContacts = contactRepository.getContacts();
-        Log.d("CONTACTOS", "CANTIDAD DE CONTACTOS: " + mContacts.size());
+        contactRepository = ContactRepository.getInstance();
+        contactRepository.loadData();
+        this.mFavContacts = contactRepository.getFavContacts();
+        Log.d("CONTACTOS", "CONTACTOS FAVORITOS: " + mFavContacts.size());
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_list_contacts, parent, false);
-        ContactListAdapter.ViewHolder holder = new ContactListAdapter.ViewHolder(view);
+        FavoriteListAdapter.ViewHolder holder = new FavoriteListAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        JolgorioUser contact = mContacts.get(position);
+        JolgorioUser contact = mFavContacts.get(position);
         holder.user = contact;
         holder.contactName.setText(contact.getName());
         holder.contactNumber.setText(contact.getNumber());
@@ -63,52 +65,44 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 .into(holder.contactImage);
 
         Drawable favTrue = mContext.getDrawable(R.drawable.icon_fav_true);
-        Drawable favFalse = mContext.getDrawable(R.drawable.icon_fav_false);
 
-        if(contactRepository.isFavorite(contact)){
-            Log.d("CONTACTOS", "Contacto favorito: " + contact.getName());
-            holder.isFavorite = true;
-            holder.favoriteBtn.setBackground(favTrue);
-        }else{
-            holder.isFavorite = false;
-            holder.favoriteBtn.setBackground(favFalse);
-        }
-
-        holder.favoriteBtn.setOnClickListener(new View.OnClickListener(){
+        holder.isFavorite = true;
+        holder.favButton.setBackground(favTrue);
+        holder.favButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if(holder.isFavorite){
-                    holder.isFavorite = false;
-                    holder.favoriteBtn.setBackground(favFalse);
                     contactRepository.removeFavorite(holder.user);
-                }else{
-                    holder.isFavorite = true;
-                    holder.favoriteBtn.setBackground(favTrue);
-                    contactRepository.addFavorite(holder.user);
+                    holder.isFavorite = false;
                 }
+                reload();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mContacts.size();
+        return mFavContacts.size();
+    }
+
+    public void reload(){
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        AppCompatButton favButton;
         CircleImageView contactImage;
         TextView contactName;
         TextView contactNumber;
-        AppCompatButton favoriteBtn;
         JolgorioUser user;
-        boolean isFavorite = false;
+        boolean isFavorite;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             contactImage = itemView.findViewById(R.id.contactImage);
             contactName = itemView.findViewById(R.id.contactName);
             contactNumber = itemView.findViewById(R.id.contactNumber);
-            favoriteBtn = itemView.findViewById(R.id.favButton);
+            favButton = itemView.findViewById(R.id.favButton);
         }
     }
 }

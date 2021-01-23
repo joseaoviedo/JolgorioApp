@@ -1,6 +1,7 @@
 package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.ContactListAdapter;
+import com.jolgorio.jolgorioapp.data.dummy.ContactsDummy;
+import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 
 public class ContactsFragment extends Fragment {
     NavController navController;
