@@ -45,7 +45,6 @@ public class RegisterFragment extends Fragment {
 
             }
         });
-
     }
 
     private void LeavingAlert(View view){
