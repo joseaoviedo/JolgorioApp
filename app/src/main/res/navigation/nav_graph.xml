@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_contactsFragment"
             app:destination="@id/contactsFragment" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_videoCallPagerFragment"
+            app:destination="@id/videoCallPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/activityListActivity"
@@ -67,5 +70,10 @@
         android:name="com.jolgorio.jolgorioapp.ui.videocall.ContactsFragment"
         android:label="ContactsFragment"
         tools:layout="@layout/fragment_contacts"/>
+    <fragment
+        android:id="@+id/videoCallPagerFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallPagerFragment"
+        android:label="fragment_videocall_pager"
+        tools:layout="@layout/fragment_videocall_pager" />
 
 </navigation>

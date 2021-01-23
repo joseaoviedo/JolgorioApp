@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.videocall.VideoCallPagerFragment">
+
+    <View
+        android:layout_height="100dp"
+        android:layout_width="match_parent">
+    </View>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Videollamada"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="32sp"
+        android:textColor="@color/text_color"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"/>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/videocall_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/videocall_tab_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contactos">
+        </com.google.android.material.tabs.TabItem>
+
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/videocall_tab_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favoritos" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/videocall_tab_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/videocall_viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="150dp"/>
+</RelativeLayout>

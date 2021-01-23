@@ -19,6 +19,7 @@ import com.jolgorio.jolgorioapp.adapter.ContactListAdapter;
 public class ContactsFragment extends Fragment {
     NavController navController;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

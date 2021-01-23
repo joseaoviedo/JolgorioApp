@@ -33,6 +33,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         view.findViewById(R.id.PM_button0).setOnClickListener(this);
+        view.findViewById(R.id.PM_button1).setOnClickListener(this);
         view.findViewById(R.id.PM_button2).setOnClickListener(this);
 
     }
@@ -42,6 +43,9 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.PM_button0:
                 navController.navigate(R.id.action_mainMenuFragment_to_activityListActivity);
+                break;
+            case R.id.PM_button1:
+                navController.navigate(R.id.action_mainMenuFragment_to_videoCallPagerFragment);
                 break;
             case R.id.PM_button2:
                 navController.navigate(R.id.action_mainMenuFragment_to_contactsFragment);
