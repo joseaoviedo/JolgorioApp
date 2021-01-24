@@ -18,4 +18,8 @@ public class CallLogFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragemnt_registro,container,false);
     }
+
+    public void refresh(){
+
+    }
 }
