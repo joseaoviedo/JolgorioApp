@@ -33,7 +33,7 @@
             android:id="@+id/EmergencyButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="-3dp"
             android:background="@drawable/emergency_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/SU_title0"
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/logo" />
+            android:src="@drawable/icon_camera" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addImage"
@@ -66,7 +66,7 @@
             android:id="@+id/TitleSignUpFullName"
             android:layout_width="215dp"
             android:layout_height="26dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="280dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Nombre Completo"
             android:textColor="@color/black"
@@ -128,7 +128,6 @@
             android:layout_width="215dp"
             android:layout_height="44dp"
             android:clickable="true"
-            android:editable="false"
             android:focusable="false"
             android:hint="21/03/1952"
             android:inputType="textPersonName"
@@ -140,12 +139,9 @@
 
         <ImageButton
             android:id="@+id/MaleButton"
-            android:layout_width="48dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/hombre"
-            android:textSize="29sp"
-            app:backgroundTint="@color/black"
+            android:layout_width="65dp"
+            android:layout_height="73dp"
+            android:layout_marginTop="0dp"
             app:cornerRadius="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.22"
@@ -155,12 +151,9 @@
 
         <ImageButton
             android:id="@+id/FemaleButton"
-            android:layout_width="48dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/mujer"
-            android:textSize="29sp"
-            app:backgroundTint="@color/black"
+            android:layout_width="65dp"
+            android:layout_height="73dp"
+            android:layout_marginTop="0dp"
             app:cornerRadius="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.22"
@@ -351,9 +344,10 @@
         <Button
             android:id="@+id/signUpCancel"
             android:layout_width="190dp"
-            android:layout_height="62dp"
+            android:layout_height="90dp"
             android:fontFamily="@font/poppins_medium"
             android:gravity="left|center_vertical"
+            android:layout_marginLeft="3dp"
             android:text="Cancelar"
             android:textAllCaps="false"
             android:textSize="29sp"
@@ -369,17 +363,17 @@
 
         <Button
             android:id="@+id/signUpEntry"
-            android:layout_width="185dp"
-            android:layout_height="62dp"
+            android:layout_width="190dp"
+            android:layout_height="90dp"
             android:fontFamily="@font/poppins_medium"
+            android:gravity="start|center_vertical"
+            android:layout_marginRight="3dp"
             android:text="Entrar"
+            android:backgroundTint="@color/artistica"
             android:textAllCaps="false"
             android:textSize="30sp"
-            android:gravity="start|center_vertical"
             app:cornerRadius="9dp"
-            app:backgroundTint="#227F84"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.5"
             app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
