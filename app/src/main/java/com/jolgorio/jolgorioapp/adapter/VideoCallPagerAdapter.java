@@ -53,4 +53,21 @@ public class VideoCallPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
+    public void refreshTab(int position){
+        switch (position){
+            case 0:
+                ContactsFragment contactsFragment = (ContactsFragment) fragments.get(position);
+                contactsFragment.refresh();
+                break;
+            case 1:
+                FavoriteContactsFragment fContactsFragment = (FavoriteContactsFragment) fragments.get(position);
+                fContactsFragment.refresh();
+                break;
+            case 2:
+                CallLogFragment callLogFragment = (CallLogFragment) fragments.get(position);
+                callLogFragment.refresh();
+                break;
+        }
+    }
+
 }

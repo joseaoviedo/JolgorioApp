@@ -111,4 +111,8 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             favoriteBtn = itemView.findViewById(R.id.favButton);
         }
     }
+
+    public void reload(){
+        notifyDataSetChanged();
+    }
 }
