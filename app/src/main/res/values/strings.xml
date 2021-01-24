@@ -31,4 +31,7 @@
     <string name="mis_trabajos">Mis Trabajos</string>
     <string name="mi_progreso">Mi Progreso</string>
     <string name="editar_perfil">Editar Perfil</string>
+    <string name="este_mes">Este mes</string>
+    <string name="Logros">Logros </string>
+
 </resources>

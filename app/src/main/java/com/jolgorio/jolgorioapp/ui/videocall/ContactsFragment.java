@@ -21,7 +21,7 @@ import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 
 public class ContactsFragment extends Fragment {
     NavController navController;
-
+    ContactListAdapter contactListAdapter;
 
     @Nullable
     @Override
@@ -35,8 +35,12 @@ public class ContactsFragment extends Fragment {
 
     private void initRecyclerView(View view){
         RecyclerView recyclerView = view.findViewById(R.id.contacts_recycle_view);
-        ContactListAdapter contactListAdapter = new ContactListAdapter(getActivity(), navController);
+        contactListAdapter = new ContactListAdapter(getActivity(), navController);
         recyclerView.setAdapter(contactListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    public void refresh(){
+        contactListAdapter.reload();
     }
 }
