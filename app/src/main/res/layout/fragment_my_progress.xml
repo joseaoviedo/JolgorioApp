@@ -14,7 +14,7 @@
         android:id="@+id/text3"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Videollamada"
+        android:text="@string/mi_progreso"
         android:fontFamily="@font/poppins_medium"
         android:textSize="32sp"
         android:textColor="@color/text_color"
@@ -38,30 +38,30 @@
         android:layout_marginStart="30dp"/>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/videocall_tab_layout"
+        android:id="@+id/my_progress_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/videocall_tab_contacts"
+            android:id="@+id/my_progress_tab_artistica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contactos">
+            android:text="Artistico">
         </com.google.android.material.tabs.TabItem>
 
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/videocall_tab_favorites"
+            android:id="@+id/my_progress_tab_deportivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Favoritos" />
+            android:text="Deportivo" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/videocall_tab_log"
+            android:id="@+id/my_progress_tab_cultural"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro" />
+            android:text="Cultural" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
