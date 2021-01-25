@@ -1,4 +1,4 @@
-package com.jolgorio.jolgorioapp.ui.profile;
+package com.jolgorio.jolgorioapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

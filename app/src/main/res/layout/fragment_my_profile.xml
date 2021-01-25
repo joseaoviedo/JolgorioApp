@@ -57,7 +57,7 @@
         android:layout_below="@+id/profileImage"/>
     <Button
         android:id="@+id/misTrabajosButton"
-        android:layout_width="385dp"
+        android:layout_width="360dp"
         android:layout_height="130dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
@@ -71,7 +71,7 @@
         android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/miProgresoButton"
-        android:layout_width="385dp"
+        android:layout_width="360dp"
         android:layout_height="130dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
@@ -85,7 +85,7 @@
         android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/editarPerfilButton"
-        android:layout_width="385dp"
+        android:layout_width="360dp"
         android:layout_height="130dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
