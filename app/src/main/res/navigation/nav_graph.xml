@@ -91,12 +91,22 @@
         <action
             android:id="@+id/action_miPerfil_to_misTrabajos"
             app:destination="@id/misTrabajos" />
+        <action
+            android:id="@+id/action_miPerfil_to_miProgreso"
+            app:destination="@id/miProgreso" />
     </fragment>
     <fragment
         android:id="@+id/misTrabajos"
         android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_my_work"
         android:label="fragment_my_work"
         tools:layout="@layout/fragment_my_work"
+        />
+
+    <fragment
+        android:id="@+id/miProgreso"
+        android:name="com.jolgorio.jolgorioapp.ui.progress.fragment_my_progress"
+        android:label="fragment_my_progress"
+        tools:layout="@layout/fragment_my_progress"
         />
 
 

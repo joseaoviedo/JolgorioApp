@@ -46,7 +46,7 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
                 navController.navigate(R.id.action_miPerfil_to_misTrabajos);
                 break;
             case R.id.miProgresoButton:
-                //navController.navigate(R.id.action_mainMenuFragment_to_miPerfil);
+                navController.navigate(R.id.action_miPerfil_to_miProgreso);
                 break;
             case R.id.editarPerfilButton:
                 //navController.navigate(R.id.action_mainMenuFragment_to_registerFragment);

@@ -1,7 +1,6 @@
 package com.jolgorio.jolgorioapp.ui.profile;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -16,6 +15,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.adapter.CustomAdapter;
 
 public class fragment_my_work extends Fragment implements View.OnClickListener {
 

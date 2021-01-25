@@ -65,7 +65,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/videocall_viewpager"
+        android:id="@+id/my_progress_viewpager"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_marginTop="150dp"/>
