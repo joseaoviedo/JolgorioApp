@@ -25,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapter.ViewHolder>{
 
     private static final String TAG = "ActivityListAdapter";
-    private ArrayList<JolgorioActivity> mActivities = new ArrayList<>();
+    private ArrayList<JolgorioActivity> mActivities;
     private Context mContext;
     private NavController navController;
 

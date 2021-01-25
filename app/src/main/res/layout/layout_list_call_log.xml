@@ -12,7 +12,7 @@
     app:cardUseCompatPadding="true">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/contactImage"
+        android:id="@+id/call_log_image"
         android:layout_width="100dp"
         android:layout_marginStart="20dp"
         android:layout_height="100dp"
@@ -24,46 +24,46 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/contactName"
+        android:id="@+id/call_log_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_alignEnd="@+id/contactImage"
+        android:layout_alignEnd="@+id/call_log_image"
         android:fontFamily="@font/poppins_medium"
         android:text="Contacto"
         android:textColor="@color/text_color"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/contactImage"
+        app:layout_constraintStart_toEndOf="@+id/call_log_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.408" />
 
     <TextView
-        android:id="@+id/contactNumber"
+        android:id="@+id/call_log_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Numero"
+        android:text="Fecha"
         android:layout_marginStart="20dp"
         android:textColor="@color/text_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/contactImage"
-        app:layout_constraintTop_toBottomOf="@+id/contactName"
+        app:layout_constraintStart_toEndOf="@+id/call_log_image"
+        app:layout_constraintTop_toBottomOf="@+id/call_log_name"
         app:layout_constraintVertical_bias="0.0" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/favButton"
+        android:id="@+id/remove_call_log_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="95dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/icon_camera"
+        android:background="@drawable/icon_x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/videocallButton"
+        android:id="@+id/call_log_videocall_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -78,8 +78,8 @@
     <View
         android:layout_height="2dp"
         android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="#979797"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

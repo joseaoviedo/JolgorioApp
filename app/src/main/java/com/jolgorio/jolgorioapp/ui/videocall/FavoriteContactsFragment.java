@@ -42,14 +42,6 @@ public class FavoriteContactsFragment extends Fragment {
         favListAdapter = new FavoriteListAdapter(getActivity(), navController);
         recyclerView.setAdapter(favListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.fav_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 
     public void refresh(){
