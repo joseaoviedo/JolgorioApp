@@ -33,5 +33,8 @@
     <string name="editar_perfil">Editar Perfil</string>
     <string name="este_mes">Este mes</string>
     <string name="Logros">Logros </string>
+    <string name="no">No</string>
+    <string name="si">Si</string>
+    <string name="desea_realizar_la_n_llamada_al_centro_n_de_ayuda">¿Desea realizar la llamada al centro de ayuda?</string>
 
 </resources>

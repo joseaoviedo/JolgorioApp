@@ -1,5 +1,6 @@
 package com.jolgorio.jolgorioapp.ui.profile;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
@@ -58,11 +59,13 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         dialog.show();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.closeImageDisplay:
                 dialog.dismiss();
+                break;
         }
     }
 }
