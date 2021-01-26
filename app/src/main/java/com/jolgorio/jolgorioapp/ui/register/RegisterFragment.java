@@ -1,7 +1,9 @@
 package com.jolgorio.jolgorioapp.ui.register;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -19,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -26,7 +29,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.graphics.Color;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -60,7 +66,8 @@ public class RegisterFragment extends Fragment {
     private Drawable female_true;
     private Drawable female_false;
 
-    static final int REQUEST_IMAGE_CAPTURE = 101;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_GALERY = 1;
 
     private Spinner pais;
     private Spinner provincia;
@@ -90,6 +97,8 @@ public class RegisterFragment extends Fragment {
 
         maleFlag = false;
         femaleFlag = false;
+
+        RegisterIMG = (CircleImageView) view.findViewById(R.id.imageProfile);
 
         entryButton = (Button) view.findViewById(R.id.signUpEntry);
         entryButton.setEnabled(false);
@@ -174,6 +183,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //dispatchTakePictureIntent();
+                Log.d("Llega aquí", "primer boton");
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 final View popupView = getLayoutInflater().inflate(R.layout.layout_upload_photo_options_popup, null);
 
@@ -188,7 +198,8 @@ public class RegisterFragment extends Fragment {
                     galeryBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
+                            Log.d("Llega aquí", "galeria*********");
+                            takePhotoFromGalery();
                             //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
                         }
                     });
@@ -197,6 +208,7 @@ public class RegisterFragment extends Fragment {
                     cameraBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Log.d("Llega aquí", "camara*********");
                             dispatchTakePictureIntent();
                             //dialog.dismiss();
                             //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
@@ -329,26 +341,57 @@ public class RegisterFragment extends Fragment {
         });
     }
 
-
     // Take Foto
     private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            //getActivity().startActivityIfNeeded(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            //startActivity(takePictureIntent);
-            getActivity().startActivity(takePictureIntent);
+        Log.d("Llega aquí", "Llegooo##################");
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            //if (takePictureIntent.resolveActivity(RegisterFragment.this.getContext().getPackageManager()) != null) {
+            Log.d("Llega aquí", "Llegooo++++++++++++++++++");
+            startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
+        } else {
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                REQUEST_IMAGE_CAPTURE);
         }
-        allFieldsFilled();
     }
 
-    //Taking result
-    protected void onActivityResult(int requestCode, int resultCode, Intent data, ImageView img) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            img.setImageBitmap(imageBitmap);
+    public void takePhotoFromGalery() {
+        Log.d("Llega aquí", "}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}");
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            Log.d("Llega aquí", "¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿");
+            Intent takePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            //Intent takePictureIntent = new Intent(Intent.ACTION_PICK);
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            Log.d("Llega aquí", "´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+        } else {
+            Log.d("Llega aquí", "...................................................");
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_IMAGE_CAPTURE);
         }
-        allFieldsFilled();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("Llega aquí", "FUERAAAA----");
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Log.d("Llega aquí", "DENTROOOO");
+            Bundle extras = data.getExtras();
+            Log.d("Llega aquí", "DENTROOOO2222");
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Log.d("Llega aquí", "DENTROOOO3333");
+            RegisterIMG.setImageBitmap(imageBitmap);
+        }else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void allFieldsFilled(){
