@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "183080032331",
+    "project_id": "jolgorio-db9bf",
+    "storage_bucket": "jolgorio-db9bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183080032331:android:660bb647886cb41b4955ce",
+        "android_client_info": {
+          "package_name": "com.jolgorio.jolgorioapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183080032331-b5fq8b4re3a9754e6pfmien6iudvnb9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZIHSlIT0_Ru_CmeT6zb78xq5aZZlWByw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183080032331-b5fq8b4re3a9754e6pfmien6iudvnb9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
