@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -67,7 +68,7 @@ public class RegisterFragment extends Fragment {
     private Drawable female_false;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_IMAGE_GALERY = 1;
+    static final int REQUEST_IMAGE_GALLERY = 101;
 
     private Spinner pais;
     private Spinner provincia;
@@ -174,7 +175,7 @@ public class RegisterFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("es"));
 
         birthDateField.setText(sdf.format(myCalendar.getTime()));
-        Log.d("FECHA", String.valueOf(birthDateField));
+        allFieldsFilled();
     }
 
     private void TakePhoto(View view) {
@@ -182,24 +183,22 @@ public class RegisterFragment extends Fragment {
         newPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dispatchTakePictureIntent();
-                Log.d("Llega aquí", "primer boton");
                 AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
                 final View popupView = getLayoutInflater().inflate(R.layout.layout_upload_photo_options_popup, null);
 
-                AppCompatButton galeryBtn = popupView.findViewById(R.id.galeryPhoto);
+                AppCompatButton galleryBtn = popupView.findViewById(R.id.galleryPhoto);
                 AppCompatButton cameraBtn = popupView.findViewById(R.id.cameraPhoto);
 
                 alerta.setView(popupView);
                 dialog = alerta.create();
                 dialog.show();
 
-                if(galeryBtn != null) {
-                    galeryBtn.setOnClickListener(new View.OnClickListener() {
+                if(galleryBtn != null) {
+                    galleryBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("Llega aquí", "galeria*********");
-                            takePhotoFromGalery();
+                            takePhotoFromGallery();
+                            dialog.dismiss();
                             //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
                         }
                     });
@@ -208,15 +207,15 @@ public class RegisterFragment extends Fragment {
                     cameraBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("Llega aquí", "camara*********");
                             dispatchTakePictureIntent();
-                            //dialog.dismiss();
+                            dialog.dismiss();
                             //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
                         }
                     });
                 }
             }
         });
+        allFieldsFilled();
     }
 
     private void GenderSelection(View view) {
@@ -343,11 +342,8 @@ public class RegisterFragment extends Fragment {
 
     // Take Foto
     private void dispatchTakePictureIntent() {
-        Log.d("Llega aquí", "Llegooo##################");
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            //if (takePictureIntent.resolveActivity(RegisterFragment.this.getContext().getPackageManager()) != null) {
-            Log.d("Llega aquí", "Llegooo++++++++++++++++++");
             startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
         } else {
         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
@@ -355,34 +351,32 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-    public void takePhotoFromGalery() {
-        Log.d("Llega aquí", "}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}");
+    public void takePhotoFromGallery() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Log.d("Llega aquí", "¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿");
             Intent takePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             //Intent takePictureIntent = new Intent(Intent.ACTION_PICK);
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            Log.d("Llega aquí", "´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´");
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_GALLERY);
         } else {
-            Log.d("Llega aquí", "...................................................");
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    REQUEST_IMAGE_CAPTURE);
+                    REQUEST_IMAGE_GALLERY);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Llega aquí", "FUERAAAA----");
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Log.d("Llega aquí", "DENTROOOO");
             Bundle extras = data.getExtras();
-            Log.d("Llega aquí", "DENTROOOO2222");
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            Log.d("Llega aquí", "DENTROOOO3333");
             RegisterIMG.setImageBitmap(imageBitmap);
-        }else {
+        }
+        if(requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            Uri imguri = data.getData();
+            RegisterIMG.setImageURI(imguri);
+        }else{
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_IMAGE_CAPTURE);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_IMAGE_GALLERY);
         }
     }
 

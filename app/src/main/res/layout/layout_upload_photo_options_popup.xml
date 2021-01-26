@@ -19,7 +19,7 @@
         android:backgroundTint="@color/greyout"
         />
     <Button
-        android:id="@+id/galeryPhoto"
+        android:id="@+id/galleryPhoto"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:fontFamily="@font/poppins_medium"
