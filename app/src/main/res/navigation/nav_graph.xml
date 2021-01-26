@@ -13,9 +13,6 @@
             android:id="@+id/action_mainMenuFragment_to_activityListActivity"
             app:destination="@id/activityListActivity" />
         <action
-            android:id="@+id/action_mainMenuFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
-        <action
             android:id="@+id/action_mainMenuFragment_to_videoCallPagerFragment"
             app:destination="@id/videoCallPagerFragment" />
         <action
@@ -24,6 +21,9 @@
         <action
             android:id="@+id/action_mainMenuFragment_to_miPerfil"
             app:destination="@id/miPerfil" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_juegos"
+            app:destination="@id/juegos" />
     </fragment>
     <fragment
         android:id="@+id/activityListActivity"
@@ -108,6 +108,21 @@
         android:label="fragment_my_progress"
         tools:layout="@layout/fragment_my_progress"
         />
+    <fragment
+        android:id="@+id/juegos"
+        android:name="com.jolgorio.jolgorioapp.ui.games.Fragment_menu_games"
+        android:label="fragment_menu_games"
+        tools:layout="@layout/fragment_menu_games"
+        >
+        <action
+            android:id="@+id/action_juegos_to_Memoria"
+            app:destination="@id/Memoria" />
+    </fragment>
+    <fragment
+        android:id="@+id/Memoria"
+        android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_memory_match"
+        android:label="fragment_game_memory_match"
+        tools:layout="@layout/fragment_game_memory_match"/>
 
 
 </navigation>
