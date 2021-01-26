@@ -1,10 +1,20 @@
 package com.jolgorio.jolgorioapp.ui.games;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +29,18 @@ import com.jolgorio.jolgorioapp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class fragment_game_memory_match extends Fragment {
+public class fragment_game_memory_match extends Fragment implements View.OnClickListener {
 
+    private AlertDialog.Builder alertDialogBuilder;
+    private AlertDialog dialog;
+    //Emergencia
+    private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     //los botones del juego
     ImageButton el0, el1, el2, el3, el4, el5, el6, el7,
             el8, el9, el10, el11, el12, el13, el14, el15;
 
     //los botones del menú
-    Button reiniciar, salir;
+    Button reiniciar, salir, emergencia;
 
     //las imágenes
     int imagenes[];
@@ -133,7 +147,8 @@ public class fragment_game_memory_match extends Fragment {
 
     public void botonesMenu(){
         reiniciar = (Button) view.findViewById(R.id.Reiniciar);
-        salir = (Button) view.findViewById(R.id.Salir);
+        salir = (Button) view.findViewById(R.id.salir);
+        emergencia =(Button) view.findViewById(R.id.EmergencyButton);
         reiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +161,25 @@ public class fragment_game_memory_match extends Fragment {
                 //finish();
             }
         });
+        emergencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EmergencyPopUp();
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.alertNObutton:
+                dialog.dismiss();
+                break;
+            case R.id.alertYESbutton:
+                call();
+                break;
+        }
     }
 
     public void comprobar(int i, final ImageButton imgb){
@@ -249,4 +283,41 @@ public class fragment_game_memory_match extends Fragment {
         textoPuntuacion.setText("Puntuación: " + puntuacion);
     }
 
+    //Llamar Emergencias
+    void call() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + "123"));
+            getActivity().startActivity(callIntent);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},
+                    CALL_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CALL_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void EmergencyPopUp(){
+        Log.d("3", "Call");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_emergencycall_popup, null);
+        AppCompatButton exitBtn = imageDisplay.findViewById(R.id.alertNObutton);
+        AppCompatButton calltBtn = imageDisplay.findViewById(R.id.alertYESbutton);
+        if(exitBtn != null) {
+            exitBtn.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(calltBtn != null) {
+            calltBtn.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
 }

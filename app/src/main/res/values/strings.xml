@@ -36,5 +36,6 @@
     <string name="no">No</string>
     <string name="si">Si</string>
     <string name="desea_realizar_la_n_llamada_al_centro_n_de_ayuda">¿Desea realizar la llamada al centro de ayuda?</string>
+    <string name="est_seguro_que_desea_salir_del_juego">¿Está seguro que desea salir del juego?</string>
 
 </resources>
