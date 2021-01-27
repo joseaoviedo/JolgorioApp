@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
- <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -16,9 +16,6 @@
             android:id="@+id/action_mainMenuFragment_to_videoCallPagerFragment"
             app:destination="@id/videoCallPagerFragment" />
         <action
-            android:id="@+id/action_mainMenuFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
             android:id="@+id/action_mainMenuFragment_to_miPerfil"
             app:destination="@id/miPerfil" />
         <action
@@ -34,7 +31,7 @@
             android:id="@+id/action_activityListActivity_to_activityInfoFragment"
             app:destination="@id/activityInfoFragment" />
     </fragment>
-    <fragment
+     <fragment
         android:id="@+id/activityInfoFragment"
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityInfoFragment"
         android:label="ActivityInfoFragment"
@@ -98,6 +95,9 @@
         <action
             android:id="@+id/action_miPerfil_to_miProgreso"
             app:destination="@id/miProgreso" />
+        <action
+            android:id="@+id/action_miPerfil_to_EditarPerfil"
+            app:destination="@id/EditarPerfil" />
     </fragment>
     <fragment
         android:id="@+id/misTrabajos"
@@ -112,7 +112,7 @@
         android:label="fragment_my_progress"
         tools:layout="@layout/fragment_my_progress"
         />
-    <fragment
+      <fragment
         android:id="@+id/juegos"
         android:name="com.jolgorio.jolgorioapp.ui.games.Fragment_menu_games"
         android:label="fragment_menu_games"
@@ -131,9 +131,14 @@
             android:id="@+id/action_Memoria_to_juegos"
             app:destination="@id/juegos" />
         <action
-            android:id="@+id/action_Memoria_to_mainMenuFragment"
+            android:id="@+id/action_Memoria_to_mainMenu"
             app:destination="@id/mainMenuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/EditarPerfil"
+        android:label="fragment_edit_profile"
+        android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile"/>
 
 
 </navigation>

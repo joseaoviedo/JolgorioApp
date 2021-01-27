@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +23,11 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.ActivityListAdapter;
 import com.jolgorio.jolgorioapp.data.dummy.ActivityDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import java.util.ArrayList;
 
-public class ActivityListFragment extends Fragment {
+public class ActivityListFragment extends Fragment implements View.OnClickListener {
     private ArrayList<JolgorioActivity> activities = ActivityDummy.getDummyData();
     private NavController navController;
 
@@ -36,6 +38,13 @@ public class ActivityListFragment extends Fragment {
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         initRecyclerView(view);
+
+        Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
+        EmergencyCall.setOnClickListener(this);
+
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
+
         return view;
     }
 
@@ -44,5 +53,19 @@ public class ActivityListFragment extends Fragment {
         ActivityListAdapter adapter = new ActivityListAdapter(activities, getActivity(), navController);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.EmergencyButton:
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+
+                //volver
+                break;
+        }
     }
 }

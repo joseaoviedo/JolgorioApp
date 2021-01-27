@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -174,19 +175,12 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 break;
             case R.id.salirJuego:
                 //Regresar al menu de juegos
-                navController.navigate(R.id.action_Memoria_to_juegos);
+                salirPopUp();
                 break;
             case R.id.EmergencyButton:
                 //PopUp de llamada de emergencia
-                EmergencyPopUp();
-                break;
-            case R.id.alertNObutton:
-                //Cerrar PopUp
-                dialog.dismiss();
-                break;
-            case R.id.alertYESbutton:
-                //llamada de alerta
-                call();
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
                 break;
             case R.id.jugarotravez:
                 //Se reinicia el juego desde PopUp
@@ -200,9 +194,15 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 break;
             case R.id.salir:
                 //Regresar al menu principal
-                dialog.dismiss();       
-                navController.navigate(R.id.action_Memoria_to_mainMenuFragment);
+                dialog.dismiss();
+                navController.navigate(R.id.action_Memoria_to_mainMenu);
                 break;
+            case R.id.noSalir:
+                dialog.dismiss();
+                break;
+            case R.id.siSalir:
+                dialog.dismiss();
+                navController.navigate(R.id.action_Memoria_to_juegos);
         }
     }
 
@@ -305,43 +305,6 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
         textoPuntuacion.setText("Puntuación: " + puntuacion);
     }
 
-    //Llamar Emergencias
-    void call() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + "123"));
-            getActivity().startActivity(callIntent);
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},
-                    CALL_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CALL_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void EmergencyPopUp(){
-        Log.d("3", "Call");
-        alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_emergencycall_popup, null);
-        AppCompatButton exitBtn = imageDisplay.findViewById(R.id.alertNObutton);
-        AppCompatButton calltBtn = imageDisplay.findViewById(R.id.alertYESbutton);
-        if(exitBtn != null) {
-            exitBtn.setOnClickListener((View.OnClickListener) this);
-        }
-
-        if(calltBtn != null) {
-            calltBtn.setOnClickListener((View.OnClickListener) this);
-        }
-        alertDialogBuilder.setView(imageDisplay);
-        dialog = alertDialogBuilder.create();
-        dialog.show();
-    }
 
     public void finish(){
         Log.d("3", "Juego Terminado");
@@ -360,6 +323,24 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
 
         if(salir != null) {
             salir.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
+
+    public void salirPopUp(){
+        Log.d("5", "Salir del juego");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_exit_game_popup, null);
+        AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
+        AppCompatButton siSalir = imageDisplay.findViewById(R.id.siSalir);
+        if(noSalir != null) {
+            noSalir.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(siSalir != null) {
+            siSalir.setOnClickListener((View.OnClickListener) this);
         }
         alertDialogBuilder.setView(imageDisplay);
         dialog = alertDialogBuilder.create();

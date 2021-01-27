@@ -12,11 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.CustomAdapter;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class fragment_my_work extends Fragment implements View.OnClickListener {
 
@@ -40,6 +42,12 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
 
             }
         });
+
+        Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
+        EmergencyCall.setOnClickListener(this);
+
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
 
         return view;
     }
@@ -65,6 +73,13 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.closeImageDisplay:
                 dialog.dismiss();
+                break;
+            case R.id.EmergencyButton:
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+                //volver
                 break;
         }
     }

@@ -39,6 +39,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,7 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener {
     private AlertDialog dialog;
     private NavController navController;
 
@@ -109,6 +110,7 @@ public class RegisterFragment extends Fragment {
         leavingAlertButton = (Button) view.findViewById(R.id.signUpCancel);
 
         emergencyCallButton = (Button) view.findViewById(R.id.EmergencyButton);
+        emergencyCallButton.setOnClickListener(this);
 
         maleButton = (ImageButton) view.findViewById(R.id.MaleButton);
         femaleButton = (ImageButton) view.findViewById(R.id.FemaleButton);
@@ -141,7 +143,6 @@ public class RegisterFragment extends Fragment {
         pickBirthDate(view);
         TakePhoto(view);
         LeavingAlert(view);
-        EmergencyCallAlert(view);
         GenderSelection(view);
         Entry(view);
         allFieldsFilled();
@@ -308,40 +309,12 @@ public class RegisterFragment extends Fragment {
         });
     }
 
-    private void EmergencyCallAlert(View view){
-
-        emergencyCallButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
-                final View popupView = getLayoutInflater().inflate(R.layout.layout_emergencycall_popup, null);
-
-                AppCompatButton exitBtn = popupView.findViewById(R.id.alertYESbutton);
-                AppCompatButton cancelBtn = popupView.findViewById(R.id.alertNObutton);
-
-                alerta.setView(popupView);
-                dialog = alerta.create();
-                dialog.show();
-
-                if(exitBtn != null) {
-                    exitBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                            navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
-                        }
-                    });
-                }
-                if(cancelBtn != null) {
-                    cancelBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                }
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.EmergencyButton) {
+            EmergencyCall call = new EmergencyCall();
+            call.EmergencyPopUp(this);
+        }
     }
 
     // Take Foto

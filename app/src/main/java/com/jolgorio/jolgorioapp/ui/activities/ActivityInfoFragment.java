@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class ActivityInfoFragment extends Fragment implements View.OnClickListener{
     JolgorioActivity activity;
@@ -77,6 +78,11 @@ public class ActivityInfoFragment extends Fragment implements View.OnClickListen
 
         TextView time = view.findViewById(R.id.infoTime);
         time.setText(activity.getTimeDescription());
+        Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
+        EmergencyCall.setOnClickListener(this);
+
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +97,14 @@ public class ActivityInfoFragment extends Fragment implements View.OnClickListen
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("activity", activity);
                 navController.navigate(R.id.action_activityInfoFragment_to_activityVideoFragment, bundle);
+                break;
+            case R.id.EmergencyButton:
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+                //volver
+                break;
         }
     }
 }

@@ -30,6 +30,29 @@
         app:layout_constraintEnd_toEndOf="@id/activity_info_banner"  />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EmergencyButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_toEndOf="@id/f_info_activity_title"
+        android:background="@drawable/emergency_icon"
+        app:layout_constraintBottom_toBottomOf="@id/activity_info_banner"
+        app:layout_constraintEnd_toEndOf="@id/activity_info_banner"
+        app:layout_constraintStart_toEndOf="@id/f_info_activity_title"
+        app:layout_constraintTop_toTopOf="@+id/activity_info_banner"
+        android:layout_marginStart="40dp"/>
+    <Button
+        android:id="@+id/back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/atras"
+        android:backgroundTint="#3d3d3d"
+        app:layout_constraintTop_toTopOf="@+id/activity_info_banner"
+        app:layout_constraintStart_toStartOf="@id/activity_info_banner"
+        app:layout_constraintBottom_toBottomOf="@id/activity_info_banner"
+        app:layout_constraintEnd_toStartOf="@id/f_info_activity_title"
+        android:layout_marginEnd="70dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/f_activity_enter_btn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="200dp"
