@@ -40,6 +40,7 @@ public class ArtisticaFragment extends Fragment {
         //Cambiar el color del Circulo
         CircularProgressBar circularProgressBar = (CircularProgressBar) view.findViewById(R.id.circularProgressBar);
         circularProgressBar.setProgressBarColor(Color.rgb(45,138,143));
+
         //Porcentaje
         circularProgressBar.setProgress(20f);
 

@@ -47,10 +47,10 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
                 navController.navigate(R.id.action_mainMenuFragment_to_activityListActivity);
                 break;
             case R.id.PM_button1:
-                navController.navigate(R.id.action_mainMenuFragment_to_videoCallPagerFragment);
+                navController.navigate(R.id.action_mainMenuFragment_to_juegos);
                 break;
             case R.id.PM_button2:
-                navController.navigate(R.id.action_mainMenuFragment_to_contactsFragment);
+                navController.navigate(R.id.action_mainMenuFragment_to_videoCallPagerFragment);
                 break;
             case R.id.PM_button3:
                 navController.navigate(R.id.action_mainMenuFragment_to_miPerfil);

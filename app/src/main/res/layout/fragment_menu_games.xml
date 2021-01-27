@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.MainMenuFragment">
+
+    <TextView
+        android:id="@+id/Txtjuegos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Juegos"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/text_color"
+        android:textSize="40sp" />
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/atras"
+        android:backgroundTint="#3d3d3d"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EmergencyButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf ="@id/Txtjuegos"
+        android:background="@drawable/emergency_icon"
+        android:layout_marginStart="45dp"/>
+
+    <ScrollView
+        android:layout_below="@+id/Txtjuegos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/memorygame"
+                android:layout_width="360dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Memoria"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:backgroundTint="#1B787D"
+                app:cornerRadius="20dp"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
