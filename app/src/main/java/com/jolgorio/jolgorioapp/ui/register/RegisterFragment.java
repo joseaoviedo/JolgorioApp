@@ -76,6 +76,8 @@ public class RegisterFragment extends Fragment {
     private Spinner distrito;
 
     private EditText nameField;
+    private EditText surname1Field;
+    private EditText surname2Field;
     private EditText usrNameField;
     private EditText phoneNumberField;
     private EditText birthDateField;
@@ -115,7 +117,9 @@ public class RegisterFragment extends Fragment {
 
         newPhoto = (AppCompatButton) view.findViewById((R.id.addImage));
 
-        nameField = (EditText) view.findViewById((R.id.signUpFullName));
+        nameField = (EditText) view.findViewById((R.id.signUpName));
+        surname1Field = (EditText) view.findViewById((R.id.signUpSurname1));
+        surname2Field = (EditText) view.findViewById((R.id.signUpSurname2));
         usrNameField = (EditText) view.findViewById((R.id.SignUpUsrName));
         phoneNumberField = (EditText) view.findViewById((R.id.SignUpPhone));
         pwField = (EditText) view.findViewById((R.id.SignUpPW));
@@ -389,13 +393,15 @@ public class RegisterFragment extends Fragment {
     }
 
     private void allFieldsFilled(){
-        if (nameField.getText() != null && usrNameField.getText() != null &&
-        birthDateField.getText() != null && phoneNumberField.getText() != null &&
-        pais.getSelectedItem() != null && provincia.getSelectedItem() != null &&
-        canton.getSelectedItem() != null && distrito.getSelectedItem() != null &&
-        pwConfirmField.getText() != null && pwConfirmField.getText() != null) {
+        if (nameField.getText() != null && surname1Field.getText() != null &&
+                surname2Field.getText() != null && usrNameField.getText() != null &&
+                birthDateField.getText() != null && phoneNumberField.getText() != null &&
+                pais.getSelectedItem() != null && provincia.getSelectedItem() != null &&
+                canton.getSelectedItem() != null && distrito.getSelectedItem() != null &&
+                pwConfirmField.getText() != null && pwConfirmField.getText() != null &&
+                (maleFlag != false || femaleFlag != false)) {
+
             entryButton.setEnabled(true);
         }
-
     }
 }

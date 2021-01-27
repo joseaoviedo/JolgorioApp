@@ -29,6 +29,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.024" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/EmergencyButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="-3dp"
+            android:background="@drawable/emergency_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/SU_title0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.035"
+            tools:ignore="MissingConstraints" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageProfile"
             android:layout_width="160dp"
@@ -49,18 +61,6 @@
             app:layout_constraintEnd_toEndOf="@id/imageProfile"
             app:layout_constraintTop_toTopOf="@id/imageProfile"
             app:layout_constraintVertical_bias="1.0"
-            tools:ignore="MissingConstraints" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/EmergencyButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="-3dp"
-            android:background="@drawable/emergency_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/SU_title0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.035"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -391,34 +391,14 @@
             app:layout_constraintTop_toBottomOf="@+id/TitleSignUpConfirmPW" />
 
         <Button
-            android:id="@+id/signUpCancel"
-            android:layout_width="190dp"
-            android:layout_height="90dp"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="left|center_vertical"
-            android:layout_marginLeft="3dp"
-            android:text="Cancelar"
-            android:textAllCaps="false"
-            android:textSize="29sp"
-            app:backgroundTint="#E28E15"
-            app:cornerRadius="9dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints" />
-
-        <Button
             android:id="@+id/signUpEntry"
             android:layout_width="190dp"
             android:layout_height="90dp"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="start|center_vertical"
-            android:layout_marginRight="3dp"
-            android:text="Entrar"
+            android:layout_marginEnd="108dp"
             android:backgroundTint="@color/artistica"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="Entrar"
             android:textAllCaps="false"
             android:textSize="30sp"
             app:cornerRadius="9dp"
