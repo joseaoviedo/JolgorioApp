@@ -175,7 +175,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 break;
             case R.id.salirJuego:
                 //Regresar al menu de juegos
-                navController.navigate(R.id.action_Memoria_to_juegos);
+                salirPopUp();
                 break;
             case R.id.EmergencyButton:
                 //PopUp de llamada de emergencia
@@ -197,6 +197,12 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 dialog.dismiss();
                 navController.navigate(R.id.action_Memoria_to_mainMenu);
                 break;
+            case R.id.noSalir:
+                dialog.dismiss();
+                break;
+            case R.id.siSalir:
+                dialog.dismiss();
+                navController.navigate(R.id.action_Memoria_to_juegos);
         }
     }
 
@@ -317,6 +323,24 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
 
         if(salir != null) {
             salir.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
+
+    public void salirPopUp(){
+        Log.d("5", "Salir del juego");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_exit_game_popup, null);
+        AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
+        AppCompatButton siSalir = imageDisplay.findViewById(R.id.siSalir);
+        if(noSalir != null) {
+            noSalir.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(siSalir != null) {
+            siSalir.setOnClickListener((View.OnClickListener) this);
         }
         alertDialogBuilder.setView(imageDisplay);
         dialog = alertDialogBuilder.create();
