@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -67,7 +67,11 @@
         android:id="@+id/contactsFragment"
         android:name="com.jolgorio.jolgorioapp.ui.videocall.ContactsFragment"
         android:label="ContactsFragment"
-        tools:layout="@layout/fragment_contacts"/>
+        tools:layout="@layout/fragment_contacts">
+        <action
+            android:id="@+id/action_contactsFragment_self"
+            app:destination="@id/contactsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/videoCallPagerFragment"
         android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallPagerFragment"
@@ -122,7 +126,14 @@
         android:id="@+id/Memoria"
         android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_memory_match"
         android:label="fragment_game_memory_match"
-        tools:layout="@layout/fragment_game_memory_match"/>
+        tools:layout="@layout/fragment_game_memory_match">
+        <action
+            android:id="@+id/action_Memoria_to_juegos"
+            app:destination="@id/juegos" />
+        <action
+            android:id="@+id/action_Memoria_to_mainMenuFragment"
+            app:destination="@id/mainMenuFragment" />
+    </fragment>
 
 
 </navigation>

@@ -12,6 +12,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Handler;
 import android.util.Log;
@@ -31,16 +33,19 @@ import java.util.Collections;
 
 public class fragment_game_memory_match extends Fragment implements View.OnClickListener {
 
+    NavController navController;
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
+
     //Emergencia
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
+
     //los botones del juego
     ImageButton el0, el1, el2, el3, el4, el5, el6, el7,
             el8, el9, el10, el11, el12, el13, el14, el15;
 
     //los botones del menú
-    Button reiniciar, salir, emergencia;
+    Button reiniciar, salirJuego, emergencia;
 
     //las imágenes
     int imagenes[];
@@ -78,6 +83,8 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                              Bundle savedInstanceState) {
 
         view =  inflater.inflate(R.layout.fragment_game_memory_match, container, false);
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
         cargarImagenes();
         botonesMenu();
         iniciar();
@@ -147,37 +154,54 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
 
     public void botonesMenu(){
         reiniciar = (Button) view.findViewById(R.id.Reiniciar);
-        salir = (Button) view.findViewById(R.id.salir);
+        reiniciar.setOnClickListener((View.OnClickListener) this);
+
+        salirJuego = (Button) view.findViewById(R.id.salirJuego);
+        salirJuego.setOnClickListener((View.OnClickListener) this);
+
         emergencia =(Button) view.findViewById(R.id.EmergencyButton);
-        reiniciar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iniciar();
-            }
-        });
-        salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //finish();
-            }
-        });
-        emergencia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EmergencyPopUp();
-            }
-        });
+        emergencia.setOnClickListener((View.OnClickListener) this);
 
     }
 
+    //Controlador de funcion de botones
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.Reiniciar:
+                //Reiniciar el juego
+                iniciar();
+                break;
+            case R.id.salirJuego:
+                //Regresar al menu de juegos
+                navController.navigate(R.id.action_Memoria_to_juegos);
+                break;
+            case R.id.EmergencyButton:
+                //PopUp de llamada de emergencia
+                EmergencyPopUp();
+                break;
             case R.id.alertNObutton:
+                //Cerrar PopUp
                 dialog.dismiss();
                 break;
             case R.id.alertYESbutton:
+                //llamada de alerta
                 call();
+                break;
+            case R.id.jugarotravez:
+                //Se reinicia el juego desde PopUp
+                dialog.dismiss();
+                iniciar();
+                break;
+            case R.id.otrojuego:
+                //Regresar al menu de juegos
+                dialog.dismiss();
+                navController.navigate(R.id.action_Memoria_to_juegos);
+                break;
+            case R.id.salir:
+                //Regresar al menu principal
+                dialog.dismiss();       
+                navController.navigate(R.id.action_Memoria_to_mainMenuFragment);
                 break;
         }
     }
@@ -216,9 +240,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 textoPuntuacion.setText("Puntuación: " + puntuacion);
                 //al llegar a 8 aciertos se ha ganado el juego
                 if(aciertos==8){
-                    Toast toast = Toast.makeText(getContext(),
-                            "Has  ganado!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    finish();
                 }
             }else{//si NO coincide el valor los volvemos a tapar al cabo de un segundo
                 handler.postDelayed(new Runnable() {
@@ -315,6 +337,29 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
 
         if(calltBtn != null) {
             calltBtn.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
+
+    public void finish(){
+        Log.d("3", "Juego Terminado");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_game_win_popup, null);
+        AppCompatButton jugarotravez = imageDisplay.findViewById(R.id.jugarotravez);
+        AppCompatButton otrojuego = imageDisplay.findViewById(R.id.otrojuego);
+        AppCompatButton salir = imageDisplay.findViewById(R.id.salir);
+        if(jugarotravez != null) {
+            jugarotravez.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(otrojuego != null) {
+            otrojuego.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(salir != null) {
+            salir.setOnClickListener((View.OnClickListener) this);
         }
         alertDialogBuilder.setView(imageDisplay);
         dialog = alertDialogBuilder.create();
