@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class Fragment_menu_games extends Fragment implements View.OnClickListener {
 
@@ -56,54 +57,11 @@ public class Fragment_menu_games extends Fragment implements View.OnClickListene
                 navController.navigate(R.id.action_juegos_to_Memoria);
                 break;
             case R.id.EmergencyButton:
-                EmergencyPopUp();
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
                 break;
-            case R.id.alertNObutton:
-                dialog.dismiss();
-                break;
-            case R.id.alertYESbutton:
-                call();
-                break;
+
         }
     }
 
-    //Llamar Emergencias
-    void call() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + "123"));
-            getActivity().startActivity(callIntent);
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},
-                    CALL_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CALL_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-
-    public void EmergencyPopUp(){
-        Log.d("3", "Call");
-        alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_emergencycall_popup, null);
-        AppCompatButton exitBtn = imageDisplay.findViewById(R.id.alertNObutton);
-        AppCompatButton calltBtn = imageDisplay.findViewById(R.id.alertYESbutton);
-        if(exitBtn != null) {
-            exitBtn.setOnClickListener(this);
-        }
-
-        if(calltBtn != null) {
-            calltBtn.setOnClickListener(this);
-        }
-        alertDialogBuilder.setView(imageDisplay);
-        dialog = alertDialogBuilder.create();
-        dialog.show();
-    }
 }

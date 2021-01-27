@@ -7,6 +7,7 @@
     tools:context=".ui.activities.ActivityListFragment">
 
     <TextView
+        android:id="@+id/Texto"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,12 +19,22 @@
         />
 
     <Button
+        android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/atras"
         android:backgroundTint="#3d3d3d"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EmergencyButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf ="@id/Texto"
+        android:background="@drawable/emergency_icon"
+        android:layout_marginStart="45dp"/>
 
     <TextView
         android:layout_width="wrap_content"

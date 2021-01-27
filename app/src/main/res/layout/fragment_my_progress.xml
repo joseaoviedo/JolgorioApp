@@ -21,6 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20sp"/>
     <Button
+        android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -68,5 +69,5 @@
         android:id="@+id/my_progress_viewpager"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_marginTop="150dp"/>
+        android:layout_below="@+id/my_progress_tab_layout"/>
 </RelativeLayout>

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener{
 
@@ -56,7 +57,8 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
                 navController.navigate(R.id.action_mainMenuFragment_to_miPerfil);
                 break;
             case R.id.PM_button4:
-                navController.navigate(R.id.action_mainMenuFragment_to_registerFragment);
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
                 break;
         }
     }

@@ -13,11 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -46,6 +48,11 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_video, container, false);
         fillInfo(view);
+        Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
+        EmergencyCall.setOnClickListener(this);
+
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
         return view;
     }
 
@@ -107,6 +114,14 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         switch (v.getId()){
             case R.id.activity_completed_exit_btn:
                 dialog.dismiss();
+            case R.id.EmergencyButton:
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+
+                //volver
+                break;
         }
     }
 

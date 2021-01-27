@@ -9,13 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.VideoCallPagerAdapter;
+import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 
-public class VideoCallPagerFragment extends Fragment {
+public class VideoCallPagerFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_videocall_pager, container, false);
@@ -41,6 +43,25 @@ public class VideoCallPagerFragment extends Fragment {
                 adapter.refreshTab(tab.getPosition());
             }
         });
+
+        Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
+        EmergencyCall.setOnClickListener(this);
+
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.EmergencyButton:
+                EmergencyCall call = new EmergencyCall();
+                call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+                //volver
+                break;
+        }
     }
 }
