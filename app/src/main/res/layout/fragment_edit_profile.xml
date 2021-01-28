@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,402 +7,411 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/SU_title0"
+        android:layout_width="276dp"
+        android:layout_height="80dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="¡Bienvenido!"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/icon_default_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/icon_add"
+        app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+        app:layout_constraintEnd_toEndOf="@id/imageProfile"
+        app:layout_constraintTop_toTopOf="@id/imageProfile"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/EmergencyButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="-3dp"
+        android:background="@drawable/emergency_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/SU_title0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035"
+        tools:ignore="MissingConstraints" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context="com.mejorprogramacion.layouts.Constraint">
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp"
+        android:padding="10dp"
+        tools:context=".ui.register.RegisterFragment">
 
-        <TextView
-            android:id="@+id/SU_title0"
-            android:layout_width="276dp"
-            android:layout_height="80dp"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center"
-            android:text="Editar Perfil"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.024" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.mejorprogramacion.layouts.Constraint">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/EmergencyButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="-3dp"
-            android:background="@drawable/emergency_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/SU_title0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.035"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/TitleSignUpName"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Nombre"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginTop="108dp"
-            android:src="@drawable/icon_default_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/signUpName"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpName" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/icon_add"
-            app:layout_constraintBottom_toBottomOf="@id/imageProfile"
-            app:layout_constraintEnd_toEndOf="@id/imageProfile"
-            app:layout_constraintTop_toTopOf="@id/imageProfile"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/TitleSignUpSurname1"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Primer apellido"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpName"/>
 
-        <TextView
-            android:id="@+id/TitleSignUpName"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="280dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Nombre"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/signUpSurname1"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname1" />
 
-        <EditText
-            android:id="@+id/signUpName"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpName" />
+            <TextView
+                android:id="@+id/TitleSignUpSurname2"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Segundo apellido"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname1"/>
 
-        <TextView
-            android:id="@+id/TitleSignUpSurname1"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Primer apellido"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpName"/>
+            <EditText
+                android:id="@+id/signUpSurname2"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname2" />
 
-        <EditText
-            android:id="@+id/signUpSurname1"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname1" />
+            <TextView
+                android:id="@+id/TitleSignUpUsrName"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Nombre de Usuario"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname2" />
 
-        <TextView
-            android:id="@+id/TitleSignUpSurname2"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Segundo apellido"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname1"/>
+            <EditText
+                android:id="@+id/SignUpUsrName"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpUsrName" />
 
-        <EditText
-            android:id="@+id/signUpSurname2"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname2" />
+            <TextView
+                android:id="@+id/TitleSignUpBirthDate"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Fecha de Nacimiento"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpUsrName" />
 
-        <TextView
-            android:id="@+id/TitleSignUpUsrName"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Nombre de Usuario"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpSurname2" />
+            <EditText
+                android:id="@+id/SignUpBirthDate"
+                android:layout_width="215dp"
+                android:layout_height="44dp"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="21/03/1952"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate" />
 
-        <EditText
-            android:id="@+id/SignUpUsrName"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpUsrName" />
+            <ImageButton
+                android:id="@+id/MaleButton"
+                android:layout_width="65dp"
+                android:layout_height="73dp"
+                android:layout_marginTop="0dp"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.22"
+                app:layout_constraintStart_toEndOf="@+id/SignUpBirthDate"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
+                tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/TitleSignUpBirthDate"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Fecha de Nacimiento"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpUsrName" />
+            <ImageButton
+                android:id="@+id/FemaleButton"
+                android:layout_width="65dp"
+                android:layout_height="73dp"
+                android:layout_marginTop="0dp"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.22"
+                app:layout_constraintStart_toEndOf="@+id/MaleButton"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
+                tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/SignUpBirthDate"
-            android:layout_width="215dp"
-            android:layout_height="44dp"
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="21/03/1952"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate" />
+            <TextView
+                android:id="@+id/TitleSignUpPhone"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Teléfono"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate" />
 
-        <ImageButton
-            android:id="@+id/MaleButton"
-            android:layout_width="65dp"
-            android:layout_height="73dp"
-            android:layout_marginTop="0dp"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.22"
-            app:layout_constraintStart_toEndOf="@+id/SignUpBirthDate"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
-            tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/SignUpPhone"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.111"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPhone" />
 
-        <ImageButton
-            android:id="@+id/FemaleButton"
-            android:layout_width="65dp"
-            android:layout_height="73dp"
-            android:layout_marginTop="0dp"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.22"
-            app:layout_constraintStart_toEndOf="@+id/MaleButton"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/TitleSignUpPais"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Pais"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPhone" />
 
-        <TextView
-            android:id="@+id/TitleSignUpPhone"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Teléfono"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpBirthDate" />
+            <Spinner
+                android:id="@+id/signUpPais"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-83dp"
+                tools:layout_editor_absoluteY="165dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPais"/>
 
-        <EditText
-            android:id="@+id/SignUpPhone"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.111"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPhone" />
+            <TextView
+                android:id="@+id/TitleSignUpProvincia"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Provincia"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPais" />
 
-        <TextView
-            android:id="@+id/TitleSignUpPais"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Pais"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPhone" />
+            <Spinner
+                android:id="@+id/signUpProvincia"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-83dp"
+                tools:layout_editor_absoluteY="165dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpProvincia"/>
 
-        <Spinner
-            android:id="@+id/signUpPais"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-83dp"
-            tools:layout_editor_absoluteY="165dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPais"/>
+            <TextView
+                android:id="@+id/TitleSignUpCanton"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Cantón"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpProvincia" />
 
-        <TextView
-            android:id="@+id/TitleSignUpProvincia"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Provincia"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPais" />
+            <Spinner
+                android:id="@+id/signUpCanton"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-83dp"
+                tools:layout_editor_absoluteY="165dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpCanton"/>
 
-        <Spinner
-            android:id="@+id/signUpProvincia"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-83dp"
-            tools:layout_editor_absoluteY="165dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpProvincia"/>
+            <TextView
+                android:id="@+id/TitleSignUpDistrito"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Distrito"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpCanton" />
 
-        <TextView
-            android:id="@+id/TitleSignUpCanton"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Cantón"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpProvincia" />
+            <Spinner
+                android:id="@+id/signUpDistrito"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-83dp"
+                tools:layout_editor_absoluteY="165dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpDistrito"/>
 
-        <Spinner
-            android:id="@+id/signUpCanton"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-83dp"
-            tools:layout_editor_absoluteY="165dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpCanton"/>
+            <TextView
+                android:id="@+id/TitleSignUpPW"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Contraseña"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpDistrito" />
 
-        <TextView
-            android:id="@+id/TitleSignUpDistrito"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Distrito"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpCanton" />
+            <EditText
+                android:id="@+id/SignUpPW"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPW" />
 
-        <Spinner
-            android:id="@+id/signUpDistrito"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-83dp"
-            tools:layout_editor_absoluteY="165dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpDistrito"/>
+            <TextView
+                android:id="@+id/TitleSignUpConfirmPW"
+                android:layout_width="215dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="52dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Confrimar Contraseña"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPW" />
 
-        <TextView
-            android:id="@+id/TitleSignUpPW"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Contraseña"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpDistrito" />
+            <EditText
+                android:id="@+id/signUpConfirmPW"
+                android:layout_width="363dp"
+                android:layout_height="44dp"
+                android:inputType="textPersonName"
+                app:cornerRadius="70dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TitleSignUpConfirmPW" />
 
-        <EditText
-            android:id="@+id/SignUpPW"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPW" />
-
-        <TextView
-            android:id="@+id/TitleSignUpConfirmPW"
-            android:layout_width="215dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Confrimar Contraseña"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpPW" />
-
-        <EditText
-            android:id="@+id/signUpConfirmPW"
-            android:layout_width="393dp"
-            android:layout_height="44dp"
-            android:inputType="textPersonName"
-            app:cornerRadius="70dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TitleSignUpConfirmPW" />
-
-        <Button
-            android:id="@+id/signUpEntry"
-            android:layout_width="190dp"
-            android:layout_height="90dp"
-            android:layout_marginEnd="108dp"
-            android:backgroundTint="@color/artistica"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center"
-            android:text="Entrar"
-            android:textAllCaps="false"
-            android:textSize="30sp"
-            app:cornerRadius="9dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/signUpEntry"
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:layout_marginEnd="108dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/artistica"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Entrar"
+                android:textAllCaps="false"
+                android:textSize="30sp"
+                app:cornerRadius="9dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
