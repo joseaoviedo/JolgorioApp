@@ -18,12 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.ContactListAdapter;
+import com.jolgorio.jolgorioapp.adapter.LogroListAdapter;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class CulturalFragment extends Fragment {
 
     NavController navController;
-    ContactListAdapter contactListAdapter;
+    LogroListAdapter logroListAdapter;
 
     @Nullable
     @Override
@@ -31,7 +32,7 @@ public class CulturalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_layout_my_progress,container,false);
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
-        //initRecyclerView(view);
+        initRecyclerView(view);
 
         //Cambiar el icono
         ImageView icon = (ImageView) view.findViewById(R.id.iconProgress);
@@ -53,14 +54,14 @@ public class CulturalFragment extends Fragment {
     }
 
     private void initRecyclerView(View view){
-        RecyclerView recyclerView = view.findViewById(R.id.logros);
-        contactListAdapter = new ContactListAdapter(getActivity(), navController);
-        recyclerView.setAdapter(contactListAdapter);
+        RecyclerView recyclerView = view.findViewById(R.id.logros_recycler);
+        logroListAdapter = new LogroListAdapter(getActivity(), navController,3);
+        recyclerView.setAdapter(logroListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     public void refresh(){
-        contactListAdapter.reload();
+        logroListAdapter.reload();
     }
 
 }

@@ -2,14 +2,13 @@ package com.jolgorio.jolgorioapp.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -17,51 +16,61 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioLogro;
+import com.jolgorio.jolgorioapp.repositories.LogroRepository;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-/*
-public class LogroArtisticoAdapter extends RecyclerView.Adapter<LogroArtisticoAdapter.ViewHolder> {
 
-    private static final String TAG = "LogroArtisticoAdapter";
+public class LogroListAdapter extends RecyclerView.Adapter<LogroListAdapter.ViewHolder> {
+
     ArrayList<JolgorioLogro> mLogros;
     Context mContext;
     NavController navController;
+    LogroRepository logroRepository;
+    int tipo;
 
-    public LogroArtisticoAdapter(ArrayList<JolgorioLogro> mLogros,Context mContext, NavController navController){
-        this.mLogros = mLogros;
+    public LogroListAdapter(Context mContext, NavController navController, int tipoLogro){
         this.mContext = mContext;
         this.navController = navController;
+        this.logroRepository = LogroRepository.getInstance();
+        this.logroRepository.loadData();
+        this.tipo = tipoLogro;
+        if(tipo == 1){
+            this.mLogros = logroRepository.getLogrosArtisticos();
+        }else if(tipo == 2){
+            this.mLogros = logroRepository.getLogrosDeportivo();
+        }else if(tipo == 3){
+            this.mLogros= logroRepository.getLogrosCultural();
+        }
+        else{
+            System.out.println("Error codigo de logros no reconocido");
+        }
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_logro, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        LogroListAdapter.ViewHolder holder = new LogroListAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
         JolgorioLogro logro = mLogros.get(position);
+
         holder.logro = logro;
-        holder.activityTitle.setText(act.getTitle());
-        Drawable color;
-        switch (act.getType()){
+        holder.logroText.setText(logro.getTitle());
+        switch (logro.getType()){
             case 1:
-                color = mContext.getDrawable(R.drawable.activity_bg_artistica);
-                holder.parentLayout.setBackground(color);
+                holder.iconImage.setImageResource(R.drawable.artisticas);
                 break;
             case 2:
-                color = mContext.getDrawable(R.drawable.activity_bg_deportiva);
-                holder.parentLayout.setBackground(color);
+                holder.iconImage.setImageResource(R.drawable.deportivos);
                 break;
             default:
-                color = mContext.getDrawable(R.drawable.activity_bg_cultural);
-                holder.parentLayout.setBackground(color);
+                holder.iconImage.setImageResource(R.drawable.culturales);
                 break;
         }
 
@@ -73,18 +82,20 @@ public class LogroArtisticoAdapter extends RecyclerView.Adapter<LogroArtisticoAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        CircleImageView categoryImage;
-        TextView activityTitle;
-        RelativeLayout parentLayout;
+
+        ImageView iconImage;
+        TextView logroText;
         JolgorioLogro logro;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            categoryImage = itemView.findViewById(R.id.list_activity_image);
-            activityTitle = itemView.findViewById(R.id.list_activity_title);
-            parentLayout = itemView.findViewById(R.id.list_activity_parent_layout);
+            iconImage = itemView.findViewById(R.id.iconLogro);
+            logroText = itemView.findViewById(R.id.logroText);
+
         }
     }
-}
 
- */
+    public void reload(){
+        notifyDataSetChanged();
+    }
+}

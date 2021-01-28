@@ -22,7 +22,6 @@ import com.jolgorio.jolgorioapp.ui.profile.fragment_my_profile;
 
 public class EmergencyCall extends Fragment implements View.OnClickListener {
 
-    private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
     Fragment frag;
 
@@ -52,7 +51,7 @@ public class EmergencyCall extends Fragment implements View.OnClickListener {
     public void EmergencyPopUp(Fragment fragment){
         Log.d("3", "Call");
         frag = fragment;
-        alertDialogBuilder = new AlertDialog.Builder(frag.getActivity());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(frag.getActivity());
         final View imageDisplay = frag.getLayoutInflater().inflate(R.layout.layout_emergencycall_popup, null);
         AppCompatButton exitBtn = imageDisplay.findViewById(R.id.alertNObutton);
         AppCompatButton calltBtn = imageDisplay.findViewById(R.id.alertYESbutton);

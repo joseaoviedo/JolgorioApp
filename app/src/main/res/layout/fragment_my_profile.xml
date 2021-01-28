@@ -11,6 +11,7 @@
         android:id="@+id/my_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/mi_perfil"
@@ -18,14 +19,15 @@
         android:textAllCaps="false"
         android:textColor="@color/text_color"
         android:textSize="40sp" />
+
     <Button
         android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/atras"
-        android:backgroundTint="#3d3d3d"/>
+        android:backgroundTint="#3d3d3d" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/EmergencyButton"
@@ -36,68 +38,78 @@
         android:background="@drawable/emergency_icon"
         android:layout_marginStart="45dp"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="147dp"
-        android:layout_height="147dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/my_profile"
-        android:src="@drawable/logo" />
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="Nombre"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/text_color"
-        android:textSize="35sp"
-        android:layout_below="@+id/profileImage"/>
-    <Button
-        android:id="@+id/misTrabajosButton"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/mis_trabajos"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:backgroundTint="#1B787D"
-        app:cornerRadius="20dp"
-        android:layout_below="@id/name"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/miProgresoButton"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/mi_progreso"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:backgroundTint="#3EB7C8"
-        app:cornerRadius="20dp"
-        android:layout_below="@id/misTrabajosButton"
-        android:layout_centerHorizontal="true" />
-    <Button
-        android:id="@+id/editarPerfilButton"
-        android:layout_width="360dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/editar_perfil"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:backgroundTint="#FFA018"
-        app:cornerRadius="20dp"
-        android:layout_below="@id/miProgresoButton"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/my_profile"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/my_profile"
+                android:src="@drawable/logo" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Nombre"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color"
+                android:textSize="35sp"
+                android:layout_below="@+id/profileImage"/>
+            <Button
+                android:id="@+id/misTrabajosButton"
+                android:layout_width="360dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/mis_trabajos"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:backgroundTint="#1B787D"
+                app:cornerRadius="20dp"
+                android:layout_below="@id/name"
+                android:layout_centerHorizontal="true" />
+            <Button
+                android:id="@+id/miProgresoButton"
+                android:layout_width="360dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/mi_progreso"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:backgroundTint="#3EB7C8"
+                app:cornerRadius="20dp"
+                android:layout_below="@id/misTrabajosButton"
+                android:layout_centerHorizontal="true"/>
+            <Button
+                android:id="@+id/editarPerfilButton"
+                android:layout_width="360dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/editar_perfil"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:backgroundTint="#FFA018"
+                app:cornerRadius="20dp"
+                android:layout_below="@id/miProgresoButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
