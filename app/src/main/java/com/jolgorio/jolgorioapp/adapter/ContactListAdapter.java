@@ -2,10 +2,12 @@ package com.jolgorio.jolgorioapp.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -86,6 +88,14 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 }
             }
         });
+        holder.callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putParcelable("calledUser", holder.user);
+                navController.navigate(R.id.calling_fragment, args);
+            }
+        });
     }
 
     @Override
@@ -98,6 +108,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         TextView contactName;
         TextView contactNumber;
         AppCompatButton favoriteBtn;
+        ImageButton callButton;
         JolgorioUser user;
         boolean isFavorite = false;
 
@@ -107,6 +118,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             contactName = itemView.findViewById(R.id.contactName);
             contactNumber = itemView.findViewById(R.id.contactNumber);
             favoriteBtn = itemView.findViewById(R.id.favButton);
+            callButton = itemView.findViewById(R.id.videocallButton);
         }
     }
 

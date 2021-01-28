@@ -21,11 +21,12 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
-import com.jolgorio.jolgorioapp.tools.VideoCallPeer;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -75,7 +76,7 @@ public class CallingFragment extends Fragment {
 
     public void sendCallRequest(){
         JolgorioUser logedInUser = LogedInUserRepository.getInstance().getLogedInUser();
-        DatabaseReference databaseReference = VideoCallPeer.getInstance().getDatabaseReference();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child(calledUser.getNumber()).child("incoming").setValue(logedInUser.getNumber());
         databaseReference.child(calledUser.getNumber()).child("isAvailable").addValueEventListener(new ValueEventListener() {
             @Override
@@ -99,13 +100,14 @@ public class CallingFragment extends Fragment {
     }
 
     public void listenForConnectionId(){
-        DatabaseReference databaseReference = VideoCallPeer.getInstance().getDatabaseReference();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child(calledUser.getNumber()).child("connId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null){
                     String connId = snapshot.getValue().toString();
                     Bundle args = new Bundle();
+                    args.putString("userCalledId", calledUser.getNumber());
                     args.putString("connId", connId);
                     navController.navigate(R.id.videoCallFragment, args);
                 }
@@ -119,7 +121,7 @@ public class CallingFragment extends Fragment {
     }
 
     public void cancelCall(){
-        DatabaseReference databaseReference = VideoCallPeer.getInstance().getDatabaseReference();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child(calledUser.getNumber()).child("incoming").setValue(null);
         databaseReference.child(calledUser.getNumber()).child("isAvailable").setValue(null);
         databaseReference.child(calledUser.getNumber()).child("connId").setValue(null);

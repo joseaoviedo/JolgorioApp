@@ -6,7 +6,7 @@ import android.webkit.JavascriptInterface;
 public class CallJavaScript {
     @JavascriptInterface
     public void onPeerConnected(){
-        VideoCallPeer.getInstance().setPeerConnected(true);
+
     }
 
     @JavascriptInterface
