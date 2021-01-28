@@ -1,38 +1,19 @@
 package com.jolgorio.jolgorioapp.data.dummy;
 
-import android.os.Parcelable;
-
 import com.jolgorio.jolgorioapp.data.model.JolgorioLogro ;
+import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 
 import java.util.ArrayList;
 
 public class LogrosDummy {
 
-    private static ArrayList<JolgorioLogro > dummy = new ArrayList<>();
+    private static ArrayList<JolgorioLogro > artisticas = new ArrayList<>();
+    private static ArrayList<JolgorioLogro > deportivas = new ArrayList<>();
+    private static ArrayList<JolgorioLogro > culturales = new ArrayList<>();
     private static String sampleTextArtistica ="Completar 10 actividades artísticas";
     private static String sampleTextDeportiva ="Completar 10 actividades Deportivas";
     private static String sampleTextCultural ="Completar 10 actividades culturales";
 
-
-    public static ArrayList<JolgorioLogro > getDummyData(){
-        if(dummy.isEmpty()){
-            loadData();
-        }
-        return dummy;
-    }
-
-    public JolgorioLogro getByID(int id){
-        if(dummy.isEmpty()){
-            loadData();
-        }
-
-        for(JolgorioLogro j: dummy){
-            if(j.getId() == id){
-                return j;
-            }
-        }
-        return null;
-    }
 
     private static void loadData(){
         JolgorioLogro logro1 = new JolgorioLogro(1, 1, sampleTextArtistica);
@@ -48,17 +29,40 @@ public class LogrosDummy {
         JolgorioLogro  logro11 = new JolgorioLogro(11, 3, sampleTextCultural);
         JolgorioLogro  logro12 = new JolgorioLogro(12, 3, sampleTextCultural);
 
-        dummy.add(logro1);
-        dummy.add(logro2);
-        dummy.add(logro3);
-        dummy.add(logro4);
-        dummy.add(logro5);
-        dummy.add(logro6);
-        dummy.add(logro7);
-        dummy.add(logro8);
-        dummy.add(logro9);
-        dummy.add(logro10);
-        dummy.add(logro11);
-        dummy.add(logro12);
+        artisticas.add(logro1);
+        artisticas.add(logro2);
+        artisticas.add(logro3);
+        artisticas.add(logro4);
+
+        deportivas.add(logro5);
+        deportivas.add(logro6);
+        deportivas.add(logro7);
+        deportivas.add(logro8);
+
+        culturales.add(logro9);
+        culturales.add(logro10);
+        culturales.add(logro11);
+        culturales.add(logro12);
+    }
+
+    public static ArrayList<JolgorioLogro> getArtisticas(){
+        if(artisticas.isEmpty()){
+            loadData();
+        }
+        return artisticas;
+    }
+
+    public static ArrayList<JolgorioLogro> getDeportiva(){
+        if(deportivas.isEmpty()){
+            loadData();
+        }
+        return deportivas;
+    }
+
+    public static ArrayList<JolgorioLogro> getCultural(){
+        if(culturales.isEmpty()){
+            loadData();
+        }
+        return culturales;
     }
 }

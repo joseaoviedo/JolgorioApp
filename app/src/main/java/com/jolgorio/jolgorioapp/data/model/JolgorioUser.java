@@ -24,6 +24,29 @@ public class JolgorioUser implements Parcelable {
         this.photoURL = photoURL;
     }
 
+    protected JolgorioUser(Parcel in) {
+        id = in.readInt();
+        username = in.readString();
+        number = in.readString();
+        email = in.readString();
+        name = in.readString();
+        surname1 = in.readString();
+        surname2 = in.readString();
+        photoURL = in.readString();
+    }
+
+    public static final Creator<JolgorioUser> CREATOR = new Creator<JolgorioUser>() {
+        @Override
+        public JolgorioUser createFromParcel(Parcel in) {
+            return new JolgorioUser(in);
+        }
+
+        @Override
+        public JolgorioUser[] newArray(int size) {
+            return new JolgorioUser[size];
+        }
+    };
+
     public String getNumber() {
         return number;
     }
@@ -95,6 +118,13 @@ public class JolgorioUser implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(id);
+        dest.writeString(username);
+        dest.writeString(number);
+        dest.writeString(email);
+        dest.writeString(name);
+        dest.writeString(surname1);
+        dest.writeString(surname2);
+        dest.writeString(photoURL);
     }
 }

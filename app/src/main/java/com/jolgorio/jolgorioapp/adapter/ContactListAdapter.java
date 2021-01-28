@@ -10,19 +10,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.data.dummy.ContactsDummy;
-import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
