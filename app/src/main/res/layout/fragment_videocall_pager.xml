@@ -21,7 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20sp"/>
     <Button
-        android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -36,7 +35,7 @@
         android:layout_marginTop="20dp"
         android:layout_toEndOf ="@id/text3"
         android:background="@drawable/emergency_icon"
-        android:layout_marginStart="27dp"/>
+        android:layout_marginStart="30dp"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/videocall_tab_layout"
@@ -69,5 +68,5 @@
         android:id="@+id/videocall_viewpager"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/videocall_tab_layout"/>
+        android:layout_marginTop="150dp"/>
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.jolgorio.jolgorioapp.ui.main;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.tools.VideoCallPeer;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener{
-
+    AlertDialog.Builder alertDialogBuilder;
     NavController navController;
 
     @Override
@@ -33,6 +38,7 @@ public class MainMenuFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
+
         view.findViewById(R.id.PM_button0).setOnClickListener(this);
         view.findViewById(R.id.PM_button1).setOnClickListener(this);
         view.findViewById(R.id.PM_button2).setOnClickListener(this);

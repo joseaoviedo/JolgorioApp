@@ -1,15 +1,22 @@
 package com.jolgorio.jolgorioapp.adapter;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import android.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +27,7 @@ import com.jolgorio.jolgorioapp.data.dummy.ContactsDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
+import com.jolgorio.jolgorioapp.ui.videocall.CallingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +96,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                 }
             }
         });
+
+
+        holder.callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putParcelable("calledUser", holder.user);
+                navController.navigate(R.id.calling_fragment, args);
+            }
+        });
     }
 
     @Override
@@ -100,6 +118,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         TextView contactName;
         TextView contactNumber;
         AppCompatButton favoriteBtn;
+        ImageButton callButton;
         JolgorioUser user;
         boolean isFavorite = false;
 
@@ -109,6 +128,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             contactName = itemView.findViewById(R.id.contactName);
             contactNumber = itemView.findViewById(R.id.contactNumber);
             favoriteBtn = itemView.findViewById(R.id.favButton);
+            callButton = itemView.findViewById(R.id.videocallButton);
         }
     }
 

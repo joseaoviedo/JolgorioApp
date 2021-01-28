@@ -61,4 +61,13 @@ public class ContactRepository {
             favContacts = ContactsDummy.getFavContacts();
         }
     }
+
+    public JolgorioUser getContactFromPhone(String phoneNumber){
+        for(JolgorioUser j: contacts){
+            if(j.getNumber().equals(phoneNumber)){
+                return j;
+            }
+        }
+        return null;
+    }
 }

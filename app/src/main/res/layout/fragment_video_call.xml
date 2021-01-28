@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ui.videocall.VideoCallFragment">
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/videocall_webview">
+    </WebView>
+
+    <LinearLayout
+        android:id="@+id/videocall_buttons_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/videocall_audio"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/icon_mic_on"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/videocall_end"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/icon_end_call"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/videocall_video"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/icon_camera_on"/>
+
+    </LinearLayout>
+    
+
+</RelativeLayout>

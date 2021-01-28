@@ -48,7 +48,7 @@ public class VideoCallPagerFragment extends Fragment implements View.OnClickList
         EmergencyCall.setOnClickListener(this);
 
         Button back = (Button) view.findViewById(R.id.back);
-        back.setOnClickListener(this);
+        //back.setOnClickListener(this);
         return view;
     }
 

@@ -21,7 +21,7 @@ import com.jolgorio.jolgorioapp.data.model.JolgorioLogro;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
+/*
 public class LogroArtisticoAdapter extends RecyclerView.Adapter<LogroArtisticoAdapter.ViewHolder> {
 
     private static final String TAG = "LogroArtisticoAdapter";
@@ -86,3 +86,5 @@ public class LogroArtisticoAdapter extends RecyclerView.Adapter<LogroArtisticoAd
         }
     }
 }
+
+ */

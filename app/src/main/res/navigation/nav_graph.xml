@@ -61,15 +61,6 @@
             app:destination="@id/activityListActivity" />
     </fragment>
     <fragment
-        android:id="@+id/contactsFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.videocall.ContactsFragment"
-        android:label="ContactsFragment"
-        tools:layout="@layout/fragment_contacts">
-        <action
-            android:id="@+id/action_contactsFragment_self"
-            app:destination="@id/contactsFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/videoCallPagerFragment"
         android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallPagerFragment"
         android:label="fragment_videocall_pager"
@@ -139,6 +130,26 @@
         android:label="fragment_edit_profile"
         android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile"/>
+    <fragment
+        android:id="@+id/calling_fragment"
+        android:name="com.jolgorio.jolgorioapp.ui.videocall.CallingFragment"
+        android:label="fragment_calling"
+        tools:layout="@layout/fragment_calling" >
+
+        <argument
+            android:name="calledUser"
+            app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioUser"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/videoCallFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment"
+        android:label="VideoCallFragment"
+        tools:layout="@layout/fragment_video_call">
+        <argument
+            android:name="connId"
+            app:argType="string"/>
+    </fragment>
 
 
 </navigation>
