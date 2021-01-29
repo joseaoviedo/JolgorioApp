@@ -44,6 +44,9 @@ public class Fragment_menu_games extends Fragment implements View.OnClickListene
         Button memoria = (Button) view.findViewById(R.id.memorygame);
         memoria.setOnClickListener(this);
 
+        Button puzzle = (Button) view.findViewById(R.id.puzzle);
+        puzzle.setOnClickListener(this);
+
         Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
         EmergencyCall.setOnClickListener(this);
 
@@ -55,6 +58,9 @@ public class Fragment_menu_games extends Fragment implements View.OnClickListene
         switch (v.getId()){
             case R.id.memorygame:
                 navController.navigate(R.id.action_juegos_to_Memoria);
+                break;
+            case R.id.puzzle:
+                navController.navigate(R.id.action_juegos_to_Puzzle);
                 break;
             case R.id.EmergencyButton:
                 EmergencyCall call = new EmergencyCall();
