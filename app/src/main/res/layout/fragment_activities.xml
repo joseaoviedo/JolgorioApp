@@ -6,79 +6,108 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ActivityListFragment">
 
+    <RelativeLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/f_info_activity_title"
+            android:layout_width="220dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_centerInParent="true"
+            android:text="Actividades"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/text_color"
+            android:textSize="30sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/EmergencyButton"
+            android:layout_width="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="60dp"
+            android:background="@drawable/emergency_icon"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/atras"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
+    </RelativeLayout>
+
     <TextView
-        android:id="@+id/Texto"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="28sp"
-        android:textColor="#3D3D3D"
-        android:text="Actividades"
-        />
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/atras"
-        android:backgroundTint="#3d3d3d"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/EmergencyButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf ="@id/Texto"
-        android:background="@drawable/emergency_icon"
-        android:layout_marginStart="45dp"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/text1"
         android:text="Actividades pendientes"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_medium"
         android:textSize="20sp"
         android:textColor="#3d3d3d"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"/>
+        android:layout_below="@id/banner"/>
 
     <LinearLayout
         android:layout_height="wrap_content"
+        android:id="@+id/progress_layout"
         android:layout_width="wrap_content"
-        android:layout_marginTop="125dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text1"
         android:layout_centerHorizontal="true">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
             android:src="@drawable/artistica_icon"/>
-
-
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/artistica_progress"
+            app:cpb_progressbar_color="@color/artistica"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginLeft="70dp"
+            android:layout_marginEnd="5dp"
             android:src="@drawable/deportiva_icon"/>
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginEnd="15dp"
+            android:id="@+id/deportiva_progress"
+            app:cpb_progressbar_color="@color/artistica"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
             android:src="@drawable/cultural_icon"/>
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:id="@+id/cultural_progress"
+            app:cpb_progressbar_color="@color/artistica"/>
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/progress_layout"
+        android:padding="20dp"
         android:id="@+id/recycler_view"
-        android:layout_width="370dp"
-        android:layout_height="700dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp" />
+        android:scrollbars="vertical"
+        android:scrollbarSize="@dimen/appbar_padding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
 </RelativeLayout>

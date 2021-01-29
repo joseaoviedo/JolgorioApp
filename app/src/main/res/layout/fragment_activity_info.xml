@@ -1,56 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.MainMenuFragment"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <View
+    <RelativeLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/activity_info_banner"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/deportiva"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp"></View>
+        android:background="@color/deportiva">
+        <TextView
+            android:id="@+id/f_info_activity_title"
+            android:layout_width="220dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_centerInParent="true"
+            android:text="Titulo"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/f_info_activity_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Titulo"
-        android:textColor="@color/white"
-        android:textSize="32sp"
-        app:layout_constraintTop_toTopOf="@+id/activity_info_banner"
-        app:layout_constraintStart_toStartOf="@id/activity_info_banner"
-        app:layout_constraintBottom_toBottomOf="@id/activity_info_banner"
-        app:layout_constraintEnd_toEndOf="@id/activity_info_banner"  />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/EmergencyButton"
+            android:layout_width="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="60dp"
+            android:background="@drawable/emergency_icon"
+            android:layout_marginEnd="10dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/EmergencyButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_toEndOf="@id/f_info_activity_title"
-        android:background="@drawable/emergency_icon"
-        app:layout_constraintBottom_toBottomOf="@id/activity_info_banner"
-        app:layout_constraintEnd_toEndOf="@id/activity_info_banner"
-        app:layout_constraintStart_toEndOf="@id/f_info_activity_title"
-        app:layout_constraintTop_toTopOf="@+id/activity_info_banner"
-        android:layout_marginStart="40dp"/>
-    <Button
-        android:id="@+id/back"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/atras"
-        android:backgroundTint="#3d3d3d"
-        app:layout_constraintTop_toTopOf="@+id/activity_info_banner"
-        app:layout_constraintStart_toStartOf="@id/activity_info_banner"
-        app:layout_constraintBottom_toBottomOf="@id/activity_info_banner"
-        app:layout_constraintEnd_toStartOf="@id/f_info_activity_title"
-        android:layout_marginEnd="70dp"/>
+        <Button
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/atras"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/f_activity_enter_btn"
@@ -66,8 +56,8 @@
         android:textAllCaps="false"
         android:textSize="24sp"
         app:iconTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         app:rippleColor="#FFFFFF" />
 
     <ScrollView
@@ -140,4 +130,4 @@
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

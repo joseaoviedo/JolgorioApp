@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listenToCalls();
+        //listenToCalls();
         setContentView(R.layout.activity_main);
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     * en lo que reste de su ejecución, por lo tanto debe realizarse una verificación de usuario
     * previo a llamar esta función
      */
+    /*
     private void listenToCalls(){
         JolgorioUser logedInUser = LogedInUserRepository.getInstance().getLogedInUser();
         if(logedInUser == null){return;}
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    */
 
     /*public void EmergencyCall(){
 

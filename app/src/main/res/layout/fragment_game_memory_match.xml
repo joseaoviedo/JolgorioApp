@@ -6,39 +6,47 @@
     android:background="@color/artistica">
 
 
-    <TextView
-        android:id="@+id/textoPuntuacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Puntuacion:"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="30sp" />
-    <Button
-        android:id="@+id/salirJuego"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/atras"
-        android:backgroundTint="#3d3d3d"/>
+    <RelativeLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/artistica">
+        <TextView
+            android:id="@+id/textoPuntuacion"
+            android:layout_width="220dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_centerInParent="true"
+            android:text="Puntuación: "
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/EmergencyButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf ="@id/textoPuntuacion"
-        android:background="@drawable/emergency_icon"
-        android:layout_marginStart="45dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/EmergencyButton"
+            android:layout_width="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="60dp"
+            android:background="@drawable/emergency_icon"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/salirJuego"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/atras"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
+    </RelativeLayout>
 
 
     <TableLayout
         android:id="@+id/table"
-        android:layout_below="@id/textoPuntuacion"
+        android:layout_below="@id/banner"
         android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -96,10 +96,6 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         Log.d("AAAAAAAAAAAAAAAAAAA", "ACTIVIDAD FINALIZADA");
         alertDialogBuilder = new AlertDialog.Builder(getActivity());
         final View finishedActivityView = getLayoutInflater().inflate(R.layout.layout_activity_completed_popup, null);
-        AppCompatButton exitBtn = finishedActivityView.findViewById(R.id.activity_completed_exit_btn);
-        if(exitBtn != null) {
-            exitBtn.setOnClickListener(this);
-        }
         AppCompatButton photoBtn = finishedActivityView.findViewById(R.id.activity_completed_photo_btn);
         if(photoBtn != null) {
             photoBtn.setOnClickListener(this);
@@ -112,8 +108,6 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.activity_completed_exit_btn:
-                dialog.dismiss();
             case R.id.EmergencyButton:
                 EmergencyCall call = new EmergencyCall();
                 call.EmergencyPopUp(this);
