@@ -1,16 +1,19 @@
 package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.PermissionRequest;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -22,11 +25,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.CallJavaScript;
-import com.jolgorio.jolgorioapp.tools.VideoCallPeer;
 import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 import java.nio.file.Path;
@@ -37,6 +44,7 @@ public class VideoCallFragment extends Fragment {
     private boolean isVideo;
     private CallJavaScript javaScriptInterface;
     private String connId;
+    private String userCalledId;
     final int REQUEST_CAMERA = 1;
     final int REQUEST_AUDIO_MODIFY = 2;
     static final int REQUEST_RECORD_AUDIO = 3;
@@ -46,6 +54,7 @@ public class VideoCallFragment extends Fragment {
         super.onCreate(savedInstanceState);
         javaScriptInterface = new CallJavaScript();
         Bundle args = getArguments();
+        userCalledId = args.getString("userCalledId");
         connId = args.getString("connId");
     }
 
@@ -65,21 +74,25 @@ public class VideoCallFragment extends Fragment {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         webView.addJavascriptInterface(javaScriptInterface, "Android");
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.getSettings().setAllowContentAccess(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+
             @Override
-            public void onPermissionRequest(PermissionRequest request) {
-                if(!(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)){
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
-                }
-                if(!(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MODIFY_AUDIO_SETTINGS) == PackageManager.PERMISSION_GRANTED)){
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS}, REQUEST_AUDIO_MODIFY);
-                }
-                if(!(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)){
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},REQUEST_RECORD_AUDIO);
-                }
+            public void onPermissionRequest(final PermissionRequest request) {
+                Log.d("VIDEOCALL", "onPermissionRequest");
                 request.grant(request.getResources());
             }
+
         });
+
+        webView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webView.getSettings().setMixedContentMode( WebSettings.MIXED_CONTENT_ALWAYS_ALLOW );
+        }
+
+
         loadVideoCall();
     }
 
@@ -99,9 +112,29 @@ public class VideoCallFragment extends Fragment {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + VideoCallPeer.getInstance().getUserId() + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
         if(connId != null){
-            callJavaScriptFunction("javascript:startCall(\"" + connId + "\")");
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
+            databaseReference.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue() != null){
+                        if(snapshot.getValue().toString().equals("true")){
+                            Log.d("VIDEOCALL", "LLAMADA ACEPTADA");
+                            callJavaScriptFunction("javascript:startCall(\"" + connId + "\")");
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }else{
+            JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child(user.getNumber()).child("isPeerConnected").setValue(true);
         }
     }
 
@@ -148,9 +181,9 @@ public class VideoCallFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        VideoCallPeer.getInstance().getDatabaseReference().child(
-                LogedInUserRepository.getInstance().getLogedInUser().getNumber()
-        ).setValue(null);
+        if(userCalledId != null){
+            FirebaseDatabase.getInstance().getReference().child(userCalledId).setValue(null);
+        }
         webView.loadUrl("about:blank");
         super.onDestroy();
     }

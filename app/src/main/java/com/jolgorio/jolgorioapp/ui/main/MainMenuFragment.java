@@ -19,7 +19,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.tools.VideoCallPeer;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class MainMenuFragment extends Fragment implements View.OnClickListener{
