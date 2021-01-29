@@ -12,7 +12,7 @@ public class ContactsDummy {
 
 
     private static void loadData(){
-        /*
+
         JolgorioUser u1 = new JolgorioUser(1, "test1", "12341234", "DEFAULT", "Juan", "Gonzales", "Castillo", defaultPhoto);
         JolgorioUser u2 = new JolgorioUser(2, "test2", "14141515", "DEFAULT", "Juana", "Castillo", "Gonzales", defaultPhoto);
         JolgorioUser u3 = new JolgorioUser(3, "test3", "12451245", "DEFAULT", "Mario", "Vargas", "Chavez", defaultPhoto);
@@ -34,18 +34,6 @@ public class ContactsDummy {
         favContacts.add(u3);
         favContacts.add(u5);
         favContacts.add(u6);
-
-        */
-        //Juan
-
-        JolgorioUser u1 = new JolgorioUser(1, "test1", "12341234", "DEFAULT", "Juan", "Gonzales", "Castillo", defaultPhoto);
-        contacts.add(u1);
-        favContacts.add(u1);
-        //Miguel
-
-        JolgorioUser u2 = new JolgorioUser(2, "test2", "14141515", "DEFAULT", "Juana", "Castillo", "Gonzales", defaultPhoto);
-        contacts.add(u2);
-        favContacts.add(u2);
 
     }
 
