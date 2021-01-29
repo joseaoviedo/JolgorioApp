@@ -112,7 +112,10 @@
         <action
             android:id="@+id/action_juegos_to_Memoria"
             app:destination="@id/Memoria" />
-    </fragment>
+          <action
+              android:id="@+id/action_juegos_to_Puzzle"
+              app:destination="@id/Puzzle" />
+      </fragment>
     <fragment
         android:id="@+id/Memoria"
         android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_memory_match"
@@ -150,6 +153,10 @@
             android:name="connId"
             app:argType="string"/>
     </fragment>
-
+    <fragment
+        android:id="@+id/Puzzle"
+        android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_15puzzle"
+        android:label="fragment_game_15puzzle"
+        tools:layout="@layout/fragment_game_15puzzle"/>
 
 </navigation>

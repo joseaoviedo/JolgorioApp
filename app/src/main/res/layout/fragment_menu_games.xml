@@ -59,8 +59,21 @@
                 app:cornerRadius="20dp"
                 android:layout_centerHorizontal="true" />
 
+            <Button
+                android:id="@+id/puzzle"
+                android:layout_width="360dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="15 Puzzle"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:backgroundTint="@color/deportiva"
+                app:cornerRadius="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/memorygame"/>
+
         </RelativeLayout>
     </ScrollView>
-
-
 </RelativeLayout>

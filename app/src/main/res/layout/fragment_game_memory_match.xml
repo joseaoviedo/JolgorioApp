@@ -16,7 +16,8 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:fontFamily="@font/poppins_medium"/>
     <Button
         android:id="@+id/salirJuego"
         android:layout_width="60dp"
