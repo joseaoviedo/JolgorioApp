@@ -34,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CallingFragment extends Fragment {
     JolgorioUser calledUser;
     NavController navController;
+    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,9 +77,9 @@ public class CallingFragment extends Fragment {
 
     public void sendCallRequest(){
         JolgorioUser logedInUser = LogedInUserRepository.getInstance().getLogedInUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(calledUser.getNumber()).child("incoming").setValue(logedInUser.getNumber());
-        databaseReference.child(calledUser.getNumber()).child("isAvailable").addValueEventListener(new ValueEventListener() {
+
+        mDatabase.child(calledUser.getNumber()).child("incoming").setValue(logedInUser.getNumber());
+        mDatabase.child(calledUser.getNumber()).child("isAvailable").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null){
@@ -100,8 +101,8 @@ public class CallingFragment extends Fragment {
     }
 
     public void listenForConnectionId(){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(calledUser.getNumber()).child("connId").addValueEventListener(new ValueEventListener() {
+
+        mDatabase.child(calledUser.getNumber()).child("connId").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null){
@@ -121,10 +122,9 @@ public class CallingFragment extends Fragment {
     }
 
     public void cancelCall(){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(calledUser.getNumber()).child("incoming").setValue(null);
-        databaseReference.child(calledUser.getNumber()).child("isAvailable").setValue(null);
-        databaseReference.child(calledUser.getNumber()).child("connId").setValue(null);
+        mDatabase.child(calledUser.getNumber()).child("incoming").setValue(null);
+        mDatabase.child(calledUser.getNumber()).child("isAvailable").setValue(null);
+        mDatabase.child(calledUser.getNumber()).child("connId").setValue(null);
         navController.popBackStack(R.id.videoCallPagerFragment, true);
     }
 }

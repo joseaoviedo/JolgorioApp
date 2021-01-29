@@ -64,7 +64,6 @@ public class ActivityListFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.back:
 
-                //volver
                 break;
         }
     }

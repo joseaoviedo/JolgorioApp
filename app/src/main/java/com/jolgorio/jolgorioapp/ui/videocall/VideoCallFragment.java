@@ -39,6 +39,7 @@ import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 import java.nio.file.Path;
 
 public class VideoCallFragment extends Fragment {
+    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
     private WebView webView;
     private boolean isAudio;
     private boolean isVideo;
@@ -114,9 +115,8 @@ public class VideoCallFragment extends Fragment {
     private void initializePeer(){
         callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
         if(connId != null){
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
-            databaseReference.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
+            mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.getValue() != null){
@@ -133,8 +133,8 @@ public class VideoCallFragment extends Fragment {
             });
         }else{
             JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-            databaseReference.child(user.getNumber()).child("isPeerConnected").setValue(true);
+
+            mDatabase.child(user.getNumber()).child("isPeerConnected").setValue(true);
         }
     }
 
@@ -182,7 +182,7 @@ public class VideoCallFragment extends Fragment {
     @Override
     public void onDestroy() {
         if(userCalledId != null){
-            FirebaseDatabase.getInstance().getReference().child(userCalledId).setValue(null);
+            mDatabase.child(userCalledId).setValue(null);
         }
         webView.loadUrl("about:blank");
         super.onDestroy();

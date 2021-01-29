@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
     boolean isCalled = false;
     static AlertDialog.Builder dialogBuilder;
     static AlertDialog dialog;
+    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //listenToCalls();
         setContentView(R.layout.activity_main);
         dialogBuilder = new AlertDialog.Builder(this);
-        listenToCalls();
         LogedInUserRepository.getInstance();
         Locale locale = new Locale("es_ES");
         Locale.setDefault(locale);
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     * en lo que reste de su ejecución, por lo tanto debe realizarse una verificación de usuario
     * previo a llamar esta función
      */
+    /*
     private void listenToCalls(){
         JolgorioUser logedInUser = LogedInUserRepository.getInstance().getLogedInUser();
         if(logedInUser == null){return;}
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    */
 
     /*public void EmergencyCall(){
 

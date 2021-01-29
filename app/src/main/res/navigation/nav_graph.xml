@@ -41,12 +41,7 @@
             android:name="activity"
             app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
 
-        <action
-            android:id="@+id/action_activityInfoFragment_to_activityVideoFragment"
-            app:destination="@id/activityVideoFragment"
-            app:popUpTo="@layout/fragment_activities"
-            app:popUpToInclusive="true"/>
-    </fragment>
+     </fragment>
     <fragment
         android:id="@+id/activityVideoFragment"
         android:name="com.jolgorio.jolgorioapp.ui.activities.ActivityVideoFragment"
@@ -56,9 +51,6 @@
         <argument
             android:name="activity"
             app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioActivity"/>
-        <action
-            android:id="@+id/action_activityVideoFragment_to_activityListActivity"
-            app:destination="@id/activityListActivity" />
     </fragment>
     <fragment
         android:id="@+id/videoCallPagerFragment"

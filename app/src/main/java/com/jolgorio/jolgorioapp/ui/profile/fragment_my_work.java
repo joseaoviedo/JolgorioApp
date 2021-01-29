@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -54,7 +55,7 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
 
     public void displayImage(int position){
         Log.d("12", "Abrir Imagen");
-        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.WrapContentDialog);
         final View imageDisplay = getLayoutInflater().inflate(R.layout.fragment_image_display, null);
         AppCompatButton exitBtn = imageDisplay.findViewById(R.id.closeImageDisplay);
         if(exitBtn != null) {
@@ -65,6 +66,11 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         ImageView img= (ImageView) imageDisplay.findViewById(R.id.imageDisplay);
         img.setImageResource(imagesTest[position]);
         dialog.show();
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
     }
 
     @SuppressLint("NonConstantResourceId")
