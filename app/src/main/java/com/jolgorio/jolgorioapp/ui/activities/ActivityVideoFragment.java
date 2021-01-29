@@ -119,8 +119,7 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
-
-                //volver
+                navController.popBackStack(R.id.activityListActivity, false);
                 break;
         }
     }

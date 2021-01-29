@@ -22,4 +22,8 @@
     <style name="Theme.JolgorioApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.JolgorioApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.JolgorioApp.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:letterSpacing">0</item>
+    </style>
 </resources>

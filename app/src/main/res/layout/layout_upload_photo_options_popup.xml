@@ -12,20 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="0dp"
+        android:backgroundTint="@color/deportiva"
         android:fontFamily="@font/poppins_medium"
         android:text="Cámara"
+        android:textAllCaps="false"
         android:textSize="30dp"
-        app:cornerRadius="9dp"
-        android:backgroundTint="@color/greyout"
-        />
+        android:theme="@style/Theme.JolgorioApp.Button"
+        app:cornerRadius="9dp" />
+
     <Button
         android:id="@+id/galleryPhoto"
         android:layout_width="match_parent"
         android:layout_height="75dp"
+        android:backgroundTint="@color/cultural"
         android:fontFamily="@font/poppins_medium"
         android:text="Galería"
+        android:textAllCaps="false"
         android:textSize="30dp"
-        app:cornerRadius="9dp"
-        android:backgroundTint="@color/greyout"
-        />
+        android:theme="@style/Theme.JolgorioApp.Button"
+        app:cornerRadius="9dp" />
 </LinearLayout>

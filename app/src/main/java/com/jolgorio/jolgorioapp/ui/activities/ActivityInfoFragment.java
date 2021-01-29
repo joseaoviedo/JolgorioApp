@@ -96,7 +96,7 @@ public class ActivityInfoFragment extends Fragment implements View.OnClickListen
             case R.id.f_activity_enter_btn:
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("activity", activity);
-                navController.navigate(R.id.action_activityInfoFragment_to_activityVideoFragment, bundle);
+                navController.navigate(R.id.activityVideoFragment, bundle);
                 break;
             case R.id.EmergencyButton:
                 EmergencyCall call = new EmergencyCall();

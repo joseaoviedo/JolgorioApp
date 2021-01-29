@@ -45,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
     boolean isCalled = false;
     static AlertDialog.Builder dialogBuilder;
     static AlertDialog dialog;
+    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        listenToCalls();
         setContentView(R.layout.activity_main);
         dialogBuilder = new AlertDialog.Builder(this);
-        listenToCalls();
         LogedInUserRepository.getInstance();
         Locale locale = new Locale("es_ES");
         Locale.setDefault(locale);
