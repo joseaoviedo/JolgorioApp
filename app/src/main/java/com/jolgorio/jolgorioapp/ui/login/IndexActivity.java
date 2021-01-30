@@ -2,6 +2,7 @@ package com.jolgorio.jolgorioapp.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jolgorio.jolgorioapp.R;
 
 public class IndexActivity extends AppCompatActivity implements View.OnClickListener {
+    boolean doubleBackToExitPressedOnce;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +38,27 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         Log.d("INDEX", "ACTIVIDAD TERMINADA CON CÓDIGO: " + resultCode);
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, "Ingresado correctamente", Toast.LENGTH_SHORT).show();
+            setResult(1);
             finish();
         }
     }
 
     @Override
     public void onBackPressed() {
-        return;
+        if (doubleBackToExitPressedOnce) {
+            setResult(0);
+            finish();
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Presione otra vez para salir", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

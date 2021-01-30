@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -95,6 +96,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
+                    PreferenceUtils.getInstance().setLoggedInUserMail(inputEmail);
                     logInSuccessful();
                 }else{
                     Toast.makeText(LoginActivity.this, "Ha fallado el ingreso, revise sus credenciales", Toast.LENGTH_SHORT).show();

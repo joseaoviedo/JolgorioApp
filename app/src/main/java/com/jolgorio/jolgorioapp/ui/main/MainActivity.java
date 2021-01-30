@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -50,6 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     boolean isCalled = false;
+    boolean doubleBackToExitPressedOnce;
     static AlertDialog.Builder dialogBuilder;
     static AlertDialog dialog;
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
@@ -58,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
-        if(!PreferenceUtils.isUserLogedIn(this)){
+        PreferenceUtils pUtils = PreferenceUtils.getInstance();
+        pUtils.setMainContext(this);
+        if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
-            this.startActivity(intent);
+            startActivityForResult(intent, 0);
         }
         //listenToCalls();
         SQLConnection sql = SQLConnection.getInstance();
@@ -76,12 +80,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_CANCELED){
+            finish();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
 
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            super.onBackPressed();
+            if (doubleBackToExitPressedOnce) {
+                setResult(0);
+                finish();
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Presione otra vez para salir", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
 
         } else {
             getSupportFragmentManager().popBackStack();
