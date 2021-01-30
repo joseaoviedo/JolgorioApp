@@ -3,6 +3,8 @@ package com.jolgorio.jolgorioapp.ui.progress;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -17,9 +19,14 @@ import com.jolgorio.jolgorioapp.adapter.VideoCallPagerAdapter;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 public class fragment_my_progress extends Fragment implements View.OnClickListener {
+
+    NavController navController;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
 
         View view = inflater.inflate(R.layout.fragment_my_progress, container, false);
         TabLayout tabLayout = view.findViewById(R.id.my_progress_tab_layout);
@@ -62,7 +69,7 @@ public class fragment_my_progress extends Fragment implements View.OnClickListen
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
-                //volver
+                navController.popBackStack(R.id.miPerfil, false);
                 break;
         }
     }

@@ -20,6 +20,7 @@
         android:textColor="@color/text_color"
         android:textSize="30sp" />
     <Button
+        android:id="@+id/back"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -31,10 +32,12 @@
         android:id="@+id/EmergencyButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="81dp"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf ="@id/Txtjuegos"
-        android:background="@drawable/emergency_icon"
-        android:layout_marginStart="45dp"/>
+        android:layout_marginEnd="18dp"
+        android:layout_toEndOf="@id/Txtjuegos"
+        android:background="@drawable/emergency_icon" />
 
     <ScrollView
         android:layout_below="@+id/Txtjuegos"

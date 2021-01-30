@@ -63,7 +63,7 @@ public class ActivityListFragment extends Fragment implements View.OnClickListen
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
-
+                navController.popBackStack(R.id.mainMenuFragment, false);
                 break;
         }
     }

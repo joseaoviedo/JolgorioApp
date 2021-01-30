@@ -103,7 +103,7 @@ public class ActivityInfoFragment extends Fragment implements View.OnClickListen
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
-                //volver
+                getActivity().onBackPressed();
                 break;
         }
     }

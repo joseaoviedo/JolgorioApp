@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -63,6 +65,20 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.locale = locale;
         getApplicationContext().getResources().updateConfiguration(config, null);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+
     }
 
     /*

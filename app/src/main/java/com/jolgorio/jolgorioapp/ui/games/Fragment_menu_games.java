@@ -50,6 +50,9 @@ public class Fragment_menu_games extends Fragment implements View.OnClickListene
         Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
         EmergencyCall.setOnClickListener(this);
 
+        Button back = (Button) view.findViewById(R.id.back);
+        back.setOnClickListener(this);
+
         return view;
     }
 
@@ -65,6 +68,9 @@ public class Fragment_menu_games extends Fragment implements View.OnClickListene
             case R.id.EmergencyButton:
                 EmergencyCall call = new EmergencyCall();
                 call.EmergencyPopUp(this);
+                break;
+            case R.id.back:
+                navController.popBackStack(R.id.mainMenuFragment, false);
                 break;
 
         }

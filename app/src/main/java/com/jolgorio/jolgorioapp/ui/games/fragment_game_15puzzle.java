@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,20 +40,31 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
     private int stepCount = 0;
     private Button reiniciar;
     private Button emergencia;
+    private Button back;
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
-
+    NavController navController;
     View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game_15puzzle, container, false);
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
 
         loadViews();
         loadNumbers();
         generateNumbers();
         loadDataToViews();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                salirPopUp();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return view;
     }
@@ -106,6 +120,7 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
         textSteps = view.findViewById(R.id.steps);
         reiniciar = view.findViewById(R.id.revolver);
         emergencia = view.findViewById(R.id.EmergencyButton);
+        back = view.findViewById(R.id.salirJuego);
 
         buttons = new Button[4][4];
 
@@ -124,6 +139,7 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
             }
         });
 
+        back.setOnClickListener((View.OnClickListener) this);
         emergencia.setOnClickListener((View.OnClickListener) this);
     }
 
@@ -141,11 +157,22 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
             loadDataToViews();
             stepCount = 0;
             textSteps.setText("Pasos: "+stepCount);
-        }else if (v.getId() == R.id.otrojuego) {
+        }else if (v.getId() == R.id.otrojuego || v.getId() == R.id.siSalir) {
             //Regresar al menu de juegos
+            dialog.dismiss();
+            navController.popBackStack(R.id.juegos, false);
 
         }else if (v.getId() == R.id.salir) {
             //Regresar al menu principal
+            dialog.dismiss();
+            getActivity().onBackPressed();
+            getActivity().onBackPressed();
+
+        }else if (v.getId() == R.id.salirJuego) {
+            salirPopUp();
+
+        }else if(v.getId() == R.id.noSalir) {
+            dialog.dismiss();
         }else {
             buttonClick(v);
         }
@@ -215,5 +242,21 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
         dialog = alertDialogBuilder.create();
         dialog.show();
     }
+    public void salirPopUp(){
+        Log.d("5", "Salir del juego");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_exit_game_popup, null);
+        AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
+        AppCompatButton siSalir = imageDisplay.findViewById(R.id.siSalir);
+        if(noSalir != null) {
+            noSalir.setOnClickListener((View.OnClickListener) this);
+        }
 
+        if(siSalir != null) {
+            siSalir.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
 }
