@@ -46,21 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/salirJuego" />
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/EmergencyButton"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:text="@string/tiempo_00_00"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmergencyButton" />
+
 
     <RelativeLayout
         android:id="@+id/group"
@@ -72,7 +58,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time">
+        app:layout_constraintTop_toBottomOf="@+id/steps">
 
         <Button
             android:id="@+id/button1"
@@ -206,14 +192,14 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/Reiniciar"
+        android:id="@+id/revolver"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/group"
         android:layout_alignParentBottom="true"
         android:backgroundTint="@color/cultural"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/reiniciar"
+        android:text="Reiniciar"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"

@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -46,7 +47,8 @@
                     app:cpb_progressbar_width="10dp"
                     app:cpb_round_border="false"
                     app:cpb_progress_max="100"
-                    app:cpb_progress="60"/>
+                    app:cpb_progress="60"
+                    app:cpb_background_progressbar_color="#D9D9D9"/>
 
                 <ImageView
                     android:id="@+id/iconProgress"

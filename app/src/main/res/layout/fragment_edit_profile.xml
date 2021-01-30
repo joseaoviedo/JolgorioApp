@@ -63,7 +63,10 @@
         android:layout_height="match_parent"
         android:layout_marginTop="250dp"
         android:padding="10dp"
-        tools:context=".ui.register.RegisterFragment">
+        tools:context=".ui.register.RegisterFragment"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
+        android:scrollbarThumbVertical="@color/ScrollBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
