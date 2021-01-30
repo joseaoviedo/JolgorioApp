@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
@@ -90,6 +91,13 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
         botonesMenu();
         iniciar();
 
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                salirPopUp();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         return view;
     }
 
@@ -188,21 +196,19 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 iniciar();
                 break;
             case R.id.otrojuego:
+            case R.id.siSalir:
                 //Regresar al menu de juegos
                 dialog.dismiss();
-                navController.navigate(R.id.action_Memoria_to_juegos);
+                navController.popBackStack(R.id.juegos, false);
                 break;
             case R.id.salir:
                 //Regresar al menu principal
                 dialog.dismiss();
-                navController.navigate(R.id.action_Memoria_to_mainMenu);
+                navController.popBackStack(R.id.mainMenuFragment, false);
                 break;
             case R.id.noSalir:
                 dialog.dismiss();
                 break;
-            case R.id.siSalir:
-                dialog.dismiss();
-                navController.navigate(R.id.action_Memoria_to_juegos);
         }
     }
 

@@ -72,5 +72,8 @@
         android:id="@+id/my_progress_viewpager"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_below="@+id/my_progress_tab_layout"/>
+        android:layout_below="@+id/my_progress_tab_layout"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
+        android:scrollbarThumbVertical="@color/ScrollBar"/>
 </RelativeLayout>

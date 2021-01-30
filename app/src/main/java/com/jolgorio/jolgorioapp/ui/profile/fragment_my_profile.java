@@ -79,7 +79,7 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
-                //volver
+                navController.popBackStack(R.id.mainMenuFragment, false);
                 break;
         }
     }

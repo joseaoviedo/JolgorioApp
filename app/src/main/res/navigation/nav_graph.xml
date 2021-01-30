@@ -112,14 +112,10 @@
         android:id="@+id/Memoria"
         android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_memory_match"
         android:label="fragment_game_memory_match"
-        tools:layout="@layout/fragment_game_memory_match">
-        <action
-            android:id="@+id/action_Memoria_to_juegos"
-            app:destination="@id/juegos" />
-        <action
-            android:id="@+id/action_Memoria_to_mainMenu"
-            app:destination="@id/mainMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_game_memory_match"/>
+    <action
+        android:id="@+id/action_fragment_memory_to_fragment_juegos"
+        app:popUpTo="@+id/juegos"/>
     <fragment
         android:id="@+id/EditarPerfil"
         android:label="fragment_edit_profile"
@@ -150,5 +146,8 @@
         android:name="com.jolgorio.jolgorioapp.ui.games.fragment_game_15puzzle"
         android:label="fragment_game_15puzzle"
         tools:layout="@layout/fragment_game_15puzzle"/>
+    <action
+        android:id="@+id/action_fragment_puzzle_to_fragment_juegos"
+        app:popUpTo="@+id/juegos"/>
 
 </navigation>

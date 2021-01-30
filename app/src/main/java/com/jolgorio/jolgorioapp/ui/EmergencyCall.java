@@ -33,7 +33,7 @@ public class EmergencyCall extends Fragment implements View.OnClickListener {
             callIntent.setData(Uri.parse("tel:" + "123"));
             frag.getActivity().startActivity(callIntent);
         } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},
+            ActivityCompat.requestPermissions(frag.getActivity(), new String[]{Manifest.permission.CALL_PHONE},
                     CALL_PERMISSION_REQUEST_CODE);
         }
     }

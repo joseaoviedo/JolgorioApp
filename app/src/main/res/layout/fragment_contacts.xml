@@ -10,6 +10,9 @@
         android:id="@+id/contacts_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="10dp"
+        android:scrollbarThumbVertical="@color/ScrollBar"
         />
 
 </RelativeLayout>
