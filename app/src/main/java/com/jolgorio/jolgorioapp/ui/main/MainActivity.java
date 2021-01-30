@@ -35,7 +35,9 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
+import com.jolgorio.jolgorioapp.tools.SQLConnection;
 
+import java.sql.ResultSet;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //listenToCalls();
+        SQLConnection sql = SQLConnection.getInstance();
+        ResultSet rs = sql.executeQuery("SELECT * FROM Actividad");
         setContentView(R.layout.activity_main);
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
