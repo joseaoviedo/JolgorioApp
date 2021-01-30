@@ -1,11 +1,11 @@
 package com.jolgorio.jolgorioapp.tools;
 
 public class Configuration {
-    private static String sqlServerURL = "35.232.179.89:3306";
-    private static String sqlDatabase = "jolgoriotest";
-    private static String sqlUsername = "jolgorioapp";
-    private static String sqlPassword = "jolgoriotest";
-    private static String sqlMainSchema = "application";
+    private static String sqlServerURL = "sql5.freemysqlhosting.net";
+    private static String sqlDatabase = "sql5389294";
+    private static String sqlUsername = "sql5389294";
+    private static String sqlPassword = "4TdnTSsNPY";
+    private static String sqlMainSchema = "sql5389294";
 
     public static String getSqlServerURL(){
         return sqlServerURL;

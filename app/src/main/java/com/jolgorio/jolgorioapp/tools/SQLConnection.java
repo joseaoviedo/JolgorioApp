@@ -1,4 +1,8 @@
 package com.jolgorio.jolgorioapp.tools;
+import android.util.Log;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,29 +14,27 @@ public class SQLConnection {
     private Connection connection;
 
     public static synchronized SQLConnection getInstance(){
-        if(instance != null){
-            return instance;
+        if(instance == null) {
+            instance = new SQLConnection();
         }
-
-        else{
-           instance = new SQLConnection();
-           return instance;
-        }
+        return instance;
     }
 
     private SQLConnection(){
-        String connectionUrl =
-                "jdbc:mysql://" + Configuration.getSqlServerURL() + "/" + Configuration.getSqlDatabase() + "?cloudSqlInstance=phonic-vortex-258523:us-central1:jolgoriotest&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=" + Configuration.getSqlUsername() + "&password=" + Configuration.getSqlPassword();
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(connectionUrl, Configuration.getSqlUsername(), Configuration.getSqlPassword());
-            System.out.println("==========Conectado===============");
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net/sql5389294",
+                    "sql5389294", "4TdnTSsNPY");
         }catch(Exception e){
+            Log.d("SQL", "Fallo al conectar con la base de datos SQL");
             e.printStackTrace();
         }
     }
 
     public ResultSet executeQuery(String query){
+        if(connection == null){
+            return null;
+        }
         ResultSet resultSet = null;
         try{
             Statement statement = connection.createStatement();
