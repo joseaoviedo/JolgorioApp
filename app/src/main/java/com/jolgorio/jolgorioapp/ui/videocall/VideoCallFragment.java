@@ -81,6 +81,12 @@ public class VideoCallFragment extends Fragment {
 
             @Override
             public void onPermissionRequest(final PermissionRequest request) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                        REQUEST_CAMERA);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                        REQUEST_AUDIO_MODIFY);
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                        REQUEST_RECORD_AUDIO);
                 Log.d("VIDEOCALL", "onPermissionRequest");
                 request.grant(request.getResources());
             }
