@@ -2,18 +2,21 @@ package com.jolgorio.jolgorioapp.ui.main;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.telecom.InCallService;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,9 +38,10 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
+import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.tools.SQLConnection;
+import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
 
-import java.sql.ResultSet;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -52,10 +56,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
+        if(!PreferenceUtils.isUserLogedIn(this)){
+            Intent intent = new Intent(this, IndexActivity.class);
+            this.startActivity(intent);
+        }
         //listenToCalls();
         SQLConnection sql = SQLConnection.getInstance();
-        ResultSet rs = sql.executeQuery("SELECT * FROM Actividad");
-        setContentView(R.layout.activity_main);
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
         Locale locale = new Locale("es_ES");
@@ -63,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.locale = locale;
         getApplicationContext().getResources().updateConfiguration(config, null);
+        setContentView(R.layout.activity_main);
+
     }
 
     /*

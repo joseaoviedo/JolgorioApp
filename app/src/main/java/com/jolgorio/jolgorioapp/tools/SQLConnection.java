@@ -23,7 +23,7 @@ public class SQLConnection {
     private SQLConnection(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net/sql5389294",
+            connection = DriverManager.getConnection("jdbc:mysql://sql5.freemysqlhosting.net",
                     "sql5389294", "4TdnTSsNPY");
         }catch(Exception e){
             Log.d("SQL", "Fallo al conectar con la base de datos SQL");

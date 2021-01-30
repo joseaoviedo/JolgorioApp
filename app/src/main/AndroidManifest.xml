@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jolgorio.jolgorioapp">
 
     <uses-feature
@@ -29,6 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JolgorioApp"
+        tools:replace="android:theme"
         android:usesCleartextTraffic="true">
 
         <activity
@@ -40,6 +42,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.login.IndexActivity"
+            android:label="Index"
+            android:theme="@style/Theme.JolgorioApp.NoActionBar"></activity>
+
+        <activity android:name=".ui.login.LoginActivity"
+            android:label="Login"
+            android:theme="@style/Theme.JolgorioApp.NoActionBar"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
