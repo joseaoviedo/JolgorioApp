@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
         }
-        //listenToCalls();
+        listenToCalls();
         SQLConnection sql = SQLConnection.getInstance();
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
@@ -120,13 +120,12 @@ public class MainActivity extends AppCompatActivity {
     * en lo que reste de su ejecución, por lo tanto debe realizarse una verificación de usuario
     * previo a llamar esta función
      */
-    /*
+
     private void listenToCalls(){
         JolgorioUser logedInUser = LogedInUserRepository.getInstance().getLogedInUser();
         if(logedInUser == null){return;}
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference.child(logedInUser.getNumber()).child("incoming").addValueEventListener(new ValueEventListener() {
+        mDatabase.child(logedInUser.getNumber()).child("incoming").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null) {
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         if(caller == null) {
             return;
         }
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
         View view = View.inflate(this, R.layout.layout_incoming_call_popup, null);
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
@@ -203,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    */
+
 
     /*public void EmergencyCall(){
 
