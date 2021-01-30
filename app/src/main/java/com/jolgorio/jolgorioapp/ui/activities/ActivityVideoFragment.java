@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -34,6 +35,10 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
     private AlertDialog dialog;
     private boolean finished;
 
+    YouTubePlayerView youtubePlayerView;
+
+    YouTubePlayer youTubePlayer2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,7 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         activity = args.getParcelable("activity");
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
+
     }
 
     @Override
@@ -53,6 +59,15 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
 
         Button back = (Button) view.findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                salirPopUp();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
         return view;
     }
 
@@ -65,18 +80,20 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         TextView title = view.findViewById(R.id.f_video_activity_title);
         title.setText(activity.getTitle());
 
-        YouTubePlayerView youtubePlayerView = view.findViewById(R.id.video_player);
+        youtubePlayerView = view.findViewById(R.id.video_player);
 
         getLifecycle().addObserver(youtubePlayerView);
         youtubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NotNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
+                youTubePlayer2 = youTubePlayer;
                 String videoURL = activity.getVideoLink();
                 if(videoURL.contains("watch?v=")){
                     String[] split = videoURL.split("=");
                     String videoId = split[1];
                     youTubePlayer.loadVideo(videoId, 0);
+
                 }
             }
 
@@ -113,11 +130,38 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                 call.EmergencyPopUp(this);
                 break;
             case R.id.back:
+                salirPopUp();
+                break;
+            case R.id.siSalir:
+                //Regresar a la
+                dialog.dismiss();
                 navController.popBackStack(R.id.activityListActivity, false);
+                break;
+            case R.id.noSalir:
+                youTubePlayer2.play();
+                dialog.dismiss();
                 break;
         }
     }
 
+    public void salirPopUp(){
+        Log.d("5", "Salir Actividad");
+        youTubePlayer2.pause();
+        alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_finish_activity_popup, null);
+        AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
+        AppCompatButton siSalir = imageDisplay.findViewById(R.id.siSalir);
+        if(noSalir != null) {
+            noSalir.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(siSalir != null) {
+            siSalir.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        dialog.show();
+    }
 
 
 
