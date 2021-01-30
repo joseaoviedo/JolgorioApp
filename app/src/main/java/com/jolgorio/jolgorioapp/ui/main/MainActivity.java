@@ -55,10 +55,20 @@ public class MainActivity extends AppCompatActivity {
     static AlertDialog.Builder dialogBuilder;
     static AlertDialog dialog;
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
+    final int REQUEST_CAMERA = 1;
+    final int REQUEST_AUDIO_MODIFY = 2;
+    static final int REQUEST_RECORD_AUDIO = 3;
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                REQUEST_CAMERA);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                REQUEST_AUDIO_MODIFY);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                REQUEST_RECORD_AUDIO);
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
         pUtils.setMainContext(this);
