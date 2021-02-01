@@ -47,6 +47,7 @@ import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             ActivityRepository.getInstance().loadAllActivities();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
         listenToCalls();

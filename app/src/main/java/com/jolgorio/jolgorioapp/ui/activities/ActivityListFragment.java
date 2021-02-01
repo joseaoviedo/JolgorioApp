@@ -28,7 +28,6 @@ import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 import java.util.ArrayList;
 
 public class ActivityListFragment extends Fragment implements View.OnClickListener {
-    private ArrayList<JolgorioActivity> activities = ActivityDummy.getDummyData();
     private NavController navController;
 
     @Nullable
@@ -50,7 +49,7 @@ public class ActivityListFragment extends Fragment implements View.OnClickListen
 
     private void initRecyclerView(View view){
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        ActivityListAdapter adapter = new ActivityListAdapter(activities, getActivity(), navController);
+        ActivityListAdapter adapter = new ActivityListAdapter(getActivity(), navController);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
