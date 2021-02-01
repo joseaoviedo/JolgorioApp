@@ -120,7 +120,7 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
         textSteps = view.findViewById(R.id.steps);
         reiniciar = view.findViewById(R.id.revolver);
         emergencia = view.findViewById(R.id.EmergencyButton);
-        back = view.findViewById(R.id.salirJuego);
+        back = view.findViewById(R.id.back);
 
         buttons = new Button[4][4];
 
@@ -168,7 +168,7 @@ public class fragment_game_15puzzle extends Fragment implements View.OnClickList
             getActivity().onBackPressed();
             getActivity().onBackPressed();
 
-        }else if (v.getId() == R.id.salirJuego) {
+        }else if (v.getId() == R.id.back) {
             salirPopUp();
 
         }else if(v.getId() == R.id.noSalir) {

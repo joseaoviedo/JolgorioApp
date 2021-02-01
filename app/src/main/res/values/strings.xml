@@ -43,5 +43,6 @@
     <string name="nombre">Nombre</string>
     <string name="est_seguro_que_desea_salir_de_la_actividad">¿Está seguro que desea salir de la actividad?</string>
     <string name="est_seguro_que_desea_salir_sin_guardar">¿Está seguro que desea salir sin guardar?</string>
+    <string name="actividades">Actividades</string>
 
 </resources>
