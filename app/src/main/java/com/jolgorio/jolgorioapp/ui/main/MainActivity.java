@@ -106,9 +106,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        int count = getSupportFragmentManager().getBackStackEntryCount();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
-        if (count == 0) {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof MainMenuFragment) {
             if (doubleBackToExitPressedOnce) {
                 setResult(0);
                 finish();
@@ -126,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
             }, 2000);
 
         } else {
-            getSupportFragmentManager().popBackStack();
+            super.onBackPressed();
         }
-
     }
 
     /*
