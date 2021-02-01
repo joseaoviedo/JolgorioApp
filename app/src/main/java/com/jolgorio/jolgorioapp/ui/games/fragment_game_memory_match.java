@@ -165,7 +165,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
         reiniciar = (Button) view.findViewById(R.id.Reiniciar);
         reiniciar.setOnClickListener((View.OnClickListener) this);
 
-        salirJuego = (Button) view.findViewById(R.id.salirJuego);
+        salirJuego = (Button) view.findViewById(R.id.back);
         salirJuego.setOnClickListener((View.OnClickListener) this);
 
         emergencia =(Button) view.findViewById(R.id.EmergencyButton);
@@ -181,7 +181,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 //Reiniciar el juego
                 iniciar();
                 break;
-            case R.id.salirJuego:
+            case R.id.back:
                 //Regresar al menu de juegos
                 salirPopUp();
                 break;

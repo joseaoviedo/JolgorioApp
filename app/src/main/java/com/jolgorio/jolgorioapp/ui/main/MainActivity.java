@@ -50,6 +50,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_PHONE_CALL = 4;
     boolean isCalled = false;
     boolean doubleBackToExitPressedOnce;
     static AlertDialog.Builder dialogBuilder;
@@ -69,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_AUDIO_MODIFY);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
                 REQUEST_RECORD_AUDIO);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                REQUEST_CAMERA);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
+                REQUEST_PHONE_CALL);
+
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
         pUtils.setMainContext(this);
