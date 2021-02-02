@@ -55,7 +55,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
     ImageButton [] botonera = new ImageButton[16];
 
     //imagen de fondo;
-    int fondo;
+    int fondo = R.color.cultural;
 
     //para barajar
 //el ArrayList que recoge el resultado de barajar
@@ -112,7 +112,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                 R.drawable.la6,
                 R.drawable.la7,
         };
-        fondo = R.drawable.fondo;
+        fondo = R.color.cultural;
     }
 
     public ArrayList<Integer> barajar(int longitud) {
