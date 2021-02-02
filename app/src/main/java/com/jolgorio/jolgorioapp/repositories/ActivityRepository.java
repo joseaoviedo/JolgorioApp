@@ -138,7 +138,7 @@ public class ActivityRepository {
     }
 
     public ArrayList<JolgorioActivity> loadAllActivities() throws IOException, ExecutionException, InterruptedException {
-        JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl + "actividades").get();
+        JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl + "actividades/").get();
         ArrayList<JolgorioActivity> result = new ArrayList<>();
         try{
             for(int i = 0; i < response.length(); i++){

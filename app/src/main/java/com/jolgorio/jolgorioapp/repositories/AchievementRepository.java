@@ -51,7 +51,7 @@ public class AchievementRepository {
         ArrayList<JolgorioAchievement> result = new ArrayList<>();
         try{
             JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl +
-                    "logros/" + 1).get();
+                    "logros/" + 1 + "/").get();
             for(int i = 0; i < response.length(); i++){
                 JSONObject object = response.getJSONObject(i);
                 int id = object.getInt("idlogro");
@@ -69,7 +69,8 @@ public class AchievementRepository {
     public ArrayList<JolgorioAchievement> loadType2(){
         ArrayList<JolgorioAchievement> result = new ArrayList<>();
         try{
-            JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl + "logros/" + 2).get();
+            JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl +
+                    "logros/" + 2 + "/").get();
             for(int i = 0; i < response.length(); i++){
                 JSONObject object = response.getJSONObject(i);
                 int id = object.getInt("idlogro");
@@ -87,7 +88,8 @@ public class AchievementRepository {
     public ArrayList<JolgorioAchievement> loadType3(){
         ArrayList<JolgorioAchievement> result = new ArrayList<>();
         try{
-            JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl + "logros/" + 3).get();
+            JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl +
+                    "logros/" + 3 + "/").get();
             for(int i = 0; i < response.length(); i++){
                 JSONObject object = response.getJSONObject(i);
                 int id = object.getInt("idlogro");
