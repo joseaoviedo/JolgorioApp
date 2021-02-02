@@ -38,13 +38,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.tools.SQLConnection;
 import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
 
+import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -86,8 +89,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
         }
+        try {
+            ActivityRepository.getInstance().loadAllActivities();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         listenToCalls();
-        SQLConnection sql = SQLConnection.getInstance();
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
         Locale locale = new Locale("es_ES");

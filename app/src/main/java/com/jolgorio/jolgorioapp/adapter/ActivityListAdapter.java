@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 
 import java.util.ArrayList;
 
@@ -28,9 +29,12 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
     private ArrayList<JolgorioActivity> mActivities;
     private Context mContext;
     private NavController navController;
+    private ActivityRepository activityRepository;
 
-    public ActivityListAdapter(ArrayList<JolgorioActivity> mActivities, Context mContext, NavController navController) {
-        this.mActivities = mActivities;
+    public ActivityListAdapter(Context mContext, NavController navController) {
+        activityRepository = ActivityRepository.getInstance();
+        activityRepository.loadData();
+        this.mActivities = activityRepository.getActivities();
         this.mContext = mContext;
         this.navController = navController;
     }

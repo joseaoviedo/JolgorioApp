@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 public class JolgorioUser implements Parcelable {
     private int id;
-    private String username;
     private String number;
     private String email;
     private String name;
@@ -13,9 +12,8 @@ public class JolgorioUser implements Parcelable {
     private String surname2;
     private String photoURL;
 
-    public JolgorioUser(int id, String username, String number, String email, String name, String surname1, String surname2, String photoURL){
+    public JolgorioUser(int id, String number, String email, String name, String surname1, String surname2, String photoURL){
         this.id = id;
-        this.username = username;
         this.number = number;
         this.email = email;
         this.name = name;
@@ -26,7 +24,6 @@ public class JolgorioUser implements Parcelable {
 
     protected JolgorioUser(Parcel in) {
         id = in.readInt();
-        username = in.readString();
         number = in.readString();
         email = in.readString();
         name = in.readString();
@@ -55,9 +52,7 @@ public class JolgorioUser implements Parcelable {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+
 
     public void setNumber(String number) {
         this.number = number;
@@ -87,9 +82,6 @@ public class JolgorioUser implements Parcelable {
         return id;
     }
 
-    public String getUsername(){
-        return username;
-    }
 
     public String getEmail(){
         return email;
@@ -119,7 +111,6 @@ public class JolgorioUser implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(username);
         dest.writeString(number);
         dest.writeString(email);
         dest.writeString(name);
