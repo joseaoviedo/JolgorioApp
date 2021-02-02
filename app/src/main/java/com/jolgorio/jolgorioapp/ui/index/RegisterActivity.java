@@ -1,45 +1,35 @@
-package com.jolgorio.jolgorioapp.ui.register;
+package com.jolgorio.jolgorioapp.ui.index;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import android.graphics.Color;
-import android.widget.ImageView;
+
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,9 +37,7 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.app.Activity.RESULT_OK;
-
-public class RegisterFragment extends Fragment implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog dialog;
     private NavController navController;
 
@@ -88,68 +76,66 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     final Calendar myCalendar = Calendar.getInstance(new Locale("es_ES"));
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
-        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_register);
 
         Locale locale = new Locale("es_ES");
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
-        getActivity().getApplicationContext().getResources().updateConfiguration(config, null);
+        this.getApplicationContext().getResources().updateConfiguration(config, null);
 
         maleFlag = false;
         femaleFlag = false;
 
-        RegisterIMG = (CircleImageView) view.findViewById(R.id.imageProfile);
+        RegisterIMG = (CircleImageView) findViewById(R.id.imageProfile);
 
-        entryButton = (Button) view.findViewById(R.id.signUpEntry);
+        entryButton = (Button) findViewById(R.id.signUpEntry);
         entryButton.setEnabled(false);
 
-        leavingAlertButton = (Button) view.findViewById(R.id.signUpCancel);
+        leavingAlertButton = (Button) findViewById(R.id.signUpCancel);
 
-        emergencyCallButton = (Button) view.findViewById(R.id.EmergencyButton);
+        emergencyCallButton = (Button) findViewById(R.id.EmergencyButton);
         emergencyCallButton.setOnClickListener(this);
 
-        maleButton = (ImageButton) view.findViewById(R.id.MaleButton);
-        femaleButton = (ImageButton) view.findViewById(R.id.FemaleButton);
+        maleButton = (ImageButton) findViewById(R.id.MaleButton);
+        femaleButton = (ImageButton) findViewById(R.id.FemaleButton);
 
-        birthDateField = (EditText) view.findViewById(R.id.SignUpBirthDate);
+        birthDateField = (EditText) findViewById(R.id.SignUpBirthDate);
 
-        newPhoto = (AppCompatButton) view.findViewById((R.id.addImage));
+        newPhoto = (AppCompatButton) findViewById((R.id.addImage));
 
-        nameField = (EditText) view.findViewById((R.id.signUpName));
-        surname1Field = (EditText) view.findViewById((R.id.signUpSurname1));
-        surname2Field = (EditText) view.findViewById((R.id.signUpSurname2));
-        usrNameField = (EditText) view.findViewById((R.id.SignUpUsrName));
-        phoneNumberField = (EditText) view.findViewById((R.id.SignUpPhone));
-        pwField = (EditText) view.findViewById((R.id.SignUpPW));
-        pwConfirmField = (EditText) view.findViewById((R.id.signUpConfirmPW));
+        nameField = (EditText) findViewById((R.id.signUpName));
+        surname1Field = (EditText) findViewById((R.id.signUpSurname1));
+        surname2Field = (EditText) findViewById((R.id.signUpSurname2));
+        usrNameField = (EditText) findViewById((R.id.SignUpUsrName));
+        phoneNumberField = (EditText) findViewById((R.id.SignUpPhone));
+        pwField = (EditText) findViewById((R.id.SignUpPW));
+        pwConfirmField = (EditText) findViewById((R.id.signUpConfirmPW));
 
-        pais = (Spinner) view.findViewById((R.id.signUpPais));
-        provincia = (Spinner) view.findViewById((R.id.signUpProvincia));
-        canton = (Spinner) view.findViewById((R.id.signUpCanton));
-        distrito = (Spinner) view.findViewById((R.id.signUpDistrito));
+        pais = (Spinner) findViewById((R.id.signUpPais));
+        provincia = (Spinner) findViewById((R.id.signUpProvincia));
+        canton = (Spinner) findViewById((R.id.signUpCanton));
+        distrito = (Spinner) findViewById((R.id.signUpDistrito));
 
-        male_true = getActivity().getDrawable(R.drawable.hombre_true);
-        male_false = getActivity().getDrawable(R.drawable.hombre_false);
-        female_true = getActivity().getDrawable(R.drawable.mujer_true);
-        female_false = getActivity().getDrawable(R.drawable.mujer_false);
+        male_true = getDrawable(R.drawable.hombre_true);
+        male_false = getDrawable(R.drawable.hombre_false);
+        female_true = getDrawable(R.drawable.mujer_true);
+        female_false = getDrawable(R.drawable.mujer_false);
 
         maleButton.setBackground(male_false);
         femaleButton.setBackground(female_false);
 
-        pickBirthDate(view);
-        TakePhoto(view);
-        LeavingAlert(view);
-        GenderSelection(view);
-        Entry(view);
+        pickBirthDate();
+        TakePhoto();
+        LeavingAlert();
+        GenderSelection();
+        Entry();
         allFieldsFilled();
-        return view;
     }
 
-    private void pickBirthDate(View view){
+    private void pickBirthDate(){
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -167,7 +153,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(getActivity(), date, myCalendar
+                new DatePickerDialog(RegisterActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -183,12 +169,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         allFieldsFilled();
     }
 
-    private void TakePhoto(View view) {
+    private void TakePhoto() {
 
         newPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder alerta = new AlertDialog.Builder(RegisterActivity.this);
                 final View popupView = getLayoutInflater().inflate(R.layout.layout_upload_photo_options_popup, null);
 
                 AppCompatButton galleryBtn = popupView.findViewById(R.id.galleryPhoto);
@@ -223,14 +209,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         allFieldsFilled();
     }
 
-    private void GenderSelection(View view) {
+    private void GenderSelection() {
 
         maleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 maleFlag = true;
                 femaleFlag = false;
-                GenderChange(view);
+                GenderChange();
             }
         });
 
@@ -239,13 +225,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 femaleFlag = true;
                 maleFlag = false;
-                GenderChange(view);
+                GenderChange();
             }
         });
         allFieldsFilled();
     }
 
-    private void GenderChange(View view){
+    private void GenderChange(){
 
         if(maleFlag){
 
@@ -261,7 +247,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         allFieldsFilled();
     }
 
-    private void Entry(View view){
+    private void Entry(){
         entryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,12 +259,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    private void LeavingAlert(View view){
+    private void LeavingAlert(){
 
         leavingAlertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder alerta = new AlertDialog.Builder(RegisterActivity.this);
                 final View popupView = getLayoutInflater().inflate(R.layout.fragment_leaving_register_alert, null);
 
                 AppCompatButton exitBtn = popupView.findViewById(R.id.alertYESbutton);
@@ -308,39 +294,42 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
-
+    /*
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.EmergencyButton) {
             EmergencyCall call = new EmergencyCall();
-            call.EmergencyPopUp(this);
+            call.EmergencyPopUp(RegisterActivity.this);
         }
     }
 
+     */
+
     // Take Foto
     private void dispatchTakePictureIntent() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
         } else {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+        ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{Manifest.permission.CAMERA},
                 REQUEST_IMAGE_CAPTURE);
         }
     }
 
     public void takePhotoFromGallery() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             Intent takePictureIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             //Intent takePictureIntent = new Intent(Intent.ACTION_PICK);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_GALLERY);
         } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_IMAGE_GALLERY);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -350,9 +339,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Uri imguri = data.getData();
             RegisterIMG.setImageURI(imguri);
         }else{
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_IMAGE_CAPTURE);
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     REQUEST_IMAGE_GALLERY);
         }
     }
@@ -361,7 +350,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_IMAGE_CAPTURE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -376,5 +365,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
             entryButton.setEnabled(true);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

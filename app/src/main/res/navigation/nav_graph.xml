@@ -59,7 +59,7 @@
         tools:layout="@layout/fragment_videocall_pager" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.register.RegisterFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.index.RegisterActivity"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
         <action

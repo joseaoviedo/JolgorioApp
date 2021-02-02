@@ -33,7 +33,7 @@ import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
-import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -74,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
+        //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
+        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
