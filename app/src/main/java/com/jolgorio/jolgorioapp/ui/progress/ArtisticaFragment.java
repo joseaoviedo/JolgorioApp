@@ -17,14 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.adapter.ContactListAdapter;
-import com.jolgorio.jolgorioapp.adapter.LogroListAdapter;
+import com.jolgorio.jolgorioapp.adapter.AchievementListAdapter;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class ArtisticaFragment extends Fragment {
 
     NavController navController;
-    LogroListAdapter logroListAdapter;
+    AchievementListAdapter achievementListAdapter;
 
     @Nullable
     @Override
@@ -54,12 +53,12 @@ public class ArtisticaFragment extends Fragment {
 
     private void initRecyclerView(View view){
         RecyclerView recyclerView = view.findViewById(R.id.logros_recycler);
-        logroListAdapter = new LogroListAdapter(getActivity(), navController,1 );
-        recyclerView.setAdapter(logroListAdapter);
+        achievementListAdapter = new AchievementListAdapter(getActivity(), navController,1 );
+        recyclerView.setAdapter(achievementListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     public void refresh(){
-        logroListAdapter.reload();
+        achievementListAdapter.reload();
     }
 }

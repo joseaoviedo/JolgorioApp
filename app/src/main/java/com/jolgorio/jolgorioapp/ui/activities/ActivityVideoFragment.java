@@ -40,6 +40,7 @@ import android.widget.Toast;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -143,6 +144,7 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
 
     private void activityFinished(){
         Log.d("AAAAAAAAAAAAAAAAAAA", "ACTIVIDAD FINALIZADA");
+        ActivityRepository.getInstance().onActivityComplete(activity);
         alertDialogBuilder = new AlertDialog.Builder(getActivity());
         final View finishedActivityView = getLayoutInflater().inflate(R.layout.layout_activity_completed_popup, null);
         AppCompatButton photoBtn = finishedActivityView.findViewById(R.id.activity_completed_photo_btn);
