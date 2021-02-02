@@ -1,5 +1,6 @@
 package com.jolgorio.jolgorioapp.ui.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -23,7 +24,9 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.ActivityListAdapter;
 import com.jolgorio.jolgorioapp.data.dummy.ActivityDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 
@@ -40,11 +43,29 @@ public class ActivityListFragment extends Fragment implements View.OnClickListen
 
         Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
         EmergencyCall.setOnClickListener(this);
-
+        setProgress(view);
         Button back = (Button) view.findViewById(R.id.back);
         back.setOnClickListener(this);
 
         return view;
+    }
+
+    public void setProgress(View v){
+        CircularProgressBar type1Progress = v.findViewById(R.id.artistica_progress);
+        CircularProgressBar type2Progress = v.findViewById(R.id.deportiva_progress);
+        CircularProgressBar type3Progress = v.findViewById(R.id.cultural_progress);
+
+        //Barra artística
+        type1Progress.setProgressBarColor(Color.rgb(61,127,132));
+        type1Progress.setProgress(ActivityRepository.getInstance().calculateActivityProgress(1));
+
+        //Barra deportiva
+        type2Progress.setProgressBarColor(Color.rgb(57,178,195));
+        type2Progress.setProgress(ActivityRepository.getInstance().calculateActivityProgress(2));
+
+        //Barra cultural
+        type3Progress.setProgressBarColor(Color.rgb(226,142,21));
+        type3Progress.setProgress(ActivityRepository.getInstance().calculateActivityProgress(3));
     }
 
     private void initRecyclerView(View view){

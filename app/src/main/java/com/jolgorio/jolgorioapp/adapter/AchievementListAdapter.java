@@ -1,13 +1,11 @@
 package com.jolgorio.jolgorioapp.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,33 +13,31 @@ import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.data.model.JolgorioLogro;
-import com.jolgorio.jolgorioapp.repositories.LogroRepository;
+import com.jolgorio.jolgorioapp.data.model.JolgorioAchievement;
+import com.jolgorio.jolgorioapp.repositories.AchievementRepository;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+public class AchievementListAdapter extends RecyclerView.Adapter<AchievementListAdapter.ViewHolder> {
 
-public class LogroListAdapter extends RecyclerView.Adapter<LogroListAdapter.ViewHolder> {
-
-    ArrayList<JolgorioLogro> mLogros;
+    ArrayList<JolgorioAchievement> mLogros;
     Context mContext;
     NavController navController;
-    LogroRepository logroRepository;
+    AchievementRepository achievementRepository;
     int tipo;
 
-    public LogroListAdapter(Context mContext, NavController navController, int tipoLogro){
+    public AchievementListAdapter(Context mContext, NavController navController, int tipoLogro){
         this.mContext = mContext;
         this.navController = navController;
-        this.logroRepository = LogroRepository.getInstance();
-        this.logroRepository.loadData();
+        this.achievementRepository = AchievementRepository.getInstance();
+        this.achievementRepository.loadData();
         this.tipo = tipoLogro;
         if(tipo == 1){
-            this.mLogros = logroRepository.getLogrosArtisticos();
+            this.mLogros = achievementRepository.getType1();
         }else if(tipo == 2){
-            this.mLogros = logroRepository.getLogrosDeportivo();
+            this.mLogros = achievementRepository.getType2();
         }else if(tipo == 3){
-            this.mLogros= logroRepository.getLogrosCultural();
+            this.mLogros= achievementRepository.getType3();
         }
         else{
             System.out.println("Error codigo de logros no reconocido");
@@ -52,13 +48,13 @@ public class LogroListAdapter extends RecyclerView.Adapter<LogroListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_logro, parent, false);
-        LogroListAdapter.ViewHolder holder = new LogroListAdapter.ViewHolder(view);
+        AchievementListAdapter.ViewHolder holder = new AchievementListAdapter.ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        JolgorioLogro logro = mLogros.get(position);
+        JolgorioAchievement logro = mLogros.get(position);
 
         holder.logro = logro;
         holder.logroText.setText(logro.getTitle());
@@ -85,7 +81,7 @@ public class LogroListAdapter extends RecyclerView.Adapter<LogroListAdapter.View
 
         ImageView iconImage;
         TextView logroText;
-        JolgorioLogro logro;
+        JolgorioAchievement logro;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

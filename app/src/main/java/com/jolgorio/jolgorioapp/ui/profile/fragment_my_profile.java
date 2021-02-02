@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jolgorio.jolgorioapp.R;
-import com.jolgorio.jolgorioapp.tools.SQLConnection;
+//import com.jolgorio.jolgorioapp.tools.SQLConnection;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import android.Manifest;

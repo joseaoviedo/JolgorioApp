@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,9 +17,10 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.telecom.InCallService;
+import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +31,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -47,8 +46,7 @@ import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
-import com.jolgorio.jolgorioapp.tools.SQLConnection;
-import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,9 +90,13 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
+        //getContacts();
+
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
+        //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
+        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
@@ -271,7 +273,10 @@ public class MainActivity extends AppCompatActivity {
 
                     cursorInfo.close();
                 }
-            }
+            }/*
+            for (int i=0; i<numbers.size();i++){
+                System.out.println("Número: "+numbers.get(i));
+            }*/
             cursor.close();
         }
         return numbers;

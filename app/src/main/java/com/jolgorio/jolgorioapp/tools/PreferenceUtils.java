@@ -41,4 +41,11 @@ public class PreferenceUtils {
         editor.commit();
     }
 
+    public void removeLoggedInUserMail(){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("default", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("loggedInUserMail");
+        editor.commit();
+    }
+
 }

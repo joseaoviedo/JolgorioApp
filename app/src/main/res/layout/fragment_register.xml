@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.register.RegisterFragment">
+    android:padding="2dp"
+    tools:context=".ui.index.RegisterActivity">
 
     <RelativeLayout
         android:id="@+id/banner"
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/white"
+        android:padding="2dp"
         app:layout_constraintBottom_toTopOf="@+id/imageProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +78,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="250dp"
         android:padding="10dp"
-        tools:context=".ui.register.RegisterFragment"
+        tools:context=".ui.index.RegisterActivity"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dp"
         android:scrollbarThumbVertical="@color/ScrollBar">
@@ -101,7 +103,7 @@
 
             <EditText
                 android:id="@+id/signUpName"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -125,7 +127,7 @@
 
             <EditText
                 android:id="@+id/signUpSurname1"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -149,7 +151,7 @@
 
             <EditText
                 android:id="@+id/signUpSurname2"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -173,7 +175,7 @@
 
             <EditText
                 android:id="@+id/SignUpUsrName"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -197,7 +199,7 @@
 
             <EditText
                 android:id="@+id/SignUpBirthDate"
-                android:layout_width="215dp"
+                android:layout_width="170dp"
                 android:layout_height="44dp"
                 android:clickable="true"
                 android:focusable="false"
@@ -248,7 +250,7 @@
 
             <EditText
                 android:id="@+id/SignUpPhone"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -272,7 +274,7 @@
 
             <Spinner
                 android:id="@+id/signUpPais"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
@@ -299,7 +301,7 @@
 
             <Spinner
                 android:id="@+id/signUpProvincia"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
@@ -326,7 +328,7 @@
 
             <Spinner
                 android:id="@+id/signUpCanton"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
@@ -353,7 +355,7 @@
 
             <Spinner
                 android:id="@+id/signUpDistrito"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown"
@@ -380,7 +382,7 @@
 
             <EditText
                 android:id="@+id/SignUpPW"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -404,7 +406,7 @@
 
             <EditText
                 android:id="@+id/signUpConfirmPW"
-                android:layout_width="363dp"
+                android:layout_width="340dp"
                 android:layout_height="44dp"
                 android:inputType="textPersonName"
                 app:cornerRadius="70dp"
@@ -415,7 +417,7 @@
 
             <Button
                 android:id="@+id/signUpCancel"
-                android:layout_width="168dp"
+                android:layout_width="150dp"
                 android:layout_height="90dp"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="left|center_vertical"
@@ -423,7 +425,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Cancelar"
                 android:textAllCaps="false"
-                android:textSize="25sp"
+                android:textSize="22sp"
+                android:padding="5dp"
                 app:backgroundTint="#E28E15"
                 app:cornerRadius="9dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -436,16 +439,17 @@
 
             <Button
                 android:id="@+id/signUpEntry"
-                android:layout_width="168dp"
+                android:layout_width="150dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="28dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/artistica"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Entrar"
-                android:textAlignment="center"
+                android:gravity="left|center_vertical"
                 android:textAllCaps="false"
-                android:textSize="25sp"
+                android:textSize="22sp"
+                android:padding="5dp"
                 app:cornerRadius="9dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signUpConfirmPW" />

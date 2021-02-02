@@ -34,6 +34,7 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.CallJavaScript;
+import com.jolgorio.jolgorioapp.tools.Configuration;
 import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 import java.nio.file.Path;
@@ -114,7 +115,8 @@ public class VideoCallFragment extends Fragment {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\",\""
+                 + Configuration.videoCallIp + "\"," + Configuration.videoCallPort + ",\"" + Configuration.videoCallPath + "\")");
         if(connId != null){
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
             mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {

@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -53,13 +52,18 @@
         </provider>
 
         <activity
-            android:name=".ui.login.IndexActivity"
+            android:name=".ui.index.IndexActivity"
             android:label="Index"
             android:theme="@style/Theme.JolgorioApp.NoActionBar" />
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.index.LoginActivity"
             android:label="Login"
+            android:theme="@style/Theme.JolgorioApp.NoActionBar" />
+
+        <activity
+            android:name=".ui.index.RegisterActivity"
+            android:label="Register"
             android:theme="@style/Theme.JolgorioApp.NoActionBar" />
 
         <meta-data
