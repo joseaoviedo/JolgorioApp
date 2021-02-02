@@ -413,7 +413,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/TitleSignUpConfirmPW" />
 
             <Button
-                android:id="@+id/signUpEntry"
+                android:id="@+id/signUpSave"
                 android:layout_width="190dp"
                 android:layout_height="90dp"
                 android:layout_marginTop="12dp"

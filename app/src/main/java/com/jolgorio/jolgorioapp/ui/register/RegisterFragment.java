@@ -2,16 +2,19 @@ package com.jolgorio.jolgorioapp.ui.register;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,13 +44,16 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
     private AlertDialog dialog;
@@ -85,6 +91,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private EditText pwField;
     private EditText pwConfirmField;
 
+    private Bitmap bitmap;
     final Calendar myCalendar = Calendar.getInstance(new Locale("es_ES"));
 
     @Override
@@ -267,10 +274,27 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 //Aquí se toman salida que todos los campos estén completos
                 // y se toma toda la info para la BD
+                sendInfo();
                 navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
 
             }
         });
+    }
+
+    private void sendInfo() {
+        int gender;
+        if (maleFlag == true) gender = 2; //2 es hombre en la BD
+        if (femaleFlag == true) gender = 1; //1 es mujer en la BD
+        String nombre = nameField.getText().toString();
+        String ap1 = surname1Field.getText().toString();
+        String ap2 = surname2Field.getText().toString();
+        String birthDate = birthDateField.getText().toString();
+        String phone = phoneNumberField.getText().toString();
+        String ps = pais.getSelectedItem().toString();
+        String pv = provincia.getSelectedItem().toString();
+        String c = canton.getSelectedItem().toString();
+        String d = distrito.getSelectedItem().toString();
+        String pw = pwField.getText().toString();
     }
 
     private void LeavingAlert(View view){
@@ -292,8 +316,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     exitBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
-                            navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
+                            //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
+                            navController.popBackStack(R.id.indexLogin, false);
+                            /*
+                            getActivity.onBackPressed();
+                             */
                         }
                     });
                 }
@@ -323,8 +350,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
         } else {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
-                REQUEST_IMAGE_CAPTURE);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                    REQUEST_IMAGE_CAPTURE);
         }
     }
 
@@ -338,7 +365,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     REQUEST_IMAGE_GALLERY);
         }
     }
-
+    /*
+        public void takeContact() {
+            Log.e("holaaaaaaaaaaa","1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+                Log.e("holaaaaaaaaaaa","----------------------------------");
+                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(intent, PICK_CONTACT);
+            }
+            else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CONTACTS},
+                        REQUEST_IMAGE_GALLERY);
+            }
+        }
+    */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -346,10 +386,36 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             RegisterIMG.setImageBitmap(imageBitmap);
         }
-        if(requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
-            Uri imguri = data.getData();
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            Uri imguri = data.getData(); //Hay que guardar la img URI
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),imguri);//getActivity().getContentResolver(), imguri
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //RegisterIMG.setImageBitmap(bitmap);
+            //RegisterIMG.setImageBitmap(bitmap);
             RegisterIMG.setImageURI(imguri);
-        }else{
+            //RegisterIMG.setImageBitmap(bitmap);
+        }
+        /*
+        if (requestCode == PICK_CONTACT && resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case (PICK_CONTACT):
+                    if (resultCode == Activity.RESULT_OK) {
+                        Uri contactData = data.getData();
+                        Cursor c = getActivity().getContentResolver().query(contactData, null, null, null, null);
+                        if (c.moveToFirst()) {
+                            String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                            // TODO Whatever you want to do with the selected contact name.
+                            Log.e("LLEGAAAAAAAAAAAAA", "--------------------------------------------" + name);
+                        }
+                    }
+                    break;
+            }
+
+        }*/
+        else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_IMAGE_CAPTURE);
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -357,12 +423,50 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void getContactList() {
+        ContentResolver cr = getActivity().getContentResolver();
+        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+
+        if ((cur != null ? cur.getCount() : 0) > 0) {
+            while (cur != null && cur.moveToNext()) {
+                String id = cur.getString(
+                        cur.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cur.getString(cur.getColumnIndex(
+                        ContactsContract.Contacts.DISPLAY_NAME));
+
+                if (cur.getInt(cur.getColumnIndex(
+                        ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                            new String[]{id}, null);
+                    while (pCur.moveToNext()) {
+                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        Log.i(TAG, "Name: " + name);
+                        Log.i(TAG, "Phone Number: " + phoneNo);
+                    }
+                    pCur.close();
+                }
+            }
+        }
+        if(cur!=null){
+            cur.close();
+        }
+    }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_IMAGE_CAPTURE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-        }
+        }/*
+        if (requestCode == PICK_CONTACT && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     private void allFieldsFilled(){
