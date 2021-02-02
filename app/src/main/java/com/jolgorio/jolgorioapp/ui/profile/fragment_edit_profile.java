@@ -61,6 +61,8 @@ import static android.content.ContentValues.TAG;
 
 public class fragment_edit_profile extends Fragment implements View.OnClickListener {
     private AlertDialog dialog;
+    private android.app.AlertDialog.Builder alertDialogBuilder;
+    private android.app.AlertDialog dialog2;
     private NavController navController;
 
     private CircleImageView RegisterIMG;
@@ -323,17 +325,43 @@ public class fragment_edit_profile extends Fragment implements View.OnClickListe
             public void onClick(View v) {
                 //Aquí se toman salida que todos los campos estén completos
                 // y se toma toda la info para la BD
-                navController.navigate(R.id.action_EditarPerfil_to_miPerfil);
-
+                savePopUp();
             }
         });
     }
+
+
+    public void savePopUp(){
+        Log.d("5", "Salir del juego");
+        alertDialogBuilder = new android.app.AlertDialog.Builder(getActivity());
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_save_changes_profile_popup, null);
+        AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
+        AppCompatButton siSalir = imageDisplay.findViewById(R.id.siSalir);
+        if(noSalir != null) {
+            noSalir.setOnClickListener((View.OnClickListener) this);
+        }
+
+        if(siSalir != null) {
+            siSalir.setOnClickListener((View.OnClickListener) this);
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog2 = alertDialogBuilder.create();
+        dialog2.show();
+    }
+
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.EmergencyButton) {
             EmergencyCall call = new EmergencyCall();
             call.EmergencyPopUp(this);
+        }else if (v.getId() == R.id.noSalir) {
+            dialog2.dismiss();
+        }else if (v.getId() == R.id.siSalir){
+
+            //Aqui se cambian los datos
+            dialog2.dismiss();
+            navController.navigate(R.id.action_EditarPerfil_to_miPerfil);
         }
     }
 
