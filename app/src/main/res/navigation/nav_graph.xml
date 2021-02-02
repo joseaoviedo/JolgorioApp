@@ -59,7 +59,7 @@
         tools:layout="@layout/fragment_videocall_pager" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.register.RegisterFragment"
+        android:name="com.jolgorio.jolgorioapp.ui.index.RegisterActivity"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
         <action
@@ -120,7 +120,11 @@
         android:id="@+id/EditarPerfil"
         android:label="fragment_edit_profile"
         android:name="com.jolgorio.jolgorioapp.ui.profile.fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile"/>
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_EditarPerfil_to_miPerfil"
+            app:destination="@id/miPerfil" />
+    </fragment>
     <fragment
         android:id="@+id/calling_fragment"
         android:name="com.jolgorio.jolgorioapp.ui.videocall.CallingFragment"

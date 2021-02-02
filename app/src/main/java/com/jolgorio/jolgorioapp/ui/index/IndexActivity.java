@@ -1,4 +1,4 @@
-package com.jolgorio.jolgorioapp.ui.login;
+package com.jolgorio.jolgorioapp.ui.index;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +21,8 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_index);
         Button loginBtn = findViewById(R.id.indexLogin);
         loginBtn.setOnClickListener(this);
+        Button registerBtn = findViewById(R.id.indexRegister);
+        registerBtn.setOnClickListener(this);
     }
 
     @Override
@@ -29,6 +31,11 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
             case R.id.indexLogin:
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 startActivityForResult(loginIntent, 0);
+                break;
+            case R.id.indexRegister:
+                Intent registerIntent = new Intent(this, RegisterActivity.class);
+                startActivityForResult(registerIntent, 0);
+                break;
         }
     }
 

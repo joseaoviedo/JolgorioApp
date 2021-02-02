@@ -1,17 +1,13 @@
-package com.jolgorio.jolgorioapp.ui.login;
+package com.jolgorio.jolgorioapp.ui.index;
 
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
 import android.util.Patterns;
 import android.view.View;
@@ -24,7 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
-import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;

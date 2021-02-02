@@ -1,9 +1,22 @@
 package com.jolgorio.jolgorioapp.ui.main;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.PersistableBundle;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.telecom.InCallService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -33,13 +46,18 @@ import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
-import com.jolgorio.jolgorioapp.ui.login.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -72,9 +90,13 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
+        //getContacts();
+
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
+        //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
+        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
@@ -223,6 +245,41 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+
+    public List<String> getContacts() {
+        List<String> numbers = new ArrayList<String>();
+        ContentResolver contentResolver = getContentResolver();
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor cursorInfo = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
+                    InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(getContentResolver(),
+                            ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, new Long(id)));
+
+                    Uri person = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, new Long(id));
+                    Uri pURI = Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+
+                    Bitmap photo = null;
+                    if (inputStream != null) {
+                        photo = BitmapFactory.decodeStream(inputStream);
+                    }
+                    while (cursorInfo.moveToNext()) {
+                        numbers.add(cursorInfo.getString(cursorInfo.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+                    }
+
+                    cursorInfo.close();
+                }
+            }/*
+            for (int i=0; i<numbers.size();i++){
+                System.out.println("Número: "+numbers.get(i));
+            }*/
+            cursor.close();
+        }
+        return numbers;
     }
 
 

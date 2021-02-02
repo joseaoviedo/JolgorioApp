@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jolgorio.jolgorioapp.R;
+//import com.jolgorio.jolgorioapp.tools.SQLConnection;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import android.Manifest;
@@ -39,10 +40,9 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
-
-        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
 
         Button misTrabajos = (Button) view.findViewById(R.id.misTrabajosButton);
         misTrabajos.setOnClickListener(this);
