@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.android.play.core.tasks.Task;
 import com.google.errorprone.annotations.RestrictedApi;
+import com.jolgorio.jolgorioapp.data.dummy.ActivityDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioActivity;
 import com.jolgorio.jolgorioapp.tools.Configuration;
 import com.jolgorio.jolgorioapp.tools.RestAPI;
@@ -65,7 +66,7 @@ public class ActivityRepository {
     }
 
     public ArrayList<JolgorioActivity> loadAllActivities() throws IOException, ExecutionException, InterruptedException {
-        JSONArray response = new RestAPI.RestQuery().execute(Configuration.getRestApiUrl() + "actividades").get();
+       /* JSONArray response = new RestAPI.RestQuery().execute(Configuration.getRestApiUrl() + "actividades").get();
         ArrayList<JolgorioActivity> result = new ArrayList<>();
         try{
             for(int i = 0; i < response.length(); i++){
@@ -84,8 +85,8 @@ public class ActivityRepository {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
-        return result;
+        }*/
+        return ActivityDummy.getDummyData();
     }
 
 }

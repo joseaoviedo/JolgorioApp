@@ -1,0 +1,46 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="320dp"
+    android:layout_centerVertical="true"
+    app:cornerRadius="9dp">
+
+    <TextView
+        android:id="@+id/textFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Su trabajo se subió a “Mis trabajos” de manera correcta"
+        android:textColor="@color/text_color"
+        android:textSize="30sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/textFinal"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/salir"
+            android:layout_marginTop="10dp"
+            android:layout_width="260dp"
+            android:layout_height="90dp"
+            android:textAlignment="center"
+            android:text="Salir"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            android:backgroundTint="@color/cultural"
+            app:cornerRadius="9dp"
+            android:fontFamily="@font/poppins_medium"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
@@ -62,19 +63,13 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
     private AlertDialog dialog;
     private boolean finished;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-
-    private static final int IMAGE_REQUEST = 2;
-
-    String currentImagePath = null;
-
-    ImageView img;
-
     View view;
 
     YouTubePlayerView youtubePlayerView;
 
     YouTubePlayer youTubePlayer2;
+
+    String rutaImagen;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -180,56 +175,65 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.activity_completed_photo_btn:
                 System.out.println("Tomar foto perro");
-                dispatchTakePictureIntent();
-                dialog.dismiss();
-            case R.id.closeImageDisplay:
+                abrirCamara();
                 dialog.dismiss();
                 break;
+            case R.id.salir:
+                navController.popBackStack(R.id.activityListActivity, false);
+                dialog.dismiss();
+                break;
+
         }
     }
 
     //Take photo of the activity
 
+    private void abrirCamara(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //if(intent.resolveActivity(getActivity().getPackageManager())!= null) {
 
-    private void dispatchTakePictureIntent() {
-        if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
-                    REQUEST_IMAGE_CAPTURE);
+            File imagenArchivo = null;
+            try{
+                imagenArchivo = crearImage();
+            }catch (IOException e){
+                Log.e("Error", e.toString());
+            }
+
+            if(imagenArchivo != null){
+                Uri fotoUri = FileProvider.getUriForFile(getActivity(), "com.jolgorio.jolgorioapp.fileprovider", imagenArchivo);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+                startActivityForResult(intent, 1);
+            }
+        //}
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            //Bundle extras = data.getExtras();
+            Bitmap imageBitmap = BitmapFactory.decodeFile(rutaImagen);
+            photoTaken();
         }
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            displayImage(imageBitmap);
-        }
+
+    private File crearImage() throws IOException {
+        String nombreImagen = "foto_";
+        File directorio = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(nombreImagen,".jpg", directorio);
+        rutaImagen = imagen.getAbsolutePath();
+        return imagen;
     }
 
-    public void displayImage(Bitmap imageBitmap){
+    public void photoTaken(){
         Log.d("12", "Abrir Imagen");
         alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.WrapContentDialog);
-        final View imageDisplay = getLayoutInflater().inflate(R.layout.image_display, null);
-        AppCompatButton exitBtn = imageDisplay.findViewById(R.id.closeImageDisplay);
-        if(exitBtn != null) {
-            exitBtn.setOnClickListener(this);
-        }
-        AppCompatButton save = imageDisplay.findViewById(R.id.save);
-        if(save != null) {
-            save.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("100", "Guardar");
-                    saveToInternalStorage(imageBitmap);
-                }
-            });
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_photo_taken_popup, null);
+        AppCompatButton salir = imageDisplay.findViewById(R.id.salir);
+        if(salir != null) {
+            salir.setOnClickListener(this);
         }
         alertDialogBuilder.setView(imageDisplay);
         dialog = alertDialogBuilder.create();
-        img= (ImageView) imageDisplay.findViewById(R.id.imageDisplay);
-        img.setImageBitmap(imageBitmap);
         dialog.show();
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
@@ -238,29 +242,6 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         dialog.getWindow().setAttributes(layoutParams);
     }
 
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
 
     public void salirPopUp(){
         Log.d("5", "Salir Actividad");
@@ -280,7 +261,5 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         dialog = alertDialogBuilder.create();
         dialog.show();
     }
-
-
 
 }
