@@ -1,20 +1,39 @@
 package com.jolgorio.jolgorioapp.ui.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +47,30 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
+
 public class ActivityVideoFragment extends Fragment implements View.OnClickListener{
     private JolgorioActivity activity;
     private NavController navController;
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
     private boolean finished;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private static final int IMAGE_REQUEST = 2;
+
+    String currentImagePath = null;
+
+    ImageView img;
+
+    View view;
 
     YouTubePlayerView youtubePlayerView;
 
@@ -52,7 +89,7 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_activity_video, container, false);
+        view = inflater.inflate(R.layout.fragment_activity_video, container, false);
         fillInfo(view);
         Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
         EmergencyCall.setOnClickListener(this);
@@ -141,7 +178,88 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                 youTubePlayer2.play();
                 dialog.dismiss();
                 break;
+            case R.id.activity_completed_photo_btn:
+                System.out.println("Tomar foto perro");
+                dispatchTakePictureIntent();
+                dialog.dismiss();
+            case R.id.closeImageDisplay:
+                dialog.dismiss();
+                break;
         }
+    }
+
+    //Take photo of the activity
+
+
+    private void dispatchTakePictureIntent() {
+        if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                    REQUEST_IMAGE_CAPTURE);
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            displayImage(imageBitmap);
+        }
+    }
+
+    public void displayImage(Bitmap imageBitmap){
+        Log.d("12", "Abrir Imagen");
+        alertDialogBuilder = new AlertDialog.Builder(getActivity(), R.style.WrapContentDialog);
+        final View imageDisplay = getLayoutInflater().inflate(R.layout.image_display, null);
+        AppCompatButton exitBtn = imageDisplay.findViewById(R.id.closeImageDisplay);
+        if(exitBtn != null) {
+            exitBtn.setOnClickListener(this);
+        }
+        AppCompatButton save = imageDisplay.findViewById(R.id.save);
+        if(save != null) {
+            save.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Log.d("100", "Guardar");
+                    saveToInternalStorage(imageBitmap);
+                }
+            });
+        }
+        alertDialogBuilder.setView(imageDisplay);
+        dialog = alertDialogBuilder.create();
+        img= (ImageView) imageDisplay.findViewById(R.id.imageDisplay);
+        img.setImageBitmap(imageBitmap);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
 
     public void salirPopUp(){

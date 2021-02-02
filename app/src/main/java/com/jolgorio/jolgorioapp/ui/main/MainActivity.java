@@ -51,6 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_PHONE_CALL = 4;
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 5;
     boolean isCalled = false;
     boolean doubleBackToExitPressedOnce;
     static AlertDialog.Builder dialogBuilder;
@@ -74,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_CAMERA);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
                 REQUEST_PHONE_CALL);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                REQUEST_WRITE_EXTERNAL_STORAGE);
 
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
