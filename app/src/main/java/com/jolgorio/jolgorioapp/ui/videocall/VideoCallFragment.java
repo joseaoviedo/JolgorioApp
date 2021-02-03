@@ -2,11 +2,13 @@ package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,14 +46,22 @@ import java.nio.file.Path;
 public class VideoCallFragment extends Fragment {
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
     private WebView webView;
-    private boolean isAudio;
-    private boolean isVideo;
+    private boolean isAudio = true;
+    private boolean isVideo = true;
     private CallJavaScript javaScriptInterface;
     private String connId;
     private String userCalledId;
     final int REQUEST_CAMERA = 1;
     final int REQUEST_AUDIO_MODIFY = 2;
     static final int REQUEST_RECORD_AUDIO = 3;
+
+    public MainActivity activity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MainActivity) activity;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +110,8 @@ public class VideoCallFragment extends Fragment {
 
         loadVideoCall();
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadVideoCall(){
@@ -180,6 +194,54 @@ public class VideoCallFragment extends Fragment {
 
             }
         });
+    }
+
+    public void listenToCallEnd(){
+        if(userCalledId != null){
+            mDatabase.child(userCalledId).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue() == null){
+                        endCall();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }else{
+            JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
+            mDatabase.child(user.getNumber()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    endCall();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
+    public void endCall(){
+        if(userCalledId != null){
+            mDatabase.child(userCalledId).setValue(null);
+        }else{
+            JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
+            mDatabase.child(user.getNumber()).setValue(null);
+        }
+        webView.loadUrl("about:blank");
+        exit();
+    }
+
+    public void exit(){
+        NavHostFragment navHostFragment = (NavHostFragment) activity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        navController.popBackStack(R.id.videoCallPagerFragment, false);
     }
 
     @Override

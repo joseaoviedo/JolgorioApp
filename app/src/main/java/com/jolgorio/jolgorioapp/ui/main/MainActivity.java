@@ -47,6 +47,7 @@ import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -156,6 +157,29 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+
+        if (fragment instanceof VideoCallFragment) {
+            if (doubleBackToExitPressedOnce) {
+                setResult(0);
+                VideoCallFragment videoCallFragment = (VideoCallFragment) fragment;
+                videoCallFragment.endCall();
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Presione otra vez para salir", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);
+
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
     /*
