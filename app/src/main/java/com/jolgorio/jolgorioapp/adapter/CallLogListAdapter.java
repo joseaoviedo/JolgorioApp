@@ -64,7 +64,6 @@ public class CallLogListAdapter extends RecyclerView.Adapter<CallLogListAdapter.
         holder.removeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d("CALL LOG", "Registro removido");
                 callLogRepository.removeCallLog(callLog);
                 reload();
             }

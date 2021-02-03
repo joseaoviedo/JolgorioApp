@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
-        //getContacts();
 
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
@@ -292,27 +291,11 @@ public class MainActivity extends AppCompatActivity {
 
                     cursorInfo.close();
                 }
-            }/*
-            for (int i=0; i<numbers.size();i++){
-                System.out.println("Número: "+numbers.get(i));
-            }*/
+            }
             cursor.close();
         }
         return numbers;
     }
 
-
-    /*public void EmergencyCall(){
-
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:0377778888"));
-
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        startActivity(callIntent);
-
-    }*/
 
 }

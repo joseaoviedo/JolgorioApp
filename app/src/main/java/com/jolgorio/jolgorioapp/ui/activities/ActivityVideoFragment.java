@@ -143,7 +143,6 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
     }
 
     private void activityFinished(){
-        Log.d("AAAAAAAAAAAAAAAAAAA", "ACTIVIDAD FINALIZADA");
         ActivityRepository.getInstance().onActivityComplete(activity);
         alertDialogBuilder = new AlertDialog.Builder(getActivity());
         final View finishedActivityView = getLayoutInflater().inflate(R.layout.layout_activity_completed_popup, null);

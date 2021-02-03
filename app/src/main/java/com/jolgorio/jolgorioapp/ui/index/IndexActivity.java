@@ -42,7 +42,6 @@ public class IndexActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("INDEX", "ACTIVIDAD TERMINADA CON CÓDIGO: " + resultCode);
         if (resultCode == RESULT_OK) {
             Toast.makeText(this, "Ingresado correctamente", Toast.LENGTH_SHORT).show();
             setResult(1);
