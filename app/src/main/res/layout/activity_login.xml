@@ -31,7 +31,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_vertical"
             android:text="Correo electrónico"
@@ -44,21 +44,14 @@
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:ems="10"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="30dp"
             android:inputType="textPersonName"
             android:shadowDx="25"
             android:shadowDy="25"
             android:shadowRadius="25"
             android:layout_below="@id/textView4"/>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="¿Olvidó su correo electrónico?"
-            android:layout_below="@id/loginUsername"/>
+
 
         <TextView
             android:id="@+id/textView7"
@@ -73,13 +66,12 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_vertical"
             android:text="Contraseña"
             android:textColor="#3d3d3d"
             android:textSize="22sp"
-            android:layout_below="@id/textView5"/>
+            android:layout_below="@id/loginUsername"/>
 
         <EditText
             android:id="@+id/loginPassword"

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,9 +37,14 @@ import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.tools.RestAPI;
 
@@ -46,15 +52,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import jnr.a64asm.Register;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     private AlertDialog dialog;
@@ -92,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText birthDateField;
     private EditText pwField;
     private EditText pwConfirmField;
+
+    private String imageURL = "";
 
     private Bitmap bitmap;
     final Calendar myCalendar = Calendar.getInstance(new Locale("es_ES"));
@@ -159,6 +170,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         GenderSelection();
         Entry();
         allFieldsFilled();
+        loadPaises();
+        spinnerSelect();
     }
 
     private void verifyPhone(){
@@ -268,7 +281,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateLabel() {
-        String myFormat = "dd/MM/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("es"));
 
         birthDateField.setText(sdf.format(myCalendar.getTime()));
@@ -316,17 +329,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void spinnerSelect(){
-        this.pais.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                loadProvincias(position);
-            }
+        loadProvincias(0);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         this.provincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -338,6 +342,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        this.canton.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadDistritos(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+    public void loadPaises(){
+        ArrayList<String> paises = new ArrayList<>();
+        paises.add("Costa Rica");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paises);
+        this.pais.setAdapter(arrayAdapter);
     }
 
     public void loadProvincias(int pais){
@@ -345,8 +366,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         try{
             JSONObject provJson = new RestAPI.GetQuerySingle().execute(
                     "https://ubicaciones.paginasweb.cr/provincias.json").get();
-            for(int i = 1; i == provJson.length(); i++){
-                provincias.add((String) provJson.get("\"" + i + "\""));
+            for(int i = 1; i <= provJson.length(); i++){
+                provincias.add((String) provJson.get("" + i));
+                Log.d("PROVINCIA:", provincias.get(i-1));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -355,34 +377,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.provincia.setAdapter(arrayAdapter);
     }
 
-    public void loadCantones(int pais){
-        ArrayList<String> provincias = new ArrayList<>();
+    public void loadCantones(int provincia){
+        ArrayList<String> cantones = new ArrayList<>();
         try{
             JSONObject provJson = new RestAPI.GetQuerySingle().execute(
-                    "https://ubicaciones.paginasweb.cr/provincias.json").get();
-            for(int i = 1; i == provJson.length(); i++){
-                provincias.add((String) provJson.get("\"" + i + "\""));
+                    "https://ubicaciones.paginasweb.cr/provincia/" + (provincia + 1) +"/cantones.json").get();
+            for(int i = 1; i <= provJson.length(); i++){
+                cantones.add((String) provJson.get("" + i));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provincias);
-        this.provincia.setAdapter(arrayAdapter);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cantones);
+        this.canton.setAdapter(arrayAdapter);
     }
 
-    public void loadDistritos(int pais){
-        ArrayList<String> provincias = new ArrayList<>();
+    public void loadDistritos(int canton){
+        ArrayList<String> distritos = new ArrayList<>();
         try{
+            int provincia = this.provincia.getSelectedItemPosition();
             JSONObject provJson = new RestAPI.GetQuerySingle().execute(
-                    "https://ubicaciones.paginasweb.cr/provincias.json").get();
-            for(int i = 1; i == provJson.length(); i++){
-                provincias.add((String) provJson.get("\"" + i + "\""));
+                    "https://ubicaciones.paginasweb.cr/provincia/" + (provincia + 1) +
+                            "/canton/" + (canton + 1 ) + "/distritos.json").get();
+            for(int i = 1; i <= provJson.length(); i++){
+                distritos.add((String) provJson.get("" + i));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provincias);
-        this.provincia.setAdapter(arrayAdapter);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, distritos);
+        this.distrito.setAdapter(arrayAdapter);
     }
 
 
@@ -431,45 +455,49 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 //Aquí se toman salida que todos los campos estén completos
                 // y se toma toda la info para la BD
                 registerUser();
-                navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
-
             }
         });
     }
 
     private void registerUser() {
-        int gender;
-        if (maleFlag == true) gender = 2; //2 es hombre en la BD
-        if (femaleFlag == true) gender = 1; //1 es mujer en la BD
-        String name = nameField.getText().toString();
-        String ap1 = surname1Field.getText().toString();
-        String ap2 = surname2Field.getText().toString();
-        String birthDate = birthDateField.getText().toString();
-        String phone = phoneNumberField.getText().toString();
+
         String email = emailField.getText().toString();
-        String ps = pais.getSelectedItem().toString();
-        String pv = provincia.getSelectedItem().toString();
-        String c = canton.getSelectedItem().toString();
-        String d = distrito.getSelectedItem().toString();
         String pw = pwField.getText().toString();
 
+        ProgressBar loading = findViewById(R.id.registerLoading);
+        loading.setVisibility(View.VISIBLE);
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, pw).addOnCompleteListener(
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            JSONObject userDetails = new JSONObject();
-                            try {
-                                userDetails.put("nombre", name);
-                                userDetails.put("apellido1", ap1);
-                                userDetails.put("apellido2", ap2);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        if(task.isSuccessful()) {
+                            String uuid = UUID.randomUUID().toString();
+                            StorageReference storageReference = FirebaseStorage.getInstance().getReference("/images/" + uuid + ".jpg");
+                            RegisterIMG.setDrawingCacheEnabled(true);
+                            RegisterIMG.buildDrawingCache();
+                            Bitmap bitmap = RegisterIMG.getDrawingCache();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] data = baos.toByteArray();
+                            UploadTask uploadTask = (UploadTask) storageReference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            imageURL = uri.toString();
+                                            sendData(imageURL);
+                                            return;
+                                        }
+                                    });
+                                }
+                            });
+                            sendData("NO_IMAGE");
                         }
                     }
                 }
         );
+        loading.setVisibility(View.GONE);
     }
 
 
@@ -495,7 +523,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         @Override
                         public void onClick(View v) {
                             //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
-                            navController.popBackStack(R.id.indexLogin, false);
                             /*
                             getActivity.onBackPressed();
                              */
@@ -513,6 +540,62 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+    public void sendData(String photoURL){
+        int gender;
+        if (maleFlag == true) gender = 2; //2 es hombre en la BD
+        else gender = 1; //1 es mujer en la BD
+        String name = nameField.getText().toString();
+        String ap1 = surname1Field.getText().toString();
+        String ap2 = surname2Field.getText().toString();
+        String birthDate = birthDateField.getText().toString();
+        String phone = phoneNumberField.getText().toString();
+        String email = emailField.getText().toString();
+        String ps = pais.getSelectedItem().toString();
+        String pv = provincia.getSelectedItem().toString();
+        String c = canton.getSelectedItem().toString();
+        String d = distrito.getSelectedItem().toString();
+        String pw = pwField.getText().toString();
+        try {
+            String photo = imageURL;
+            Log.d("XDXDXDXD", photo);
+            JSONObject userDetails = new JSONObject();
+            userDetails.put("urlFoto", photo);
+            userDetails.put("nombre", name);
+            userDetails.put("apellido1", ap1);
+            userDetails.put("apellido2", ap2);
+            userDetails.put("distrito", d);
+            String cntn;
+            if(canton.getSelectedItem().toString().equals("Central")){
+                cntn = provincia.getSelectedItem().toString();
+            }else{
+                cntn = canton.getSelectedItem().toString();
+            }
+            userDetails.put("provincia", provincia.getSelectedItem().toString());
+            userDetails.put("canton", cntn);
+            userDetails.put("email", email);
+            userDetails.put("fechanac", birthDate);
+            userDetails.put("numero", phone);
+            userDetails.put("sexo", gender);
+            String jsonString = userDetails.toString();
+            Log.d("SENDING TO REST API", jsonString);
+            JSONObject registeredUser = new RestAPI.PostQuery().execute(
+                    com.jolgorio.jolgorioapp.tools.Configuration.restApiUrl
+                            + "usuarios/registrar/", jsonString).get();
+            if(registeredUser.has("idusuario")){
+                Toast.makeText(RegisterActivity.this, "Registrado " +
+                        "correctamente", Toast.LENGTH_SHORT).show();
+            }
+            FirebaseAuth.getInstance().getCurrentUser();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(RegisterActivity.this,
+                    "Ha ocurrido un error en el registro",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     /*
     @Override
     public void onClick(View v) {

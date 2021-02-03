@@ -247,7 +247,6 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
 
     public void salirPopUp(){
         Log.d("5", "Salir Actividad");
-        youTubePlayer2.pause();
         alertDialogBuilder = new AlertDialog.Builder(getActivity());
         final View imageDisplay = getLayoutInflater().inflate(R.layout.layout_finish_activity_popup, null);
         AppCompatButton noSalir = imageDisplay.findViewById(R.id.noSalir);
