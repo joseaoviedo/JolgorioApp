@@ -103,15 +103,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
         }
-        try {
-            ActivityRepository.getInstance().loadAllActivities();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        LogedInUserRepository.getInstance().loadLoggedUser();
+        ContactRepository.getInstance().setContactList(getContacts());
         listenToCalls();
         dialogBuilder = new AlertDialog.Builder(this);
         LogedInUserRepository.getInstance();
