@@ -3,6 +3,7 @@ package com.jolgorio.jolgorioapp.ui.videocall;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 import java.nio.file.Path;
 
+
+
 public class VideoCallFragment extends AppCompatActivity {
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
     private WebView webView;
@@ -52,9 +55,14 @@ public class VideoCallFragment extends AppCompatActivity {
     private String connId;
     private boolean doubleBackToExitPressedOnce;
     private String userCalledId;
-    final int REQUEST_CAMERA = 1;
-    final int REQUEST_AUDIO_MODIFY = 2;
-    static final int REQUEST_RECORD_AUDIO = 3;
+    int PERMISSION_ALL = 1;
+    String[] PERMISSIONS = {
+            android.Manifest.permission.READ_CONTACTS,
+            android.Manifest.permission.WRITE_CONTACTS,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_SMS,
+            android.Manifest.permission.CAMERA
+    };
 
 
 
@@ -77,6 +85,7 @@ public class VideoCallFragment extends AppCompatActivity {
         setUpButtons();
 
     }
+
 
     public void listenForCallEnd(){
         if(userCalledId != null){
@@ -117,6 +126,9 @@ public class VideoCallFragment extends AppCompatActivity {
         webView.addJavascriptInterface(javaScriptInterface, "Android");
         webView.getSettings().setAllowContentAccess(true);
         webView.getSettings().setDomStorageEnabled(true);
+        if (!hasPermissions(this, PERMISSIONS)) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
         webView.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -136,6 +148,17 @@ public class VideoCallFragment extends AppCompatActivity {
 
 
         loadVideoCall();
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

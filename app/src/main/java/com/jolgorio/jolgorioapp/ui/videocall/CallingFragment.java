@@ -124,7 +124,7 @@ public class CallingFragment extends Fragment {
                     args.putString("connId", connId);
                     Intent callIntent = new Intent(activity, VideoCallFragment.class);
                     callIntent.putExtras(args);
-                    getActivity().startActivity(callIntent);
+                    activity.startActivity(callIntent);
                 }
             }
             @Override
