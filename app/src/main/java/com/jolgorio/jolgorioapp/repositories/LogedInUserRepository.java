@@ -46,7 +46,7 @@ public class LogedInUserRepository {
         String mail = PreferenceUtils.getInstance().getLoggedInUserMail();
         try{
             JSONObject user = new RestAPI.GetQuerySingle().execute(Configuration.restApiUrl +
-                    "/usuario/correo/" + mail + "/").get();
+                    "usuario/correo/" + mail + "/").get();
             int id = user.getInt("idusuario");
             String name = user.getString("nombre");
             String surname1 = user.getString("apellido1");

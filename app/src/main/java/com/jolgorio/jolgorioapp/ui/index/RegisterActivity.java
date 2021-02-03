@@ -46,6 +46,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.tools.RestAPI;
 
 import org.json.JSONArray;
@@ -175,6 +176,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinnerSelect();
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+
     private void verifyPhone(){
         phoneNumberField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -227,13 +235,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     JSONObject obj = null;
                     try {
                         obj = new RestAPI.GetQuerySingle().execute(com.jolgorio.jolgorioapp.tools.Configuration.restApiUrl
-                                + "usuario/correo/" + phoneNumberField.getText() + "/").get();
+                                + "usuario/correo/" + emailField.getText() + "/").get();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     if (obj != null) {
                         if(!obj.has("error")) {
-                            phoneNumberField.setText(null);
+                            emailField.setText(null);
                             Toast.makeText(RegisterActivity.this, "El correo electrónico ya está en uso", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -279,6 +287,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         allFieldsFilled();
+    }
+
+    public void registerSuccessful(){
+        setResult(RESULT_OK);
+        finish();
     }
 
     private void updateLabel() {
@@ -583,6 +596,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         "correctamente", Toast.LENGTH_SHORT).show();
             }
             FirebaseAuth.getInstance().getCurrentUser();
+            PreferenceUtils.getInstance().setLoggedInUserMail(email);
+            registerSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(RegisterActivity.this,
@@ -614,6 +629,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     REQUEST_IMAGE_GALLERY);
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

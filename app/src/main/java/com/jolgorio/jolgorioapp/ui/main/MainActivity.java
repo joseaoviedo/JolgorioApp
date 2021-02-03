@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
         //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
+        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);

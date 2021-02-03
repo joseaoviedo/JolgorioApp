@@ -125,7 +125,7 @@ public class ContactRepository extends Fragment {
                 }
             }
             if (favContacts.isEmpty()) {
-                favContacts = ContactsDummy.getFavContacts();
+                favContacts = new ArrayList<>();
             }
         }
         dataLoaded = true;
