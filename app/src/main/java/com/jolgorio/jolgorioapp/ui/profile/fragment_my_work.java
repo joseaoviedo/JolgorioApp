@@ -2,6 +2,8 @@ package com.jolgorio.jolgorioapp.ui.profile;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -33,7 +35,6 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
 
     NavController navController;
     GridView gridView;
-    int[] imagesTest = {R.drawable.test1,R.drawable.test2,R.drawable.test3};
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
 
@@ -46,17 +47,6 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         navController = navHostFragment.getNavController();
 
         View view =  inflater.inflate(R.layout.fragment_my_work, container, false);
-        gridView = view.findViewById(R.id.gridViewGallery);
-        CustomAdapter custonAdapter = new CustomAdapter(view.getContext(), imagesTest);
-        gridView.setAdapter(custonAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-               displayImage(position);
-
-            }
-        });
 
         Button EmergencyCall = (Button) view.findViewById(R.id.EmergencyButton);
         EmergencyCall.setOnClickListener(this);
@@ -64,7 +54,25 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         Button back = (Button) view.findViewById(R.id.back);
         back.setOnClickListener(this);
 
-        showImageList();
+        File root = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        getFile(root);
+        for (int i = 0; i < fileList.size(); i++) {
+            String stringFile = fileList.get(i).getAbsolutePath();
+            Log.d("1200000", stringFile);
+
+        }
+
+        CustomAdapter customAdapter = new CustomAdapter(view.getContext(), fileList);
+        gridView = view.findViewById(R.id.gridViewGallery);
+        gridView.setAdapter(customAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                displayImage(position);
+            }
+        });
 
         return view;
     }
@@ -80,7 +88,8 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         alertDialogBuilder.setView(imageDisplay);
         dialog = alertDialogBuilder.create();
         ImageView img= (ImageView) imageDisplay.findViewById(R.id.imageDisplay);
-        img.setImageResource(imagesTest[position]);
+        Bitmap myBitmap = BitmapFactory.decodeFile(fileList.get(position).getAbsolutePath());
+        img.setImageBitmap(myBitmap);
         dialog.show();
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
@@ -106,13 +115,21 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void showImageList() {
-        File folder = new File(Environment.DIRECTORY_PICTURES);
-        File[] allFiles = folder.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
+public ArrayList<File> getFile(File dir) {
+    File[] listFile = dir.listFiles();
+    if (listFile != null && listFile.length > 0) {
+    for (int i = 0; i < listFile.length; i++) {
+        if (listFile[i].getName().endsWith(".png")
+                || listFile[i].getName().endsWith(".jpg")
+                || listFile[i].getName().endsWith(".jpeg")
+                || listFile[i].getName().endsWith(".gif"))
+            {
+                String temp = listFile[i].getPath();
+                fileList.add(new File(temp));
             }
-        });
+        }
     }
+    return fileList;
+}
 
 }
