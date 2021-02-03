@@ -47,6 +47,7 @@ import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_CAMERA);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
                 REQUEST_PHONE_CALL);
-
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
         //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
-        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
@@ -174,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null) {
                     Log.d("MAIN", "LLAMADA ENTRANTE DE: " + snapshot.getValue().toString());
-                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                    NavController navController = navHostFragment.getNavController();
-                    onCallRequest(snapshot.getValue().toString(), navController);
+
+                    onCallRequest(snapshot.getValue().toString());
                 }
             }
 
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onCallRequest(String caller, NavController controller){
+    public void onCallRequest(String caller){
         if(caller == null) {
             return;
         }
@@ -229,7 +227,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
                 mDatabase.child(user.getNumber()).child("connId").setValue(LogedInUserRepository.getInstance().getUserUniqueId());
                 mDatabase.child(user.getNumber()).child("isAvailable").setValue(true);
-                controller.navigate(R.id.videoCallFragment);
+                Intent videoCallIntent = new Intent(MainActivity.this, VideoCallFragment.class);
+                startActivity(videoCallIntent);
             }
         });
         dialog.show();

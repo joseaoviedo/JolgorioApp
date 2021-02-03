@@ -1,6 +1,8 @@
 package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.ContactsContract;
+import android.telecom.Call;
 import android.telecom.InCallService;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
+import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,6 +39,14 @@ public class CallingFragment extends Fragment {
     JolgorioUser calledUser;
     NavController navController;
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
+
+    public MainActivity activity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MainActivity) activity;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,10 +122,11 @@ public class CallingFragment extends Fragment {
                     Bundle args = new Bundle();
                     args.putString("userCalledId", calledUser.getNumber());
                     args.putString("connId", connId);
-                    navController.navigate(R.id.videoCallFragment, args);
+                    Intent callIntent = new Intent(activity, VideoCallFragment.class);
+                    callIntent.putExtras(args);
+                    activity.startActivity(callIntent);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

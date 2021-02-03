@@ -52,6 +52,12 @@
         </provider>
 
         <activity
+            android:name=".ui.videocall.VideoCallFragment"
+            android:label="VideoCall"
+            android:theme="@style/Theme.JolgorioApp.NoActionBar"></activity>
+
+
+        <activity
             android:name=".ui.index.IndexActivity"
             android:label="Index"
             android:theme="@style/Theme.JolgorioApp.NoActionBar" />
