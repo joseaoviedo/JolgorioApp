@@ -56,17 +56,21 @@ public class VideoCallFragment extends AppCompatActivity {
     final int REQUEST_AUDIO_MODIFY = 2;
     static final int REQUEST_RECORD_AUDIO = 3;
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_video_call);
         javaScriptInterface = new CallJavaScript();
         Bundle args = getIntent().getExtras();
         userCalledId = args.getString("userCalledId");
         connId = args.getString("connId");
+        webView = findViewById(R.id.videocall_webview);
         setUpWebView();
         setUpButtons();
-        webView = findViewById(R.id.videocall_webview);
+
     }
 
     public void listenForCallEnd(){

@@ -1,6 +1,7 @@
 package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
+import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,6 +39,14 @@ public class CallingFragment extends Fragment {
     JolgorioUser calledUser;
     NavController navController;
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
+
+    public MainActivity activity;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (MainActivity) activity;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,7 +122,7 @@ public class CallingFragment extends Fragment {
                     Bundle args = new Bundle();
                     args.putString("userCalledId", calledUser.getNumber());
                     args.putString("connId", connId);
-                    Intent callIntent = new Intent(getActivity(), VideoCallFragment.class);
+                    Intent callIntent = new Intent(activity, VideoCallFragment.class);
                     callIntent.putExtras(args);
                     getActivity().startActivity(callIntent);
                 }
