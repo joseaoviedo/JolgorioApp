@@ -148,7 +148,12 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
         alertDialogBuilder = new AlertDialog.Builder(getActivity());
         final View finishedActivityView = getLayoutInflater().inflate(R.layout.layout_activity_completed_popup, null);
         AppCompatButton photoBtn = finishedActivityView.findViewById(R.id.activity_completed_photo_btn);
+        AppCompatButton close = finishedActivityView.findViewById(R.id.close);
         if(photoBtn != null) {
+            photoBtn.setOnClickListener(this);
+        }
+
+        if(close != null) {
             photoBtn.setOnClickListener(this);
         }
         alertDialogBuilder.setView(finishedActivityView);
@@ -181,6 +186,7 @@ public class ActivityVideoFragment extends Fragment implements View.OnClickListe
                 dialog.dismiss();
                 break;
             case R.id.salir:
+            case R.id.close:
                 navController.popBackStack(R.id.activityListActivity, false);
                 dialog.dismiss();
                 break;

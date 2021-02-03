@@ -14,6 +14,13 @@
         android:fontFamily="@font/poppins_medium"
         android:textSize="30sp"
         android:textColor="@color/text_color"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/icon_x"
+        android:layout_marginStart="5dp"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -35,7 +42,8 @@
         android:id="@+id/activity_completed_achievement"
         android:layout_below="@id/activity_completed_text2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:src="@drawable/activities_icon"/>
 
     <TextView
         android:layout_below="@id/activity_completed_achievement"
