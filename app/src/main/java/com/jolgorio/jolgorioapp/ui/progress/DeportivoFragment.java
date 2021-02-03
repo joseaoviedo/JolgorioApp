@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.AchievementListAdapter;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class DeportivoFragment extends Fragment {
@@ -33,6 +34,12 @@ public class DeportivoFragment extends Fragment {
         navController = navHostFragment.getNavController();
         initRecyclerView(view);
 
+        ActivityRepository repo =  ActivityRepository.getInstance();
+
+        repo.loadData();
+
+        float porcentajeUser = repo.calculateActivityProgress(3);
+
         //Cambiar el icono
         ImageView icon = (ImageView) view.findViewById(R.id.iconProgress);
         icon.setImageResource(R.drawable.deportivos);
@@ -41,11 +48,11 @@ public class DeportivoFragment extends Fragment {
         CircularProgressBar circularProgressBar = (CircularProgressBar) view.findViewById(R.id.circularProgressBar);
         circularProgressBar.setProgressBarColor(Color.rgb(57,178,195));
         //Porcentaje
-        circularProgressBar.setProgress(50f);
+        circularProgressBar.setProgress(porcentajeUser);
 
         //Texto del porcentaje
         TextView porcentaje = (TextView) view.findViewById(R.id.porcentage);
-        porcentaje.setText("50%");
+        porcentaje.setText(Math.round(porcentajeUser)+"%");
 
         return view;
     }

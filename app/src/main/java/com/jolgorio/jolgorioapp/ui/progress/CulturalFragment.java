@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.AchievementListAdapter;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class CulturalFragment extends Fragment {
@@ -33,6 +34,12 @@ public class CulturalFragment extends Fragment {
         navController = navHostFragment.getNavController();
         initRecyclerView(view);
 
+        ActivityRepository repo =  ActivityRepository.getInstance();
+
+        repo.loadData();
+
+        float porcentajeUser = repo.calculateActivityProgress(2);
+
         //Cambiar el icono
         ImageView icon = (ImageView) view.findViewById(R.id.iconProgress);
         icon.setImageResource(R.drawable.culturales);
@@ -42,12 +49,12 @@ public class CulturalFragment extends Fragment {
         circularProgressBar.setProgressBarColor(Color.rgb(226,142,21));
 
         //Porcentaje
-        circularProgressBar.setProgress(70f);
+        circularProgressBar.setProgress(porcentajeUser);
 
 
         //Texto del porcentaje
         TextView porcentaje = (TextView) view.findViewById(R.id.porcentage);
-        porcentaje.setText("70%");
+        porcentaje.setText(Math.round(porcentajeUser)+"%");
 
         return view;
     }
