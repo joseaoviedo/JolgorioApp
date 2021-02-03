@@ -165,6 +165,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         BackAlert();
         pickBirthDate();
         verifyPhone();
+        verifyEmail();
         TakePhoto();
         LeavingAlert();
         GenderSelection();
@@ -330,7 +331,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     public void spinnerSelect(){
         loadProvincias(0);
-
 
         this.provincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -522,10 +522,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     exitBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //navController.navigate(R.id.action_registerFragment_to_mainMenuFragment);
-                            /*
-                            getActivity.onBackPressed();
-                             */
                         }
                     });
                 }
@@ -596,18 +592,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    /*
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.EmergencyButton) {
-            EmergencyCall call = new EmergencyCall();
-            call.EmergencyPopUp(RegisterActivity.this);
-        }
-    }
-
-     */
-
-    // Take Foto
     private void dispatchTakePictureIntent(){
         if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -630,20 +614,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     REQUEST_IMAGE_GALLERY);
         }
     }
-    /*
-        public void takeContact() {
-            Log.e("holaaaaaaaaaaa","1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
-            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-                Log.e("holaaaaaaaaaaa","----------------------------------");
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-                startActivityForResult(intent, PICK_CONTACT);
-            }
-            else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CONTACTS},
-                        REQUEST_IMAGE_GALLERY);
-            }
-        }
-    */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -661,10 +631,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //RegisterIMG.setImageBitmap(bitmap);
-            //RegisterIMG.setImageBitmap(bitmap);
             RegisterIMG.setImageURI(imguri);
-            //RegisterIMG.setImageBitmap(bitmap);
         }
         else {
             ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -679,10 +646,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_IMAGE_CAPTURE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-        }/*
-        if (requestCode == PICK_CONTACT && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
-        }*/
+        }
             Toast.makeText(RegisterActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
         }
 
