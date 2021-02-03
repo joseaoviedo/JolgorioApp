@@ -252,13 +252,4 @@ public class VideoCallFragment extends Fragment {
         NavController navController = navHostFragment.getNavController();
         navController.popBackStack(R.id.videoCallPagerFragment, true);
     }
-
-    @Override
-    public void onDestroy() {
-        if(userCalledId != null){
-            mDatabase.child(userCalledId).setValue(null);
-        }
-        webView.loadUrl("about:blank");
-        super.onDestroy();
-    }
 }
