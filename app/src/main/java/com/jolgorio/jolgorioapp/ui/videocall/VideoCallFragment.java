@@ -3,11 +3,9 @@ package com.jolgorio.jolgorioapp.ui.videocall;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +16,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,7 +32,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
-import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.CallJavaScript;
 import com.jolgorio.jolgorioapp.tools.Configuration;
@@ -44,89 +39,45 @@ import com.jolgorio.jolgorioapp.ui.main.MainActivity;
 
 import java.nio.file.Path;
 
-
-
-public class VideoCallFragment extends AppCompatActivity {
+public class VideoCallFragment extends Fragment {
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("user");
     private WebView webView;
-    private boolean isAudio = true;
-    private boolean isVideo = true;
+    private boolean isAudio;
+    private boolean isVideo;
     private CallJavaScript javaScriptInterface;
     private String connId;
-    private boolean doubleBackToExitPressedOnce;
     private String userCalledId;
-    int PERMISSION_ALL = 1;
-    String[] PERMISSIONS = {
-            android.Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.MODIFY_AUDIO_SETTINGS,
-    };
+    final int REQUEST_CAMERA = 1;
+    final int REQUEST_AUDIO_MODIFY = 2;
+    static final int REQUEST_RECORD_AUDIO = 3;
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_video_call);
         javaScriptInterface = new CallJavaScript();
-        Bundle args = getIntent().getExtras();
-        if(args != null){
-            userCalledId = args.getString("userCalledId");
-            connId = args.getString("connId");
-        }else{
-            userCalledId = null;
-        }
-
-        webView = findViewById(R.id.videocall_webview);
-        setUpWebView();
-        setUpButtons();
-
+        Bundle args = getArguments();
+        userCalledId = args.getString("userCalledId");
+        connId = args.getString("connId");
     }
-
-
-    public void listenForCallEnd(){
-        if(userCalledId != null){
-            mDatabase.child(userCalledId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue() == null){
-                        finishCall();
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }else{
-            JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
-            mDatabase.child(user.getNumber()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue() == null){
-                        finishCall();
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setUpWebView(){
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_video_call, container, false);
+        webView = view.findViewById(R.id.videocall_webview);
+        setUpWebView(view);
+        setUpButtons(view);
+        return view;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setUpWebView(View view){
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         webView.addJavascriptInterface(javaScriptInterface, "Android");
         webView.getSettings().setAllowContentAccess(true);
         webView.getSettings().setDomStorageEnabled(true);
-        if (!hasPermissions(this, PERMISSIONS)) {
-            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-        }
         webView.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -148,17 +99,6 @@ public class VideoCallFragment extends AppCompatActivity {
         loadVideoCall();
     }
 
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadVideoCall(){
         String filePath = "file:android_asset/call.html";
@@ -175,7 +115,8 @@ public class VideoCallFragment extends AppCompatActivity {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\",\""
+                 + Configuration.videoCallIp + "\"," + Configuration.videoCallPort + ",\"" + Configuration.videoCallPath + "\")");
         if(connId != null){
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
             mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
@@ -204,8 +145,8 @@ public class VideoCallFragment extends AppCompatActivity {
         webView.loadUrl(function);
     }
 
-    private void setUpButtons(){
-        AppCompatButton toggleAudio = findViewById(R.id.videocall_audio);
+    private void setUpButtons(View view){
+        AppCompatButton toggleAudio = view.findViewById(R.id.videocall_audio);
         toggleAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,7 +160,7 @@ public class VideoCallFragment extends AppCompatActivity {
             }
         });
 
-        AppCompatButton toggleVideo = findViewById(R.id.videocall_video);
+        AppCompatButton toggleVideo = view.findViewById(R.id.videocall_video);
         toggleVideo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -232,7 +173,7 @@ public class VideoCallFragment extends AppCompatActivity {
                 }
             }
         });
-        AppCompatButton endCall = findViewById(R.id.videocall_end);
+        AppCompatButton endCall = view.findViewById(R.id.videocall_end);
         endCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,23 +183,11 @@ public class VideoCallFragment extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            finishCall();
-            super.onBackPressed();
-        }
-
-    }
-
-
-    public void finishCall(){
+    public void onDestroy() {
         if(userCalledId != null){
             mDatabase.child(userCalledId).setValue(null);
-        }else{
-            JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
-            mDatabase.child(user.getNumber()).setValue(null);
         }
         webView.loadUrl("about:blank");
-        setResult(0);
+        super.onDestroy();
     }
 }

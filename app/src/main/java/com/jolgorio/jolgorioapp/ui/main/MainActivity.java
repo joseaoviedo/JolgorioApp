@@ -47,7 +47,6 @@ import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
-import com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_CAMERA);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
                 REQUEST_PHONE_CALL);
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
@@ -173,8 +173,9 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null) {
                     Log.d("MAIN", "LLAMADA ENTRANTE DE: " + snapshot.getValue().toString());
-
-                    onCallRequest(snapshot.getValue().toString());
+                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    NavController navController = navHostFragment.getNavController();
+                    onCallRequest(snapshot.getValue().toString(), navController);
                 }
             }
 
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onCallRequest(String caller){
+    public void onCallRequest(String caller, NavController controller){
         if(caller == null) {
             return;
         }
@@ -227,8 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
                 mDatabase.child(user.getNumber()).child("connId").setValue(LogedInUserRepository.getInstance().getUserUniqueId());
                 mDatabase.child(user.getNumber()).child("isAvailable").setValue(true);
-                Intent videoCallIntent = new Intent(MainActivity.this, VideoCallFragment.class);
-                startActivity(videoCallIntent);
+                controller.navigate(R.id.videoCallFragment);
             }
         });
         dialog.show();
