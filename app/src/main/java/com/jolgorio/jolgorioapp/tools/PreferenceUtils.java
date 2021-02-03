@@ -31,7 +31,8 @@ public class PreferenceUtils {
 
     public String getLoggedInUserMail(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("default", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("loggedInUserMail","");
+        String email = sharedPreferences.getString("loggedInUserMail","");
+        return email;
     }
 
     public void setLoggedInUserMail(String userMail){

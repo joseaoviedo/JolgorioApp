@@ -28,6 +28,7 @@ public class LogedInUserRepository {
     private int gender;
     private int districtID;
     private String birthdate;
+    private boolean userLoged = false;
 
     public static LogedInUserRepository getInstance(){
         if(instance == null){
@@ -43,7 +44,13 @@ public class LogedInUserRepository {
     }
 
     public void loadLoggedUser(){
+        if(userLoged){
+            return;
+        }
         String mail = PreferenceUtils.getInstance().getLoggedInUserMail();
+        if(mail == null){
+            return;
+        }
         try{
             JSONObject user = new RestAPI.GetQuerySingle().execute(Configuration.restApiUrl +
                     "usuario/correo/" + mail + "/").get();
@@ -62,6 +69,7 @@ public class LogedInUserRepository {
             }
             setExtraData(sexo, districtId, birthDate);
             this.user = new JolgorioUser(id, number, email, name, surname1, surname2, photoURL);
+            userLoged = true;
         }catch (Exception e){
 
         }
