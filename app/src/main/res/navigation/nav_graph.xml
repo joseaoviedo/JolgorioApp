@@ -56,7 +56,11 @@
         android:id="@+id/videoCallPagerFragment"
         android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallPagerFragment"
         android:label="fragment_videocall_pager"
-        tools:layout="@layout/fragment_videocall_pager" />
+        tools:layout="@layout/fragment_videocall_pager" >
+        <action
+            android:id="@+id/action_videoCallPagerFragment_to_calling_fragment"
+            app:destination="@id/calling_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.jolgorio.jolgorioapp.ui.index.RegisterActivity"
@@ -135,15 +139,6 @@
             android:name="calledUser"
             app:argType="com.jolgorio.jolgorioapp.data.model.JolgorioUser"/>
 
-    </fragment>
-    <fragment
-        android:id="@+id/videoCallFragment"
-        android:name="com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment"
-        android:label="VideoCallFragment"
-        tools:layout="@layout/fragment_video_call">
-        <argument
-            android:name="connId"
-            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/Puzzle"
