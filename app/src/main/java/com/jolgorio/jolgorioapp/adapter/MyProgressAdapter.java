@@ -54,15 +54,15 @@ public class MyProgressAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 ArtisticaFragment artisticaFragment = (ArtisticaFragment) fragments.get(position);
-                //artisticaFragment.refresh();
+                artisticaFragment.refresh();
                 break;
             case 1:
                 DeportivoFragment deportivoFragment = (DeportivoFragment) fragments.get(position);
-                //deportivoFragment.refresh();
+                deportivoFragment.refresh();
                 break;
             case 2:
                 CulturalFragment culturalFragment = (CulturalFragment) fragments.get(position);
-                //culturalFragment.refresh();
+                culturalFragment.refresh();
                 break;
         }
     }

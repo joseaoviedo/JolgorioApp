@@ -254,9 +254,9 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
                     public void run() {
                         //les ponemos la imagen de fondo
                         primero.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        primero.setImageResource(R.drawable.fondo);
+                        primero.setImageResource(R.color.cultural);
                         imgb.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        imgb.setImageResource(R.drawable.fondo);
+                        imgb.setImageResource(R.color.cultural);
                         //los volvemos a habilitar
                         primero.setEnabled(true);
                         imgb.setEnabled(true);
@@ -289,7 +289,7 @@ public class fragment_game_memory_match extends Fragment implements View.OnClick
             public void run() {
                 for (int i = 0; i < botonera.length; i++) {
                     botonera[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    botonera[i].setImageResource(fondo);
+                    botonera[i].setImageResource(R.color.cultural);
                 }
             }
         }, 1000);

@@ -46,6 +46,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.tools.RestAPI;
 
 import org.json.JSONArray;
@@ -175,6 +176,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinnerSelect();
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+
     private void verifyPhone(){
         phoneNumberField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -195,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         obj = new RestAPI.GetQuerySingle().execute(com.jolgorio.jolgorioapp.tools.Configuration.restApiUrl
                                 + "usuario/numero/" + phoneNumberField.getText() + "/").get();
                     } catch (Exception e) {
-                        Log.d("REGISTER", "Número de teléfono no encontrado en la base");
+                        e.printStackTrace();
                     }
                     if (obj != null) {
                         if(!obj.has("error")) {
@@ -227,13 +235,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     JSONObject obj = null;
                     try {
                         obj = new RestAPI.GetQuerySingle().execute(com.jolgorio.jolgorioapp.tools.Configuration.restApiUrl
-                                + "usuario/correo/" + phoneNumberField.getText() + "/").get();
+                                + "usuario/correo/" + emailField.getText() + "/").get();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     if (obj != null) {
                         if(!obj.has("error")) {
-                            phoneNumberField.setText(null);
+                            emailField.setText(null);
                             Toast.makeText(RegisterActivity.this, "El correo electrónico ya está en uso", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -261,7 +269,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -272,13 +279,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         birthDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(RegisterActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
         allFieldsFilled();
+    }
+
+    public void registerSuccessful(){
+        setResult(RESULT_OK);
+        finish();
     }
 
     private void updateLabel() {
@@ -368,7 +379,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     "https://ubicaciones.paginasweb.cr/provincias.json").get();
             for(int i = 1; i <= provJson.length(); i++){
                 provincias.add((String) provJson.get("" + i));
-                Log.d("PROVINCIA:", provincias.get(i-1));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -556,7 +566,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String pw = pwField.getText().toString();
         try {
             String photo = imageURL;
-            Log.d("XDXDXDXD", photo);
             JSONObject userDetails = new JSONObject();
             userDetails.put("urlFoto", photo);
             userDetails.put("nombre", name);
@@ -576,7 +585,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             userDetails.put("numero", phone);
             userDetails.put("sexo", gender);
             String jsonString = userDetails.toString();
-            Log.d("SENDING TO REST API", jsonString);
             JSONObject registeredUser = new RestAPI.PostQuery().execute(
                     com.jolgorio.jolgorioapp.tools.Configuration.restApiUrl
                             + "usuarios/registrar/", jsonString).get();
@@ -585,6 +593,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         "correctamente", Toast.LENGTH_SHORT).show();
             }
             FirebaseAuth.getInstance().getCurrentUser();
+            PreferenceUtils.getInstance().setLoggedInUserMail(email);
+            registerSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(RegisterActivity.this,
@@ -616,6 +626,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     REQUEST_IMAGE_GALLERY);
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -89,18 +89,20 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_CAMERA);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
                 REQUEST_PHONE_CALL);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
+                REQUEST_WRITE_EXTERNAL_STORAGE);
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
 
-        //getContacts();
 
         SharedPreferences preferences = getSharedPreferences("default", MODE_PRIVATE);
         PreferenceUtils pUtils = PreferenceUtils.getInstance();
         //ES NECESARIO HACER ESTE PASO
         pUtils.setMainContext(this);
+        pUtils.removeLoggedInUserMail();
         if(!pUtils.isUserLogedIn()){
             Intent intent = new Intent(this, IndexActivity.class);
             startActivityForResult(intent, 0);
@@ -293,27 +295,11 @@ public class MainActivity extends AppCompatActivity {
 
                     cursorInfo.close();
                 }
-            }/*
-            for (int i=0; i<numbers.size();i++){
-                System.out.println("Número: "+numbers.get(i));
-            }*/
+            }
             cursor.close();
         }
         return numbers;
     }
 
-
-    /*public void EmergencyCall(){
-
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:0377778888"));
-
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        startActivity(callIntent);
-
-    }*/
 
 }

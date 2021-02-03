@@ -38,7 +38,6 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         this.contactRepository = ContactRepository.getInstance();
         this.contactRepository.loadData();
         this.mContacts = contactRepository.getContacts();
-        Log.d("CONTACTOS", "CANTIDAD DE CONTACTOS: " + mContacts.size());
     }
 
 

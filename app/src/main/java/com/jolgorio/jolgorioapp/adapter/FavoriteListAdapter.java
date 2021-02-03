@@ -41,7 +41,6 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         contactRepository = ContactRepository.getInstance();
         contactRepository.loadData();
         this.mFavContacts = contactRepository.getFavContacts();
-        Log.d("CONTACTOS", "CONTACTOS FAVORITOS: " + mFavContacts.size());
     }
 
     @NonNull
