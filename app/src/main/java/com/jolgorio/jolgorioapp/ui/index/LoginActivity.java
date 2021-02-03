@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -93,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(task.isSuccessful()){
                     PreferenceUtils.getInstance().setLoggedInUserMail(inputEmail);
                     logInSuccessful();
+                    LogedInUserRepository.getInstance().loadLoggedUserWithMail(inputEmail);
                 }else{
                     Toast.makeText(LoginActivity.this, "Ha fallado el ingreso, revise sus credenciales", Toast.LENGTH_SHORT).show();
                 }

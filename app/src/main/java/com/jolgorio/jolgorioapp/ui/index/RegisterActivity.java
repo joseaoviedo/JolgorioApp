@@ -46,6 +46,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.tools.RestAPI;
 
@@ -594,6 +595,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
             FirebaseAuth.getInstance().getCurrentUser();
             PreferenceUtils.getInstance().setLoggedInUserMail(email);
+            LogedInUserRepository.getInstance().loadLoggedUserWithMail(email);
             registerSuccessful();
         } catch (Exception e) {
             e.printStackTrace();

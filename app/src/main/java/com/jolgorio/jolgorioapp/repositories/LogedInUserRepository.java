@@ -75,6 +75,38 @@ public class LogedInUserRepository {
         }
     }
 
+    public void loadLoggedUserWithMail(String mail){
+        if(userLoged){
+            return;
+        }
+        if(mail == null){
+            return;
+        }
+        try{
+            JSONObject user = new RestAPI.GetQuerySingle().execute(Configuration.restApiUrl +
+                    "usuario/correo/" + mail + "/").get();
+            int id = user.getInt("idusuario");
+            String name = user.getString("nombre");
+            String surname1 = user.getString("apellido1");
+            String surname2 = user.getString("apellido2");
+            int districtId = user.getInt("iddistrito");
+            String email = user.getString("email");
+            String birthDate = user.getString("fechanac");
+            String number = user.getString("numero");
+            int sexo = user.getInt("sexo");
+            String photoURL = user.getString("urlfoto");
+            if(photoURL.isEmpty()) {
+                photoURL = "https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg";
+            }
+            setExtraData(sexo, districtId, birthDate);
+            this.user = new JolgorioUser(id, number, email, name, surname1, surname2, photoURL);
+            userLoged = true;
+        }catch (Exception e){
+
+        }
+    }
+
+
     private void setExtraData(int gender, int districtID, String birthdate){
         this.gender = gender;
         this.districtID = districtID;
