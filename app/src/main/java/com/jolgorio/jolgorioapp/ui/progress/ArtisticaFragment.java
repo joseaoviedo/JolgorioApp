@@ -1,5 +1,6 @@
 package com.jolgorio.jolgorioapp.ui.progress;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.AchievementListAdapter;
+import com.jolgorio.jolgorioapp.repositories.ActivityRepository;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class ArtisticaFragment extends Fragment {
@@ -25,13 +27,20 @@ public class ArtisticaFragment extends Fragment {
     NavController navController;
     AchievementListAdapter achievementListAdapter;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_layout_my_progress,container,false);
+        View view = inflater.inflate(R.layout.fragment_layout_my_progress, container, false);
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         initRecyclerView(view);
+
+        ActivityRepository repo = ActivityRepository.getInstance();
+
+        repo.loadData();
+
+        float porcentajeUser = repo.calculateActivityProgress(1);
 
         //Cambiar el icono
         ImageView icon = (ImageView) view.findViewById(R.id.iconProgress);
@@ -42,11 +51,11 @@ public class ArtisticaFragment extends Fragment {
         circularProgressBar.setProgressBarColor(Color.rgb(45,138,143));
 
         //Porcentaje
-        circularProgressBar.setProgress(20f);
+        circularProgressBar.setProgress(porcentajeUser);
 
         //Texto del porcentaje
         TextView porcentaje = (TextView) view.findViewById(R.id.porcentage);
-        porcentaje.setText("20%");
+        porcentaje.setText(Math.round(porcentajeUser) +"%");
 
         return view;
     }
