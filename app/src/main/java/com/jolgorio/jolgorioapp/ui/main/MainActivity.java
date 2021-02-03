@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_CAMERA);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE},
                 REQUEST_PHONE_CALL);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
+                REQUEST_WRITE_EXTERNAL_STORAGE);
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
