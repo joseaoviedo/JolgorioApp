@@ -77,4 +77,31 @@ public class RestAPI {
             return result;
         }
     }
+
+    public static class GetQuerySingle extends AsyncTask<String, Void, JSONObject>{
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            String url = urls[0];
+            JSONObject result = null;
+            try {
+                URL obj = new URL(url);
+                HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+                connection.setRequestMethod("GET");
+                connection.getResponseCode();
+                String input;
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuffer response = new StringBuffer();
+                while ((input = in.readLine()) != null) {
+                    response.append(input);
+                }
+                in.close();
+                Log.d("RESTFUL API","Response: " + response.toString());
+                result = new JSONObject(response.toString());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return result;
+        }
+    }
 }

@@ -72,6 +72,11 @@ public class ContactRepository extends Fragment {
         return instance;
     }
 
+    private ContactRepository(){
+        contacts = new ArrayList<>();
+        favContacts = new ArrayList<>();
+    }
+
     public ArrayList<JolgorioUser> getFavContacts() {
         return favContacts;
     }
