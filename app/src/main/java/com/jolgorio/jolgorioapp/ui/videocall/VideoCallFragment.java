@@ -129,8 +129,7 @@ public class VideoCallFragment extends Fragment {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\",\""
-                 + Configuration.videoCallIp + "\"," + Configuration.videoCallPort + ",\"" + Configuration.videoCallPath + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\"");
         if(connId != null){
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
             mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
@@ -251,14 +250,5 @@ public class VideoCallFragment extends Fragment {
         NavHostFragment navHostFragment = (NavHostFragment) activity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
         navController.popBackStack(R.id.videoCallPagerFragment, true);
-    }
-
-    @Override
-    public void onDestroy() {
-        if(userCalledId != null){
-            mDatabase.child(userCalledId).setValue(null);
-        }
-        webView.loadUrl("about:blank");
-        super.onDestroy();
     }
 }

@@ -6,6 +6,10 @@ import android.util.Log;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.tools.Configuration;
+import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
+import com.jolgorio.jolgorioapp.tools.RestAPI;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +25,10 @@ public class LogedInUserRepository {
     private FirebaseAuth firebaseAuth;
     private String userUniqueId;
 
+    private int gender;
+    private int districtID;
+    private String birthdate;
+
     public static LogedInUserRepository getInstance(){
         if(instance == null){
             instance = new LogedInUserRepository();
@@ -32,8 +40,49 @@ public class LogedInUserRepository {
         //Juan: 12341234
         //Miguel: 14141515
         userUniqueId = UUID.randomUUID().toString();
-        user = new JolgorioUser(1,"12341234", "juancho@test.com", "Juancho", "Juancho", "Juancho", "https://images.squarespace-cdn.com/content/v1/5a0dd6831f318dcf5130a0d5/1604423127155-BG7RY98W1AEAXSF4ME44/ke17ZwdGBToddI8pDm48kJ_EVeTaLbkp1ZvFgIdkixp7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UZRyDxde4pqLy1X6gpjxcbRkC_kl2YmpjbA5JCKclEdkFy8rxPAX8IibwtzfQZemqQ/julia-press.jpeg?format=2500w");
-        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public void loadLoggedUser(){
+        String mail = PreferenceUtils.getInstance().getLoggedInUserMail();
+        try{
+            JSONObject user = new RestAPI.GetQuerySingle().execute(Configuration.restApiUrl +
+                    "usuario/correo/" + mail + "/").get();
+            int id = user.getInt("idusuario");
+            String name = user.getString("nombre");
+            String surname1 = user.getString("apellido1");
+            String surname2 = user.getString("apellido2");
+            int districtId = user.getInt("iddistrito");
+            String email = user.getString("email");
+            String birthDate = user.getString("fechanac");
+            String number = user.getString("numero");
+            int sexo = user.getInt("sexo");
+            String photoURL = user.getString("urlfoto");
+            if(photoURL.isEmpty()) {
+                photoURL = "https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg";
+            }
+            setExtraData(sexo, districtId, birthDate);
+            this.user = new JolgorioUser(id, number, email, name, surname1, surname2, photoURL);
+        }catch (Exception e){
+
+        }
+    }
+
+    private void setExtraData(int gender, int districtID, String birthdate){
+        this.gender = gender;
+        this.districtID = districtID;
+        this.birthdate = birthdate;
+    }
+
+    private int getGender(){
+        return gender;
+    }
+
+    private int getDistrictID(){
+        return districtID;
+    }
+
+    private String getBirthdate(){
+        return birthdate;
     }
 
     public String getUserUniqueId(){

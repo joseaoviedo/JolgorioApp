@@ -27,9 +27,15 @@ import androidx.loader.app.LoaderManager;
 
 import com.jolgorio.jolgorioapp.data.dummy.ContactsDummy;
 import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
+import com.jolgorio.jolgorioapp.tools.Configuration;
+import com.jolgorio.jolgorioapp.tools.RestAPI;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static android.content.ContentValues.TAG;
 
@@ -52,18 +58,8 @@ public class ContactRepository extends Fragment {
     private final static int[] TO_IDS = {
             android.R.id.text1
     };
-    // Define global mutable variables
-    // Define a ListView object
-    ListView contactsList;
-    // Define variables for the contact the user selects
-    // The contact's _ID value
-    long contactId;
-    // The contact's LOOKUP_KEY
-    String contactKey;
-    // A content URI for the selected contact
-    Uri contactUri;
-    // An adapter that binds the result Cursor to the ListView
     private SimpleCursorAdapter cursorAdapter;
+    private ArrayList<String> phoneContacts;
 
     public static ContactRepository getInstance(){
         if(instance == null){
@@ -80,6 +76,7 @@ public class ContactRepository extends Fragment {
     public ArrayList<JolgorioUser> getFavContacts() {
         return favContacts;
     }
+
 
 
     public  ArrayList<JolgorioUser> getContacts(){
@@ -100,15 +97,61 @@ public class ContactRepository extends Fragment {
         favContacts.remove(contact);
     }
 
-    public void commitChanges(){}
+    public void setContactList(List<String> contacts){
+        ArrayList<String> contactList = new ArrayList<>();
+        Iterator<String> iterator = contacts.iterator();
+        while(iterator.hasNext()){
+            String contact = iterator.next();
+            contact = contact.trim();
+            contact = contact.replace("+506", "");
+            if(!contactList.contains(contact)){
+                contactList.add(contact);
+            }
+        }
+        phoneContacts = contactList;
+        for(String number: phoneContacts){
+            Log.d("Contacto", number);
+        }
+    }
 
     public void loadData(){
-        dataLoaded = true;
-        if(contacts.isEmpty()){
-            contacts = ContactsDummy.getContacts();
+        if(!dataLoaded) {
+            if (contacts.isEmpty()) {
+                for(String number: phoneContacts){
+                    JolgorioUser user = loadUserFromDatabase(number);
+                    if(user != null){
+                        contacts.add(user);
+                    }
+                }
+            }
+            if (favContacts.isEmpty()) {
+                favContacts = new ArrayList<>();
+            }
         }
-        if(favContacts.isEmpty()){
-            favContacts = ContactsDummy.getFavContacts();
+        dataLoaded = true;
+    }
+
+    public JolgorioUser loadUserFromDatabase(String number){
+        try{
+            JSONObject user = new RestAPI.GetQuerySingle().execute(Configuration.restApiUrl
+                    + "usuario/numero/" + number + "/").get();
+            int id = user.getInt("idusuario");
+            String name = user.getString("nombre");
+            String surname1 = user.getString("apellido1");
+            String surname2 = user.getString("apellido2");
+            int districtId = user.getInt("iddistrito");
+            String email = user.getString("email");
+            String birthDate = user.getString("fechanac");
+            String userNumber = user.getString("numero");
+            int sexo = user.getInt("sexo");
+            String photoURL = user.getString("urlfoto");
+            if(photoURL.isEmpty()){
+                photoURL = "https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg";
+            }
+            JolgorioUser result = new JolgorioUser(id, userNumber, email, name,surname1, surname2, photoURL);
+            return result;
+        }catch (Exception e){
+            return null;
         }
     }
 
