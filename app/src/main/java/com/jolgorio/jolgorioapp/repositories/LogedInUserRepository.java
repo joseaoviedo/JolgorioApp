@@ -73,15 +73,15 @@ public class LogedInUserRepository {
         this.birthdate = birthdate;
     }
 
-    private int getGender(){
+    public int getGender(){
         return gender;
     }
 
-    private int getDistrictID(){
+    public int getDistrictID(){
         return districtID;
     }
 
-    private String getBirthdate(){
+    public String getBirthdate(){
         return birthdate;
     }
 

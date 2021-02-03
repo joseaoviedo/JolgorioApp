@@ -44,7 +44,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.jolgorio.jolgorioapp.R;
+import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
 import com.jolgorio.jolgorioapp.repositories.ContactRepository;
+import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import java.io.IOException;
@@ -156,6 +158,23 @@ public class fragment_edit_profile extends Fragment implements View.OnClickListe
 
         maleButton.setBackground(male_false);
         femaleButton.setBackground(female_false);
+
+        JolgorioUser usr = LogedInUserRepository.getInstance().getLogedInUser();
+
+        nameField.setText(usr.getName());
+        surname1Field.setText(usr.getSurname1());
+        surname1Field.setText(usr.getSurname2());
+        birthDateField.setText(LogedInUserRepository.getInstance().getBirthdate());
+        if (LogedInUserRepository.getInstance().getGender() == 2) {
+            maleFlag = true;
+            //maleButton.setPressed(true);
+        }
+        if (LogedInUserRepository.getInstance().getGender() == 1) {
+            femaleFlag = true;
+            //femaleButton.setPressed(true);
+        }
+        phoneNumberField.setText(usr.getNumber());
+
 
         //getContactList();
         //takeContact();
