@@ -47,6 +47,7 @@ import com.jolgorio.jolgorioapp.repositories.ContactRepository;
 import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.tools.PreferenceUtils;
 import com.jolgorio.jolgorioapp.ui.index.IndexActivity;
+import com.jolgorio.jolgorioapp.ui.videocall.VideoCallFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -173,9 +174,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null) {
                     Log.d("MAIN", "LLAMADA ENTRANTE DE: " + snapshot.getValue().toString());
-                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                    NavController navController = navHostFragment.getNavController();
-                    onCallRequest(snapshot.getValue().toString(), navController);
+
+                    onCallRequest(snapshot.getValue().toString());
                 }
             }
 
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onCallRequest(String caller, NavController controller){
+    public void onCallRequest(String caller){
         if(caller == null) {
             return;
         }
@@ -228,7 +228,8 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
                 mDatabase.child(user.getNumber()).child("connId").setValue(LogedInUserRepository.getInstance().getUserUniqueId());
                 mDatabase.child(user.getNumber()).child("isAvailable").setValue(true);
-                controller.navigate(R.id.videoCallFragment);
+                Intent videoCallIntent = new Intent(MainActivity.this, VideoCallFragment.class);
+                startActivity(videoCallIntent);
             }
         });
         dialog.show();
