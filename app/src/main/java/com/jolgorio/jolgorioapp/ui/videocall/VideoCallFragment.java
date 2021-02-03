@@ -191,7 +191,7 @@ public class VideoCallFragment extends Fragment {
         endCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                endCall();
             }
         });
     }
