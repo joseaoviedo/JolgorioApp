@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     final int REQUEST_AUDIO_MODIFY = 2;
     static final int REQUEST_RECORD_AUDIO = 3;
 
+    NavController navController;
+
     @Override
     public void onCreate( Bundle savedInstanceState) {
 
@@ -119,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         config.locale = locale;
         getApplicationContext().getResources().updateConfiguration(config, null);
         setContentView(R.layout.activity_main);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
 
     }
 
@@ -197,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue() != null) {
                     Log.d("MAIN", "LLAMADA ENTRANTE DE: " + snapshot.getValue().toString());
-                    NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-                    NavController navController = navHostFragment.getNavController();
                     onCallRequest(snapshot.getValue().toString(), navController);
                 }
             }
