@@ -101,8 +101,10 @@ public class LogedInUserRepository {
             setExtraData(sexo, districtId, birthDate);
             this.user = new JolgorioUser(id, number, email, name, surname1, surname2, photoURL);
             userLoged = true;
+            Log.d("69696","Logiado con" + mail);
         }catch (Exception e){
 
+            e.printStackTrace();
         }
     }
 

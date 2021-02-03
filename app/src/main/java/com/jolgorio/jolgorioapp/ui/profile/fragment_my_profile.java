@@ -68,8 +68,6 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
         JolgorioUser usr = LogedInUserRepository.getInstance().getLogedInUser();
         nombre.setText(usr.getName());
 
-
-
         return view;
     }
 
