@@ -65,8 +65,13 @@ public class VideoCallFragment extends AppCompatActivity {
         setContentView(R.layout.fragment_video_call);
         javaScriptInterface = new CallJavaScript();
         Bundle args = getIntent().getExtras();
-        userCalledId = args.getString("userCalledId");
-        connId = args.getString("connId");
+        if(args != null){
+            userCalledId = args.getString("userCalledId");
+            connId = args.getString("connId");
+        }else{
+            userCalledId = null;
+        }
+
         webView = findViewById(R.id.videocall_webview);
         setUpWebView();
         setUpButtons();

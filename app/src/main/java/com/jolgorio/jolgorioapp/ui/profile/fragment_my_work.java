@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,11 @@ import com.jolgorio.jolgorioapp.R;
 import com.jolgorio.jolgorioapp.adapter.CustomAdapter;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class fragment_my_work extends Fragment implements View.OnClickListener {
 
     NavController navController;
@@ -30,6 +36,8 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
     int[] imagesTest = {R.drawable.test1,R.drawable.test2,R.drawable.test3};
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
+
+    private ArrayList<File> fileList = new ArrayList<File>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +63,8 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
 
         Button back = (Button) view.findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        showImageList();
 
         return view;
     }
@@ -95,4 +105,14 @@ public class fragment_my_work extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    private void showImageList() {
+        File folder = new File(Environment.DIRECTORY_PICTURES);
+        File[] allFiles = folder.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
+            }
+        });
+    }
+
 }
