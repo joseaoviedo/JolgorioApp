@@ -198,11 +198,14 @@ public class VideoCallFragment extends Fragment {
 
     public void listenToCallEnd(){
         if(userCalledId != null){
-            mDatabase.child(userCalledId).addValueEventListener(new ValueEventListener() {
+            mDatabase.child(userCalledId).child("isCallEnded").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue() == null){
-                        endCall();
+                    if(snapshot.getValue() != null){
+                        if(snapshot.getValue().toString().equals("true")){
+                            mDatabase.child(userCalledId).setValue(null);
+                            exit();
+                        }
                     }
                 }
 
@@ -213,10 +216,16 @@ public class VideoCallFragment extends Fragment {
             });
         }else{
             JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
-            mDatabase.child(user.getNumber()).addValueEventListener(new ValueEventListener() {
+            mDatabase.child(user.getNumber()).child("isCallEnded").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    endCall();
+                    if(snapshot.getValue() != null){
+                        if(snapshot.getValue().toString().equals("true")){
+                            mDatabase.child(user.getNumber()).setValue(null);
+                            exit();
+                        }
+                    }
+
                 }
 
                 @Override
@@ -229,10 +238,10 @@ public class VideoCallFragment extends Fragment {
 
     public void endCall(){
         if(userCalledId != null){
-            mDatabase.child(userCalledId).setValue(null);
+            mDatabase.child(userCalledId).child("isCallEnded").setValue(true);
         }else{
             JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
-            mDatabase.child(user.getNumber()).setValue(null);
+            mDatabase.child(user.getNumber()).child("isCallEnded").setValue(true);
         }
         webView.loadUrl("about:blank");
         exit();
@@ -241,7 +250,7 @@ public class VideoCallFragment extends Fragment {
     public void exit(){
         NavHostFragment navHostFragment = (NavHostFragment) activity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        navController.popBackStack(R.id.videoCallPagerFragment, false);
+        navController.popBackStack(R.id.videoCallPagerFragment, true);
     }
 
     @Override
