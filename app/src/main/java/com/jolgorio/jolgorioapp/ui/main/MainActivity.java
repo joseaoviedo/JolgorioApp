@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                 REQUEST_WRITE_EXTERNAL_STORAGE);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS},
+                REQUEST_WRITE_EXTERNAL_STORAGE);
 
         //getContacts();
 

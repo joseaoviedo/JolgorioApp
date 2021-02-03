@@ -124,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         RegisterIMG = (CircleImageView) findViewById(R.id.imageProfile);
 
         entryButton = (Button) findViewById(R.id.signUpEntry);
-        entryButton.setEnabled(false);
+        //entryButton.setEnabled(false);
 
         leavingAlertButton = (Button) findViewById(R.id.signUpCancel);
 
@@ -454,7 +454,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View v) {
                 //Aquí se toman salida que todos los campos estén completos
                 // y se toma toda la info para la BD
-                registerUser();
+                if (allFieldsFilled() == true) {
+                    registerUser();
+                }
             }
         });
     }
@@ -650,7 +652,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(RegisterActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
         }
 
-    private void allFieldsFilled(){
+    private boolean allFieldsFilled(){
         if (nameField.getText() != null && surname1Field.getText() != null &&
                 surname2Field.getText() != null && emailField.getText() != null &&
                 birthDateField.getText() != null && phoneNumberField.getText() != null &&
@@ -659,9 +661,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 pwConfirmField.getText() != null && pwConfirmField.getText() != null &&
                 (maleFlag != false || femaleFlag != false) &&
                 Patterns.EMAIL_ADDRESS.matcher(emailField.getText()).matches()) {
-
-            entryButton.setEnabled(true);
+            return true;
         }
+        else return false;
     }
 
     @Override

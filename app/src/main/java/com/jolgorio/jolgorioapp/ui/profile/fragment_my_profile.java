@@ -21,10 +21,13 @@ import android.widget.Button;
 
 import com.jolgorio.jolgorioapp.R;
 //import com.jolgorio.jolgorioapp.tools.SQLConnection;
+import com.jolgorio.jolgorioapp.data.model.JolgorioUser;
+import com.jolgorio.jolgorioapp.repositories.LogedInUserRepository;
 import com.jolgorio.jolgorioapp.ui.EmergencyCall;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class fragment_my_profile extends Fragment implements View.OnClickListener {
@@ -33,6 +36,7 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
     NavController navController;
     private AlertDialog.Builder alertDialogBuilder;
     private AlertDialog dialog;
+    private EditText nombre;
 
     //Emergencia
     private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
@@ -58,6 +62,13 @@ public class fragment_my_profile extends Fragment implements View.OnClickListene
 
         Button back = (Button) view.findViewById(R.id.back);
         back.setOnClickListener(this);
+
+        nombre = (EditText) view.findViewById((R.id.name));
+
+        JolgorioUser usr = LogedInUserRepository.getInstance().getLogedInUser();
+        nombre.setText(usr.getName());
+
+
 
         return view;
     }
