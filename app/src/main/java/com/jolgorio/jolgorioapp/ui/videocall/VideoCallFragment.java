@@ -57,11 +57,9 @@ public class VideoCallFragment extends AppCompatActivity {
     private String userCalledId;
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
-            android.Manifest.permission.READ_CONTACTS,
-            android.Manifest.permission.WRITE_CONTACTS,
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            android.Manifest.permission.READ_SMS,
-            android.Manifest.permission.CAMERA
+            android.Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS,
     };
 
 
@@ -247,7 +245,7 @@ public class VideoCallFragment extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-
+            finishCall();
         }
 
         this.doubleBackToExitPressedOnce = true;
