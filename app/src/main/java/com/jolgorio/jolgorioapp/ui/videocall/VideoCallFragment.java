@@ -115,8 +115,7 @@ public class VideoCallFragment extends Fragment {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\",\""
-                 + Configuration.videoCallIp + "\"," + Configuration.videoCallPort + ",\"" + Configuration.videoCallPath + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
         if(connId != null){
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
             mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {

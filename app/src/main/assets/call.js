@@ -10,9 +10,9 @@ remoteVideo.onplaying = () => { remoteVideo.style.opacity = 1 }
 let peer
 function init(userId, ip, port, path) {
     peer = new Peer(userId, {
-        host: path,
-        port: port,
-        path: path
+        host: "179.50.211.72",
+        port: 9000,
+        path: "/"
     })
 
     peer.on('open', () => {
