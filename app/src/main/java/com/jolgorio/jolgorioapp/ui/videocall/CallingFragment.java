@@ -43,6 +43,8 @@ public class CallingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         calledUser = args.getParcelable("calledUser");
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
     }
 
     @Override
