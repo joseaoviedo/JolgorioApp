@@ -1,6 +1,7 @@
 package com.jolgorio.jolgorioapp.ui.videocall;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.provider.ContactsContract;
+import android.telecom.Call;
 import android.telecom.InCallService;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +43,6 @@ public class CallingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         calledUser = args.getParcelable("calledUser");
-        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        navController = navHostFragment.getNavController();
     }
 
     @Override
@@ -110,10 +110,11 @@ public class CallingFragment extends Fragment {
                     Bundle args = new Bundle();
                     args.putString("userCalledId", calledUser.getNumber());
                     args.putString("connId", connId);
-                    navController.navigate(R.id.videoCallFragment, args);
+                    Intent callIntent = new Intent(getActivity(), VideoCallFragment.class);
+                    callIntent.putExtras(args);
+                    startActivity(callIntent);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
