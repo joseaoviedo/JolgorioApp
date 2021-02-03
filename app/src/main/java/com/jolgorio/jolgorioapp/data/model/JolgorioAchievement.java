@@ -8,7 +8,9 @@ public class JolgorioAchievement implements Parcelable {
     private int type;
     private String title;
 
-
+    /*
+    Modelo de los logros de la aplicación, contienen id, tipo, y título
+     */
     public JolgorioAchievement(int id, int type, String title) {
         this.id = id;
         this.type = type;

@@ -44,6 +44,9 @@ public class AchievementListAdapter extends RecyclerView.Adapter<AchievementList
         }
     }
 
+    /*
+     Crea la instancia de View que va a ser utilizada por el fragmento
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,6 +55,10 @@ public class AchievementListAdapter extends RecyclerView.Adapter<AchievementList
         return holder;
     }
 
+    /*
+    Esta función asigna los valores a cada elemento del RecycleView, aquí es donde se asignan tanto
+    los datos como el comportamiento de las secciones de la lista
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         JolgorioAchievement logro = mLogros.get(position);
@@ -77,6 +84,9 @@ public class AchievementListAdapter extends RecyclerView.Adapter<AchievementList
         return mLogros.size();
     }
 
+    /*
+    Representa cada fila de la lista y los datos que posee, así como los elementos de la vista
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView iconImage;

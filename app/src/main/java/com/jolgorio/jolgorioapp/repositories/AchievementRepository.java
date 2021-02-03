@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class AchievementRepository {
-
+    /*
+    Este repositorio almacena la información de los logros
+     */
     private boolean dataLoaded;
     private ArrayList<JolgorioAchievement> type1;
     private ArrayList<JolgorioAchievement> type2;
@@ -46,7 +48,9 @@ public class AchievementRepository {
     }
 
 
-
+    /*
+    Estas funciones cargan los logros por tipo
+     */
     public ArrayList<JolgorioAchievement> loadType1(){
         ArrayList<JolgorioAchievement> result = new ArrayList<>();
         try{

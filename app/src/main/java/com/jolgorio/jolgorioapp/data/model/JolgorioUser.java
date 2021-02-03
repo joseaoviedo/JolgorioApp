@@ -12,6 +12,9 @@ public class JolgorioUser implements Parcelable {
     private String surname2;
     private String photoURL;
 
+    /*
+    Esta clase modela el usuario de la aplicación, guarda los datos más relevantes
+     */
     public JolgorioUser(int id, String number, String email, String name, String surname1, String surname2, String photoURL){
         this.id = id;
         this.number = number;

@@ -46,19 +46,6 @@ public class ContactRepository extends Fragment {
     private static ContactRepository instance;
 
 
-
-
-    @SuppressLint("InlinedApi")
-    private final static String[] FROM_COLUMNS = {
-            Build.VERSION.SDK_INT
-                    >= Build.VERSION_CODES.HONEYCOMB ?
-                    ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
-                    ContactsContract.Contacts.DISPLAY_NAME
-    };
-    private final static int[] TO_IDS = {
-            android.R.id.text1
-    };
-    private SimpleCursorAdapter cursorAdapter;
     private ArrayList<String> phoneContacts;
 
     public static ContactRepository getInstance(){
@@ -68,6 +55,9 @@ public class ContactRepository extends Fragment {
         return instance;
     }
 
+    /*
+    Almacena los usuarios que están relacionados con un número de teléfono en los contactos
+     */
     private ContactRepository(){
         contacts = new ArrayList<>();
         favContacts = new ArrayList<>();
@@ -83,20 +73,34 @@ public class ContactRepository extends Fragment {
         return contacts;
     }
 
+    /*
+    Verifica si un usuario corresponde a un contacto favorito
+     */
     public boolean isFavorite(JolgorioUser contact){
         return favContacts.contains(contact);
     }
 
+    /*
+    Agrega un usuario a la lista de contactos favoritos
+     */
     public void addFavorite(JolgorioUser contact){
         if (!favContacts.contains(contact)){
             favContacts.add(contact);
         }
     }
 
+    /*
+    Remueve un usuario de la lista de contactos favoritos
+     */
     public void removeFavorite(JolgorioUser contact){
         favContacts.remove(contact);
     }
 
+    /*
+    Recibe una lista de string correspondiente a los números de teléfono de los contactos del celular,
+    busca si existen usuarios registrados con ese número de teléfono, de ser así los agrega al
+    repositorio
+     */
     public void setContactList(List<String> contacts){
         ArrayList<String> contactList = new ArrayList<>();
         Iterator<String> iterator = contacts.iterator();
@@ -114,6 +118,9 @@ public class ContactRepository extends Fragment {
         }
     }
 
+    /*
+    Carga los datos relacionados a un número de teléfono
+     */
     public void loadData(){
         if(!dataLoaded) {
             if (contacts.isEmpty()) {

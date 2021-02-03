@@ -32,6 +32,10 @@ public class ActivityRepository {
     private float type2Completed;
     private float type3Completed;
 
+    /*
+    Este repositorio almacena la información de las actividades, la misma es retribuida por medio
+    del API Rest
+     */
     public static ActivityRepository getInstance(){
         if(instance == null){
             instance = new ActivityRepository();
@@ -39,6 +43,9 @@ public class ActivityRepository {
         return instance;
     }
 
+    /*
+    Carga los datos si no están cargados
+     */
     public void loadData(){
         if(isLoaded){
             return;
@@ -52,6 +59,9 @@ public class ActivityRepository {
         isLoaded = true;
     }
 
+    /*
+    Establece una actividad como completada, tanto a nivel local como a nivel remoto
+     */
     public void onActivityComplete(JolgorioActivity act){
         int type = act.getType();
         try {
@@ -82,12 +92,15 @@ public class ActivityRepository {
         return activities;
     }
 
+    /*
+    Procesa la lista de materiales y devuelve un string de la lista de materiales acomodada
+     */
     public String processMaterials(JSONArray array){
         String result = "";
         try{
             for(int i = 0; i < array.length(); i++){
                 JSONObject object = array.getJSONObject(i);
-                result = result + (object.getString("nombre") + "\n");
+                result = result + ("-" + object.getString("nombre") + "\n");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -95,6 +108,10 @@ public class ActivityRepository {
         return result;
     }
 
+    /*
+    Trae todas las actividades completadas por el usuario el último mes y las compara con las que
+    hay en el repositorio para determinar si ya han sido completadas
+     */
     public void verifyCompleted(){
         try{
             JolgorioUser user = LogedInUserRepository.getInstance().getLogedInUser();
@@ -125,6 +142,9 @@ public class ActivityRepository {
         }
     }
 
+    /*
+    Calcula el porcentaje de completitud de las actividades basado en la cantidad máxima establecida
+     */
     public float calculateActivityProgress(int type){
         switch (type){
             case 1:
@@ -137,6 +157,10 @@ public class ActivityRepository {
         return 0f;
     }
 
+    /*
+    Carga todas las actividades que se encuentren activas en la base de datos, devuelve un arreglo
+    de objetos de tipo JolgorioActivity
+     */
     public ArrayList<JolgorioActivity> loadAllActivities() throws IOException, ExecutionException, InterruptedException {
         JSONArray response = new RestAPI.GetQuery().execute(Configuration.restApiUrl + "actividades/").get();
         ArrayList<JolgorioActivity> result = new ArrayList<>();

@@ -13,6 +13,9 @@ public class JolgorioActivity implements Parcelable {
     private String timeDescription;
     private boolean completed;
 
+    /*
+    Este modelo contiene la información de las actividades de la aplicación
+     */
     public JolgorioActivity(int id, int type, String title, String description, String materials, String videoLink, String timeDescription, boolean completed) {
         this.id = id;
         this.type = type;

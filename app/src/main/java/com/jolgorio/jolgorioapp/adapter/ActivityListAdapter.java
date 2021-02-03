@@ -38,7 +38,9 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         this.mContext = mContext;
         this.navController = navController;
     }
-
+    /*
+    Se crea la instancia del View holder para el recycle view
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,6 +49,9 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         return holder;
     }
 
+    /*
+    Se asignan los datos a cada sección de la lista, así como su comportamiento
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called.");

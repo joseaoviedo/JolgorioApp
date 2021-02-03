@@ -21,6 +21,7 @@ public class VideoCallPagerAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> fragments = new ArrayList<>();
     public VideoCallPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
+        //Asigna el fragmento correspondiente al índice de cada tab
         fragments.add(new ContactsFragment());
         fragments.add(new FavoriteContactsFragment());
         fragments.add(new CallLogFragment());
@@ -53,6 +54,9 @@ public class VideoCallPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
+    /*
+    Se llaman para actualizar la información de los recycleview cada vez que se cambia de tab
+     */
     public void refreshTab(int position){
         switch (position){
             case 0:

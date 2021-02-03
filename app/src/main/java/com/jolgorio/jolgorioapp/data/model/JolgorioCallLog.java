@@ -11,6 +11,9 @@ public class JolgorioCallLog implements Parcelable {
     JolgorioUser userCalled;
     Date date;
 
+    /*
+    Clase que modela los registros de llamada de la aplicación
+     */
     public JolgorioCallLog(JolgorioUser userCalled, Date date){
         this.userCalled = userCalled;
         this.date = date;

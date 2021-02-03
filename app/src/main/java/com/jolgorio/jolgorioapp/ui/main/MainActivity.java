@@ -124,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_CANCELED){
             finish();
+        }else if(resultCode == RESULT_OK){
+            LogedInUserRepository.getInstance().loadLoggedUser();
         }
     }
 
