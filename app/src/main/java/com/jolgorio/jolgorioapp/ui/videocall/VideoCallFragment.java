@@ -175,8 +175,7 @@ public class VideoCallFragment extends AppCompatActivity {
     }
 
     private void initializePeer(){
-        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\",\""
-                 + Configuration.videoCallIp + "\"," + Configuration.videoCallPort + ",\"" + Configuration.videoCallPath + "\")");
+        callJavaScriptFunction("javascript:init(\"" + LogedInUserRepository.getInstance().getUserUniqueId() + "\")");
         if(connId != null){
             Log.d("VIDEOCALL", "ESPERANDO RESPUESTA DE: " + userCalledId);
             mDatabase.child(userCalledId).child("isPeerConnected").addValueEventListener(new ValueEventListener() {
@@ -246,18 +245,9 @@ public class VideoCallFragment extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             finishCall();
+            super.onBackPressed();
         }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Presione otra vez para salir de la llamada", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
     }
 
 
@@ -270,6 +260,5 @@ public class VideoCallFragment extends AppCompatActivity {
         }
         webView.loadUrl("about:blank");
         setResult(0);
-        finish();
     }
 }
